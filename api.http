@@ -1,0 +1,108 @@
+###GET
+GET http://localhost:3000/products
+###GET
+GET http://localhost:3000/products/4
+###Añadir producto
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "nombre": "aksdñaksñdla",
+    "id_categoria": 3,
+    "marca": "Éxasadad",
+    "id_proveedor": 3,
+    "descripcion": "Jeadns anasdadchos",
+    "precio": 300,
+    "calificacion": 3
+}
+###eliminar
+DELETE http://localhost:3000/products/1
+
+###Pat
+PATCH http://localhost:3000/products/2
+Content-Type: application/json
+
+{
+    
+    "Calificacion": 2
+}
+###Get USER
+GET http://localhost:3000/users
+### GET ID
+GET http://localhost:3000/users/25
+### POST USER
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "Nombre": "Esneider",
+    "Celular": "3052308258",
+    "Cedula": 13320975687,
+    "Direccion": "cheesesticks",
+    "Correo": "xxsile7tb9ey@gmail.com",
+    "Contrasena": "esn5iderjj123"
+}
+### DELETE USER
+DELETE http://localhost:3000/users/1
+### PATCH USER 
+PATCH  http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+    "Nombre": "Klimber",
+    "Estado": "Desactivado" 
+}
+
+### GET DEALERS 
+GET http://localhost:3000/dealers
+### GET DEALER ID
+GET http://localhost:3000/dealers/2
+### POST DEALER
+POST http://localhost:3000/dealers
+Content-Type: application/json
+
+{
+    "Nombre": "Rigoberto",
+    "Celular": "3132728281",
+    "Cedula": 1319197787,
+    "Direccion": "cheesesticks loaiza",
+    "Correo": "xfileh1t69ey@gmail.com",
+    "Contrasena": "esdn3gderjj123sid"
+}
+###DELETE DEALER
+DELETE http://localhost:3000/dealers/3
+
+### PATCH DEALER
+PATCH  http://localhost:3000/users/4
+Content-Type: application/json
+
+{
+    "Nombre": "Klimber",
+    "Estado": "Desactivado" 
+}
+
+### LOGIN USER
+GET http://localhost:3000/users/login
+Content-Type: application/json 
+
+{
+    "Nombre": "Klimber",
+    "Contrasena": "esnigderjj123ysid"
+}
+
+###ORDERS
+GET http://localhost:3000/orders
+###ORDERS BY ID
+GET http://localhost:3000/orders/1
+###UPDATE ORDER
+PATCH http://localhost:3000/orders/1 
+Content-Type: application/json 
+
+{
+    "Direccion": "Klimber",
+    "Cliente": 4,
+    "PrecioVenta": 30000,
+    "ID_Rol": 1
+}
+###DELETE ORDER
+DELETE http://localhost:3000/orders/1 
