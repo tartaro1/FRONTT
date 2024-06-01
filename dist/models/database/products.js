@@ -13,7 +13,7 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 var _promise = _interopRequireDefault(require("mysql2/promise"));
 var _dbConfig = require("../../config/db.config.js");
-var connection = await _promise["default"].createConnection(_dbConfig.config);
+var connection = await _promise["default"].createConnection(_dbConfig.configDB);
 var ProductModel = exports.ProductModel = /*#__PURE__*/(0, _createClass2["default"])(function ProductModel() {
   (0, _classCallCheck2["default"])(this, ProductModel);
 });

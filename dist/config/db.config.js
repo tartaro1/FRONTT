@@ -3,8 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.config = void 0;
-var config = exports.config = {
+exports.configDB = void 0;
+var _dotenv = require("dotenv");
+(0, _dotenv.config)();
+var configDB = exports.configDB = {
   host: process.env.MYSQLHOST,
   port: process.env.MYSQLPORT,
   user: process.env.MYSQLUSER,

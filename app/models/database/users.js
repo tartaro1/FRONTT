@@ -1,7 +1,7 @@
 import mysql from "mysql2/promise"
-import { config } from "../../config/db.config.js";
+import { configDB } from "../../config/db.config.js";
 
-const connection = await mysql.createConnection(config);
+const connection = await mysql.createConnection(configDB);
 
 export class UserModel {
     static getAll = async() => {
