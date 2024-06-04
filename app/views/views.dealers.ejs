@@ -112,10 +112,6 @@
                                 <label for="contrasena" class="col-form-label">Contraseña</label>
                                 <input type="text" class="form-control alert-dark rounded contrasena" id="contrasena">
                             </div>
-                            <div class="mb-3">
-                                <label for="contrasena" class="col-form-label">Id Rol</label>
-                                <input type="text" class="form-control alert-dark rounded rol" id="contrasena">
-                            </div>
                         </form>
                         <div style="text-align: center;">
                             <button type="button" class="btn btn-warning btn-save">Guardar</button>
@@ -196,16 +192,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% users.forEach(user => {%>
-                                <tr class="user-list-item" data-id=`<%= user.ID_Usuario %>`>
-                                    <td class="id"><%= user.ID_Usuario %></td>
-                                    <td class="nombre"><%= user.Nombre %></td>
-                                    <td class="celular"><%= user.Celular %></td>
-                                    <td class="cedula"><%= user.Cedula %></td>
-                                    <td class="direccion"><%= user.Direccion %></td>
-                                    <td class="correo"><%= user.Correo%></td>
-                                    <td class="contrasena"><%= user.Contrasena  %></td>
-                                    <td class="estado"><%= user.EstadoUsuario%></td>
+                            <% dealers.forEach(dealer => {%>
+                                <tr class="user-list-item" data-id=`<%= dealer.ID_Usuario %>`>
+                                    <td class="id"><%= dealer.ID_Usuario %></td>
+                                    <td class="nombre"><%= dealer.Nombre %></td>
+                                    <td class="celular"><%= dealer.Celular %></td>
+                                    <td class="cedula"><%= dealer.Cedula %></td>
+                                    <td class="direccion"><%= dealer.Direccion %></td>
+                                    <td class="correo"><%= dealer.Correo%></td>
+                                    <td class="contrasena"><%= dealer.Contrasena  %></td>
+                                    <td class="estado"><%= dealer.EstadoUsuario%></td>
                                     <td>
                                         <div class="rounded icon-button">
                                             <button class="btn btn-warning edit-user-btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleEditUserModal">

@@ -39,7 +39,7 @@ export class UserModel {
             const [result] = await connection.query("CALL SP_EliminarUsuario(?)", [id]);
             return result;
         } catch (error) {
-            throw new Error("Error deleting user: ", error.message);
+            throw new Error(error);
         }
     }
     static updateUser = async({id, input}) => {

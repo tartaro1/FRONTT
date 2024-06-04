@@ -2,8 +2,12 @@ import { DealersModel } from "../models/database/dealers.js";
 import { validateDealer, validatePartialUser } from "../schemas/dealer.js";
 export class DealersController {
     static getAll = async (req, res) => {
-        const dealers = await DealersModel.getAll();
-        res.json(dealers);
+        try {
+            const dealers = await DealersModel.getAll();
+            res.render("views.dealers.ejs", {dealers});
+        } catch (error) {
+            res.json({error: error.message})
+        }
     }
     static getById = async (req, res) => {
         try {

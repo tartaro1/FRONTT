@@ -41,6 +41,7 @@ Content-Type: application/json
     "Direccion": "cheesesticks",
     "Correo": "xxsile7tb9ey@gmail.com",
     "Contrasena": "esn5iderjj123"
+    "ID_Rol": 3
 }
 ### DELETE USER
 DELETE http://localhost:3000/users/1

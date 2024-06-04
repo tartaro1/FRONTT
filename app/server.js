@@ -22,7 +22,8 @@ server.set('port', process.env.PORT || 3000);
 
 server.use("/dashboard", (req, res) => {
     res.render('views.dashboard.ejs');
-})
+});
+
 server.use("/", router);
 
 export default server;

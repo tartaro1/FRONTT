@@ -28,14 +28,16 @@ savebtn.addEventListener("click", () => {
     const direccionElement = document.querySelector(".direccion");
     const correoElement = document.querySelector(".correo");
     const contrasenaElement = document.querySelector(".contrasena");
+    const rolElement = document.querySelector(".rol");
 
-    if (nombreElement && celularElement && cedulaElement && direccionElement && correoElement && contrasenaElement) {
+    if (nombreElement && celularElement && cedulaElement && direccionElement && correoElement && contrasenaElement && rolElement) {
         const nombre = nombreElement.value;
         const celular = celularElement.value;
         const cedula = parseInt(cedulaElement.value);
         const direccion = direccionElement.value;
         const correo = correoElement.value;
         const contrasena = contrasenaElement.value;
+        const rol = parseInt(rolElement.value);
 
         fetch("http://localhost:9200/users", {
             method: "POST",
@@ -48,7 +50,8 @@ savebtn.addEventListener("click", () => {
                 Cedula: cedula,
                 Direccion: direccion,
                 Correo: correo,
-                Contrasena: contrasena
+                Contrasena: contrasena,
+                ID_Rol: rol
             })
         })
             .then(res => {
