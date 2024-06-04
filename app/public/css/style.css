@@ -4,7 +4,6 @@
     font-family: 'Lemon';
     color: #F86913;
     font-size: 30px;
-    margin-top: 10px;
 }
 .sidebar {
 	min-width: 250px;
@@ -149,6 +148,12 @@ align-items: center;
 a{
 	text-decoration: none;
 	color: #000;
+}
+.menu {
+	height: 100vh;
+	margin-top: -10px;
+	margin-bottom: -10px;
+	box-shadow: 10px 0px 10px 0px #000;
 }
 @media (max-width: 968px) {
 	.sidebar {
