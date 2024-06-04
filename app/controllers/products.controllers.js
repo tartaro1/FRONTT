@@ -2,9 +2,13 @@ import { ProductModel } from "../models/database/products.js";
 import { validateProduct, validatePartialMovie } from "../schemas/product.js";
 export class ProductController {
     static getAll = async(req, res) => {
-        const {category} = req.query;
-        const products = await ProductModel.getAll({category});
-        res.json(products);
+        try {
+            const {category} = req.query;
+            const products = await ProductModel.getAll({category});
+            res.render("views.products.ejs", {products});
+        } catch (error) {
+            res.status(500).json({error: "Error getting all products" + error.message});
+        }
     }
     static getByName = async(req, res) => {
         const {name} = req.params;

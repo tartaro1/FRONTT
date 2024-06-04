@@ -2,8 +2,12 @@ import { UserModel } from "../models/database/users.js";
 import { validateUser, validatePartialUser } from "../schemas/user.js";
 export class UsersController {
     static getAll = async(req, res) => {
-        const user = await UserModel.getAll();
-        res.json(user);
+        try {
+            const users = await UserModel.getAll();
+            res.render("views.users.ejs", {users});
+        } catch (error) {
+            res.status(500).json({error: "Error getting all users" + error.message});
+        }
     }
     static getById = async(req, res) => {
         const {id} = req.params;

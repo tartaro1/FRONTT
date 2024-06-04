@@ -3,7 +3,7 @@ GET http://localhost:3000/products
 ###GET
 GET http://localhost:3000/products/4
 ###Añadir producto
-POST http://localhost:3000/products
+POST http://localhost:9200/products
 Content-Type: application/json
 
 {

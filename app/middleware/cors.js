@@ -1,6 +1,7 @@
 import cors from 'cors'
 
 const ACCEPTED_ORIGINS = [
+  'http://localhost:9200',
   'http://localhost:8080',
   'http://localhost:3000',
   'https://movies.com',
