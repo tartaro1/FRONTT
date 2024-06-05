@@ -1,6 +1,7 @@
 import express, { urlencoded } from 'express';
 import { config } from 'dotenv';
 import { corsMiddleware } from './middleware/cors.js';
+import cors from "cors"
 import ejs from "ejs";
 import path from "path";
 import { fileURLToPath } from 'url';
@@ -17,7 +18,8 @@ server.use(express.static(path.join(__dirname, "public")));
 server.use(express.json());
 server.set("view engine", "ejs");
 server.set("views", path.join(__dirname, 'views'));
-server.use(corsMiddleware()); 
+// server.use(corsMiddleware()); 
+server.use(cors());
 server.set('port', process.env.PORT || 3000);
 
 server.use("/dashboard", (req, res) => {
