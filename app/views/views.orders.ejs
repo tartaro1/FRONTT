@@ -184,28 +184,26 @@
                     <table class="table table bordered table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Celular</th>
-                                <th scope="col">Cedula</th>
+                                <th scope="col">ID_Pedido</th>
+                                <th scope="col">Estado Pedido</th>
                                 <th scope="col">Direccion</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Contrasena </th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Precio Venta</th>
+                                <th scope="col">ID_Repartidor</th>
+                                <th scope="col">Fecha Pedido</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% users.forEach(user => {%>
-                                <tr class="user-list-item" data-id=`<%= user.ID_Usuario %>`>
-                                    <td class="id"><%= user.ID_Usuario %></td>
-                                    <td class="nombre"><%= user.Nombre %></td>
-                                    <td class="celular"><%= user.Celular %></td>
-                                    <td class="cedula"><%= user.Cedula %></td>
-                                    <td class="direccion"><%= user.Direccion %></td>
-                                    <td class="correo"><%= user.Correo%></td>
-                                    <td class="contrasena"><%= user.Contrasena  %></td>
-                                    <td class="estado"><%= user.EstadoUsuario%></td>
+                            <% orders.forEach(order => {%>
+                                <tr class="user-list-item" data-id=`<%= order.ID_Usuario %>`>
+                                    <td class="id"><%= order.ID_Pedido %></td>
+                                    <td class="nombre"><%= order.EstadoPedido %></td>
+                                    <td class="celular"><%= order.Direccion %></td>
+                                    <td class="cedula"><%= order.Cliente %></td>
+                                    <td class="direccion"><%= order.PrecioVenta %></td>
+                                    <td class="correo"><%= order.ID_Repartidor %></td>
+                                    <td class="contrasena"><%= order.FechaPedido %></td>
+                                    <td class="estado"><%= order.EstadoUsuario %></td>
                                     <td>
                                         <div class="rounded icon-button">
                                             <button class="btn btn-warning edit-user-btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleEditUserModal">

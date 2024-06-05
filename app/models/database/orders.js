@@ -7,7 +7,7 @@ export class OrderModel {
     static getAll = async() => {
         try {
             const [orders] = await connection.query("SELECT * FROM pedidos");
-            return [orders];
+            return orders;
         } catch (error) {
             throw new Error(error.message);
         }

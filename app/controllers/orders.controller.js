@@ -2,8 +2,12 @@ import { OrderModel } from "../models/database/orders.js";
 
 export class OrdersController {
     static getAll = async(req, res) => {
-        const orders = await OrderModel.getAll();
-        res.json(orders);
+        try {
+            const orders = await OrderModel.getAll();
+            res.render("views.orders.ejs", {orders})
+        } catch (error) {
+            res.status(500).json({error: error});
+        }
     }
     static getById = async(req, res) => {
         const {id} = req.params;
