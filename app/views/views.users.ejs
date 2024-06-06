@@ -35,7 +35,7 @@
                                       </li>
                                     <br>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" href="#"><i class="bi bi-clipboard2-data"></i> Reportes</a>
+                                        <a class="nav-link text-dark" href="/detailsOrders"><i class="bi bi-clipboard2-data"></i> Reportes</a>
                                     </li>
                                     <br>
                                     <li class="nav-item">
@@ -197,7 +197,7 @@
                         </thead>
                         <tbody>
                             <% users.forEach(user => {%>
-                                <tr class="user-list-item" data-id=`<%= user.ID_Usuario %>`>
+                                <tr class="user-list-item">
                                     <td class="id"><%= user.ID_Usuario %></td>
                                     <td class="nombre"><%= user.Nombre %></td>
                                     <td class="celular"><%= user.Celular %></td>
