@@ -5,7 +5,7 @@ const connection = await mysql.createConnection(configDB);
 
 export class UserModel {
     static getAll = async() => {
-        const [users] = await connection.query("SELECT * FROM usuarios");
+        const [users] = await connection.query("SELECT * FROM usuarios WHERE ID_Rol = 1");
         return users;
     }
     static getById = async({id}) => {

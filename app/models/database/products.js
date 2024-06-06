@@ -20,7 +20,7 @@ export class ProductModel {
     }
     static getById = async({id}) => {
         const [products] = await connection.query("SELECT * FROM `productos` WHERE id = ?;", [id]);
-        if (products.length === 0) throw new Error("Product not found");
+        if (products.length === 0) return "Product not found";
         return products;
     }
     static createProduct = async ({input}) => {

@@ -161,6 +161,10 @@ a{
 	border-radius: 10px;
 	transition: .5s;
 }
+.order {
+	max-width: none;
+	width: 60%;
+}
 .nav-link:hover{
 	background: #bbb8b8;
 	transition: .5s;
