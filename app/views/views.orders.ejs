@@ -65,7 +65,7 @@
             <div class="col-sm-10 contentDelete">
                 <div class="container mt-4">
                     <div class="row">
-                      <span class="col-10 title-user">Lista de Usuarios</span>
+                      <span class="col-10 title-user">Lista de pedidos</span>
                       <div class="col-2 p-1 sidebar-item"><i class="sidebar-icon bi bi-person-circle"></i> <span style="margin-left: 10px;">Emmanuel</span></div>
                     </div>
                     <div class="search-and-add">
@@ -127,95 +127,128 @@
                   <!-- Modal Editar Usuario -->
                 <div class="modal fade" id="exampleEditUserModal" tabindex="-1" aria-labelledby="exampleEditUserModalLabel" aria-hidden="true">
                     <div class="modal-dialog order">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h3 class="modal-title fs-5" id="exampleEditUserModalLabel">Editar Pedido</h3>
-                        <button type="button" class="btn btn-outline-dark bi-x btn-close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <!-- ssioisis -->
-                        <div class="modal-body">
-                            <div class="shadow rounded">
-                                <div class="container">
-                                  <div class="row align-items-start">
-                                    <div class="row justify-content-between m-3 justify-mobile" style="width:100%">
-                                        <div>
-                                            <span>Usuario: Antonio</span>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Editar pedido</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card ">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <div class="m-3">
+                                            <strong>Usuario:</strong>antonio
                                         </div>
-                                        <div class="row">
-                                            <i class="sidebar-icon bi bi-alarm icon-alarm-mobile"></i>
-                                            <input style="width:40px" type="text" class="form-control alert-dark rounded mr-2 ml-2" id="recipient-name" value="11">
-                                            <input style="width:40px" type="text" class="form-control alert-dark rounded" id="recipient-name" value="11">
+                                        <div class="input-group m-3">
+                                            <span class="input-group-text"><i class="bi bi-alarm"></i></span>
+                                            <input type="time" >
                                         </div>
-                                        <div>
-                                            <input type="text" class="form-control alert-dark rounded" id="recipient-name" value="Repartidor: Juan">
+                                        <div class="input-group m-3 ps-2">
+                                            <span class="input-group-text" id="basic-addon1">Repartidor</span>
+                                            <input type="text" class="form-control" placeholder="juan" aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
-                                  </div>
-                                  <div class="row align-items-start">
-                                    <div class="col">
-                                        <div class="user-list">
-                                          <!-- Elemento de la lista de usuario -->
-                                          <div class="user-list-item row justify-content-around rounded shadow" style="align-items: center;">
-                                              <div style="margin-left: 10px;">
-                                                  <img class="img-product-edit-p" width=40 height=40 src="./img/carne-chatas-lomo-ancho-1000-g-1.jpg">
-                                                  <span class="user-name">Lomo de res</span>
-                                              </div>
-                                              <span class="user-email">Cantidad: 01</span>
-                                              <span class="user-phone">Precio: $15200</span>
-                                          </div>
-                                          <div class="user-list-item row justify-content-around rounded shadow" style="align-items: center;">
-                                              <div style="margin-left: 10px;">
-                                                  <img class="img-product-edit-p" width=40 height=40 style="object-fit: contain;" src="./img/roa.jpg">
-                                                  <span class="user-name">Arroz Roa</span>
-                                              </div>
-                                              <span class="user-email">Cantidad: 01</span>
-                                              <span class="user-phone">Precio: $15200</span>
-                                          </div>
-                                          <div class="user-list-item row justify-content-around rounded shadow" style="align-items: center;">
-                                              <div style="margin-left: 10px;">
-                                                  <img class="img-product-edit-p" width=40 height=40 style="object-fit: contain;" src="./img/delvalle.jpg">
-                                                  <span class="user-name">Jugo del Valle</span>
-                                              </div>
-                                              <span class="user-email">Cantidad: 01</span>
-                                              <span class="user-phone">Precio: $15200</span>
-                                          </div>
-                                        </div>
-                                    </div>
-                                  </div>
-                                  <div class="row align-items-start" style="width:100%;margin: 0;">
-                                    <div class="row justify-content-between m-3 table-price-p" style="width:100%">
-                                        <div class="col-6 col-mobile-price" style="align-items: center;display: flex;">
-                                            <span class="mr-4">Estado</span>
-                                            <div class="form-group mt-4" style="width:70%">
-                                              <select id="inputState" class="form-control alert-dark" style="text-align: center;">
-                                                <option selected>Exito</option>
-                                                <option>Cadena</option>
-                                                <option>Carulla</option>
-                                                <option>Metro</option>
-                                                <option>D1</option>
-                                              </select>
+                                    <div class="card-body">
+                                        <div class="alert alert-light alert-dismissible fade show" role="alert">
+                                            <div class="card" style="width: 50vh;">
+                                                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.gq.com.mx%2Fphotos%2F5c422116f995213cba5cfa98%2F16%3A9%2Fw_1920%2Cc_limit%2Fcordero.jpg&f=1&nofb=1&ipt=2bf48bfba961d230bdae6b37157acd4c9cd5a81fe0d8f1139e9f35ab32be2109&ipo=images" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-3">
+                                                            <label for="inputZip" class="form-label">Eligir imagen</label>
+                                                            <input type="file" class="form-control" id="img" placeholder="lomo de res">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputCity" class="form-label">nombre</label>
+                                                            <input type="text" class="form-control" id="">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputState" class="form-label">cantidad</label>
+                                                            <input type="number" class="form-control" id="">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputZip" class="form-label">Precio</label>
+                                                            <input type="number" class="form-control" id="">
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
-                                        <div class="col-6 col-mobile-price"style="text-align: -webkit-center;">
-                                            <div class="info-product-final alert-dark rounded">
-                                                <span>Subtotal: $21800</span>
-                                                <span>IVA: $4142</span>
-                                                <span>Total: $25942</span>
+                                        <div class="alert alert-light alert-dismissible fade show" role="alert">
+                                            <div class="card" style="width: 50vh;">
+                                                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmetrocolombiafood.vteximg.com.br%2Farquivos%2Fids%2F220165-750-750%2F7702552000486-1.jpg%3Fv%3D636794507320300000&f=1&nofb=1&ipt=4ec13424ea95f9bb125ad9c695b74b0b83dc060503c63292f8cfb97cf9224de7&ipo=images" class="card-img-top" alt="">
+                                                <div class="card-body">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-3">
+                                                            <label for="inputZip" class="form-label">Eligir imagen</label>
+                                                            <input type="file" class="form-control" id="img">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputCity" class="form-label">nombre</label>
+                                                            <input type="text" class="form-control" id="">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputState" class="form-label">cantidad</label>
+                                                            <input type="number" class="form-control" id="">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputZip" class="form-label">Precio</label>
+                                                            <input type="number" class="form-control" id="">
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                        <div class="alert alert-light alert-dismissible fade show" role="alert">
+                                            <div class="card" style="width: 50vh;">
+                                                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fd2o812a6k13pkp.cloudfront.net%2FProductos%2F40381123001_01.jpg&f=1&nofb=1&ipt=2eb0f2f0375ddaa11fcdfc768e2d69870c99974ec4c9d3b83230873979a5d9d9&ipo=images" class="card-img-top" alt="">
+                                                <div class="card-body">
+                                                    <form class="row g-3">
+                                                        <div class="col-md-3">
+                                                            <label for="inputZip" class="form-label">Eligir imagen</label>
+                                                            <input type="file" class="form-control" id="img">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputCity" class="form-label">nombre</label>
+                                                            <input type="text" class="form-control" id="">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputState" class="form-label">cantidad</label>
+                                                            <input type="number" class="form-control" id="">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="inputZip" class="form-label">Precio</label>
+                                                            <input type="number" class="form-control" id="">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
                                     </div>
-                                  </div>
-                                      <div style="text-align: center;">
-                                        <a href="ListaPedidos.html"><button style="width:30%" type="button" class="btn btn-warning btn-save mb-2 btn-edit-p" data-bs-dismiss="modal">Guardar</button></a>
+                                    <div class="card-footer text-muted d-flex justify-content-around">
+                                        <div class="input-group pt-5 pb-5">
+                                            <label class="input-group-text" for="inputGroupSelect01">Estado</label>
+                                            <select class="form-select" id="inputGroupSelect01">
+                                                <option selected>seleciona</option>
+                                                <option value="1">exitos</option>
+                                                <option value="2">espera</option>
+                                                <option value="3">pendiente</option>
+                                            </select>
+                                        </div>
+                                        <div class="p-2 bg-light border">
+                                            <p>Subtotal: $21800</p>
+                                            <p>IVA: $4142</p>
+                                            <p>Total:$25942</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- sss -->
-                        <div style="text-align: center;">
-                            <button type="button" class="btn btn-warning btn-save-edit" data-bs-dismiss="modal">Guardar</button>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button type="button" class="btn btn-warning">Guardar</button>
+                            </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
                 <!-- Modal Eliminar Usuario -->
