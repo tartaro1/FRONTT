@@ -5,6 +5,9 @@
     color: #F86913;
     font-size: 30px;
 }
+.navbar > .container-fluid {
+	height: 100%;
+}
 .sidebar {
 	min-width: 250px;
 	max-width: 250px;

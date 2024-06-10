@@ -8,8 +8,16 @@ const connection = await mysql.createConnection(configDB);
 export class DetailsModel {
     static getAll = async() => {
         try {
-            const [result] = await connection.query("SELECT dp.ID_DetallePedido, dp.ID_Pedido, p.NombreProducto, dp.Cantidad, dp.PrecioVenta, dp.Descuento FROM detallepedido dp INNER JOIN productos p ON dp.ID_Producto = p.id;");
-            return result;
+            const [result] = await connection.query("CALL SP_DATOSPEDIDOS();");
+            return result[0];
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+    static getByProvider = async({provider}) => {
+        try {
+            const [result] = await connection.query("CALL SP_FILTRARPROVEEDOR(?);", [provider]);
+            return result[0];
         } catch (error) {
             throw new Error(error);
         }
