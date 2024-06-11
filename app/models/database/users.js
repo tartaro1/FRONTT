@@ -8,6 +8,10 @@ export class UserModel {
         const [users] = await connection.query("SELECT * FROM usuarios WHERE ID_Rol = 1");
         return users;
     }
+    static getByEmail = async({email}) => {
+        const [user] = await connection.query("SELECT * FROM usuarios WHERE ID_Rol = 1 AND Correo = ?", [email] );
+        return user;
+    }
     static getById = async({id}) => {
         if (id) {
             const [user] = await connection.query("SELECT * FROM usuarios WHERE ID_Usuario  = ?", [id]);

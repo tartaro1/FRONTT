@@ -20,6 +20,15 @@ deleteButtons.forEach(button => {
         });
     });
 });
+const browser = document.querySelector(".browse")
+browser.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const category = browser.value.trim();
+    if (category) {
+      window.location.href = `http://localhost:9200/products?category=${category}`;
+    }
+  }
+});
 const editButtons = document.querySelectorAll(".edit-user-btn");
 editButtons.forEach(btn => {
 btn.addEventListener("click", (e) => {

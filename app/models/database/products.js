@@ -4,14 +4,16 @@ import { configDB } from "../../config/db.config.js";
 const connection = await mysql.createConnection(configDB);
 
 export class ProductModel {
-    static getAll = async ({category}) => {
+    static getAll = async () => {
+        const [products] = await connection.query("CALL SP_MOSTRARPRODUCTOS();");
+        return products[0]
+    }
+    static getByCategory = async({category}) =>{
         if (category) {
             const [product] = await connection.query("CALL SP_BuscarCategoria(?);", [category]);
             if (product.length === 0) return {};
-            return product;
+            return product[0];
         }
-        const [products] = await connection.query("SELECT * FROM productos;");
-        return products
     }
     static getByName = async({nombre}) => {
         const [products] = await connection.query("CALL SP_BuscarProductos(?);", [nombre]);

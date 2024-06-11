@@ -3,8 +3,14 @@ import { validateDealer, validatePartialUser } from "../schemas/dealer.js";
 export class DealersController {
     static getAll = async (req, res) => {
         try {
-            const dealers = await DealersModel.getAll();
-            res.render("views.dealers.ejs", {dealers});
+            const {email} = req.query;
+            if (email) {
+                const dealers = await DealersModel.getByEmail({email});
+                res.render("views.resultDealer.ejs", {dealers})
+            } else {
+                const dealers = await DealersModel.getAll();
+                res.render("views.dealers.ejs", {dealers});
+            }
         } catch (error) {
             res.json({error: error.message})
         }

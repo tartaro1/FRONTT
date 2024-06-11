@@ -74,7 +74,7 @@
                     <!-- Barra de búsqueda -->
                     <div class="search-bar">
                       <div class="input-group">
-                      <input type="search" class="form-control rounded-pill alert-dark browse" placeholder="Buscar por categoria"><i class="bi bi-search"></i>
+                      <input type="search" class="form-control rounded-pill alert-dark" placeholder="Buscar por categoria"><i class="bi bi-search"></i>
                       </div>
                     </div>
                     
@@ -138,9 +138,8 @@
                     </div>
                     </div>
                     </div>
-                    
-                    <!-- Lista de usuarios -->
-                    <div class="container">
+                    <% if (products && products.length > 0) { %>
+                      <div class="container">
                         <table class="table table bordered table-striped">
                             <thead>
                                 <tr>
@@ -190,6 +189,11 @@
                             </tbody>
                         </table>
                     </div>
+                      <% } else { %>
+                          <p>No se encontró esta categoria.</p>
+                      <% } %>
+                    <!-- Lista de usuarios -->
+                    
                     <!-- Modal Editar Usuario -->
                     <div class="modal fade" id="exampleEditUserModal" tabindex="-1" aria-labelledby="exampleEditUserModalLabel" aria-hidden="true">
                     <div class="modal-dialog">

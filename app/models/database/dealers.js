@@ -8,6 +8,10 @@ export class DealersModel {
         const [dealers] = await connection.query("SELECT * FROM usuarios WHERE ID_Rol = 3");
         return dealers;
     }
+    static getByEmail = async({email}) => {
+        const [dealer] = await connection.query("SELECT * FROM usuarios WHERE ID_Rol = 3 AND Correo = ?", [email] );
+        return dealer;
+    }
     static getById = async({id}) => {
         try {
             const [dealer] = await connection.query(`SELECT * FROM usuarios WHERE ID_Usuario = ${id} AND ID_Rol = 3`);

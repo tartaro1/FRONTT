@@ -4,8 +4,13 @@ export class ProductController {
     static getAll = async(req, res) => {
         try {
             const {category} = req.query;
-            const products = await ProductModel.getAll({category});
-            res.render("views.products.ejs", {products});
+            if (category) {
+                const products = await ProductModel.getByCategory({category});
+                res.render("views.resultsProduct.ejs", {products})
+            } else {
+                const products = await ProductModel.getAll();
+                res.render("views.products.ejs", {products});
+            }
         } catch (error) {
             res.status(500).json({error: "Error getting all products" + error.message});
         }

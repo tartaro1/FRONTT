@@ -6,7 +6,7 @@ const connection = await mysql.createConnection(configDB);
 export class OrderModel {
     static getAll = async() => {
         try {
-            const [orders] = await connection.query("SELECT * FROM pedidos");
+            const [orders] = await connection.query("SELECT pedidos.ID_Pedido, pedidos.EstadoPedido, pedidos.Direccion, pedidos.PrecioVenta, pedidos.FechaPedido, cliente.Nombre AS Nombre_Cliente, repartidor.Nombre AS ID_Repartidor FROM pedidos JOIN usuarios AS cliente ON pedidos.Cliente = cliente.ID_Usuario JOIN usuarios AS repartidor ON pedidos.ID_Repartidor = repartidor.ID_Usuario WHERE repartidor.ID_Rol = 3;");
             return orders;
         } catch (error) {
             throw new Error(error.message);

@@ -3,8 +3,14 @@ import { validateUser, validatePartialUser } from "../schemas/user.js";
 export class UsersController {
     static getAll = async(req, res) => {
         try {
-            const users = await UserModel.getAll();
-            res.render("views.users.ejs", {users});
+            const {email} = req.query;
+            if (email) {
+                const user = await UserModel.getByEmail({email});
+                res.render("views.resultUser.ejs", {user})
+            } else {
+                const users = await UserModel.getAll();
+                res.render("views.users.ejs", {users});
+            }
         } catch (error) {
             res.status(500).json({error: "Error getting all users" + error.message});
         }

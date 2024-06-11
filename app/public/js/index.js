@@ -20,6 +20,15 @@ const deleteButtons = document.querySelectorAll(".delete-user-btn");
         });
     });
 });
+const browser = document.querySelector(".browse")
+browser.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const email = browser.value.trim();
+    if (email) {
+      window.location.href = `http://localhost:9200/users?email=${email}`;
+    }
+  }
+});
 const savebtn = document.querySelector(".btn-save");
 savebtn.addEventListener("click", () => {
     const nombreElement = document.querySelector(".nombre");

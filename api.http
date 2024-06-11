@@ -98,7 +98,7 @@ Content-Type: application/json
 }
 
 ###ORDERS
-GET http://localhost:3000/orders
+GET http://localhost:9200/orders
 ###ORDERS BY ID
 GET http://localhost:3000/orders/1
 ###UPDATE ORDER
@@ -113,3 +113,9 @@ Content-Type: application/json
 }
 ###DELETE ORDER
 DELETE http://localhost:3000/orders/1 
+
+####
+GET http://localhost:9200/backup
+
+###
+GET http://localhost:9200/dealers?email=dddaaa 

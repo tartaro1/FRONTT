@@ -4,6 +4,7 @@ import routesOrders from "./routes.orders.js";
 import routesDelivers from "./routes.dealers.js";
 import { Router } from "express";
 import routesDetails from "./routes.details.js";
+import routesBackup from "./routes.backup.js";
 
 const router = Router();
 
@@ -12,5 +13,5 @@ router.use("/users", routesUsers);
 router.use("/dealers", routesDelivers);
 router.use("/orders", routesOrders);
 router.use("/detailsOrders", routesDetails);
-
+router.use("/backup", routesBackup)
 export default router;
