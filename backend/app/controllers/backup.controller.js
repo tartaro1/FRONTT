@@ -1,4 +1,4 @@
-import { BackupsModel } from "../models/database/backup.js";
+import { BackupsModel } from "../models/backup.js";
 
 export class BackupsController {
     static getLatest = async(req, res) => {

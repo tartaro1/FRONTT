@@ -1,4 +1,4 @@
-import { DealersModel } from "../models/database/dealers.js";
+import { DealersModel } from "../models/dealers.js";
 import { validateDealer, validatePartialUser } from "../schemas/dealer.js";
 export class DealersController {
     static getAll = async (req, res) => {

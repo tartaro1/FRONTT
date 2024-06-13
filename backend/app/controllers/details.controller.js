@@ -1,4 +1,4 @@
-import { DetailsModel } from "../models/database/detailsOrder.js";
+import { DetailsModel } from "../models/detailsOrder.js";
 export class DetailsController {
     static getAll = async(req, res) =>{ 
         try {

@@ -1,4 +1,4 @@
-import { OrderModel } from "../models/database/orders.js";
+import { OrderModel } from "../models/orders.js";
 
 export class OrdersController {
     static getAll = async(req, res) => {

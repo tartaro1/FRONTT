@@ -1,4 +1,4 @@
-import { UserModel } from "../models/database/users.js";
+import { UserModel } from "../models/users.js";
 import { validateUser, validatePartialUser } from "../schemas/user.js";
 export class UsersController {
     static getAll = async(req, res) => {

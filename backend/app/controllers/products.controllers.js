@@ -1,4 +1,4 @@
-import { ProductModel } from "../models/database/products.js";
+import { ProductModel } from "../models/products.js";
 import { validateProduct, validatePartialMovie } from "../schemas/product.js";
 export class ProductController {
     static getAll = async(req, res) => {

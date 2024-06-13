@@ -1,4 +1,4 @@
-import { configDB } from "../../config/db.config.js";
+import { configDB } from "../config/db.config.js";
 import mysql from "mysql2/promise"
 import { config } from "dotenv";
 config();
