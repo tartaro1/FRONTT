@@ -33,11 +33,12 @@ export class ProductModel {
             id_proveedor,
             descripcion,
             precio,
-            calificacion
+            calificacion,
+            imagen
         } = input;
         try {
-            // const result = await connection.query("INSERT INTO `productos`(`NombreProducto`, `ID_Categoria`, `Marca`, `ID_Proveedor`, `Descripcion`, `PrecioVenta`, `Calificacion`) VALUES (?, ?, ?, ?, ?, ?, ?)", [nombre, id_categoria, marca, id_proveedor, descripcion, precio, calificacion ]);
-            const result = await connection.query("CALL SP_AddProducto(?, ?, ?, ?, ?, ?, ?)", [nombre, id_categoria, marca, id_proveedor, descripcion, precio, calificacion ]);
+            // const result = await connection.query("INSERT INTO `productos`(`NombreProducto`, `ID_Categoria`, `Marca`, `ID_Proveedor`, `Descripcion`, `PrecioVenta`, `Calificacion`, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)", [nombre, id_categoria, marca, id_proveedor, descripcion, precio, calificacion ]);
+            const result = await connection.query("CALL SP_AddProducto(?, ?, ?, ?, ?, ?, ?, ?)", [nombre, id_categoria, marca, id_proveedor, descripcion, precio, calificacion, imagen ]);
             const [product] = await connection.query("SELECT * FROM productos WHERE id = ?", result[0].insertId);
             return product;
         } catch (error) {

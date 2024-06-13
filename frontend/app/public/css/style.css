@@ -172,6 +172,13 @@ a{
 	background: #bbb8b8;
 	transition: .5s;
 }
+
+.imagen > img{
+	height: 70px;
+	width: 130px;
+	border-radius: 10px;
+}
+
 @media (max-width: 968px) {
 	.sidebar {
 		min-width: 100px;

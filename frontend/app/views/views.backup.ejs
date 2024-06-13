@@ -81,9 +81,22 @@
                             <li class="list-group-item">
                                 <h5 class="card-title">Restablecer Copia de Seguridad</h5>
                                 <h6><i class="bi bi-cloud-arrow-up-fill fs-2"></i> 10/02/2024</h6>
-                                <a href="#" class="btn btn-warning">Recuperar copia</a>
+                                <button class="btn btn-warning recovery"data-bs-toggle="modal" data-bs-target="#staticBackdrop">Recuperar copia</button>
                             </li>
                         </ul>
+                    </div>
+                </div>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header" style="align-self: center;padding-bottom:20px">
+                        <h5 class="modal-title fs-5" id="staticBackdropLabel">¿Desea restablecer la copia de seguridad?</h5>
+                        </div>
+                        <div style="text-align: center;padding-bottom: 20px;">
+                        <button type="button" class="btn btn-warning accept" data-bs-dismiss="modal" style="color:white">Aceptar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Rechazar</button>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>

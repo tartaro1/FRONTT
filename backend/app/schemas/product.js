@@ -11,6 +11,7 @@ const productSchema = z.object({
   descripcion: z.string(),
   precio: z.number(),
   calificacion: z.number().min(1).max(5),
+  imagen: z.string(),
   disponibilidad: z.number().default(1),
 })
 

@@ -11,4 +11,19 @@ export class BackupsModel {
             throw new Error(error)
         }
     }
+    static create = async({input}) => {
+        try {
+            const {
+                NombreBd,
+                VersionBd,
+                Tipo,
+                Ubicacion, 
+                Informacion
+            } = input;
+            const [backup] = await connection.query("CALL SP_CREARCOPIA(?, ?, ?, ?, ?)", [NombreBd, VersionBd, Tipo, Ubicacion, Informacion]);
+            return backup[0]
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
 }

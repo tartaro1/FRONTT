@@ -199,7 +199,7 @@ WHERE p.NombreProducto LIKE CONCAT('%', NOMBRE, '%');
 END$$
 
 DROP PROCEDURE IF EXISTS `SP_DATOSPEDIDOS`$$
-CREATE DEFINER=`` PROCEDURE `SP_DATOSPEDIDOS` ()   SELECT 
+CREATE DEFINER=`root`@`localhost`PROCEDURE `SP_DATOSPEDIDOS` ()   SELECT 
     dp.ID_DetallePedido, 
     dp.ID_Pedido, 
     p.NombreProducto, 
@@ -246,12 +246,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_EliminarUsuario` (IN `_id` INT(1
 END$$
 
 DROP PROCEDURE IF EXISTS `SP_FECHACOPIA`$$
-CREATE DEFINER=`` PROCEDURE `SP_FECHACOPIA` ()   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_FECHACOPIA` ()   BEGIN
 SELECT DATE(FechaHora) AS fecha FROM copiasseguridad ORDER BY ID DESC LIMIT 1;
 END$$
 
 DROP PROCEDURE IF EXISTS `SP_FILTRARPROVEEDOR`$$
-CREATE DEFINER=`` PROCEDURE `SP_FILTRARPROVEEDOR` (IN `_proveedor` VARCHAR(200))   SELECT 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_FILTRARPROVEEDOR` (IN `_proveedor` VARCHAR(200))   SELECT 
     dp.ID_DetallePedido, 
     dp.ID_Pedido, 
     p.NombreProducto, 
@@ -309,7 +309,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GestionarPublicidad` (IN `accion
 END$$
 
 DROP PROCEDURE IF EXISTS `SP_MOSTRARPRODUCTOS`$$
-CREATE DEFINER=`` PROCEDURE `SP_MOSTRARPRODUCTOS` ()   BEGIN
+CREATE DEFINER=`root`@`localhost`  PROCEDURE `SP_MOSTRARPRODUCTOS` ()   BEGIN
 SELECT
     p.id, p.NombreProducto, p.Marca, p.Descripcion, p.Descripcion, p.PrecioVenta, p.Calificacion, 		p.Disponibilidad, p.imagen, 
     c.Nombre AS ID_Categoria,

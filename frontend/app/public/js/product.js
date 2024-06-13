@@ -41,6 +41,7 @@ btn.addEventListener("click", (e) => {
     const precioElement = document.querySelector(".precioEdit");
     const calificacionElement = document.querySelector(".calificacionEdit");
     const proveedorElement = document.querySelector(".proveedorEdit");
+    const urlElement = document.querySelector(".urlEdit")
     fetch(`http://localhost:9200/products/${id}`)
         .then(res => res.json())
             .then(productArray => {
@@ -54,6 +55,7 @@ btn.addEventListener("click", (e) => {
                 descripcionElement.value = product.Descripcion;
                 precioElement.value = product.PrecioVenta;
                 calificacionElement.value = product.Calificacion;
+                urlElement.value = product.imagen;
                 const saveEditButton = document.querySelector(".btn-save-edit");
                 saveEditButton.addEventListener("click", () => {
                     if (nombreElement && marcaElement && descripcionElement && precioElement && categoriaElement && calificacionElement && proveedorElement) {
@@ -64,6 +66,7 @@ btn.addEventListener("click", (e) => {
                         const descripcion = descripcionElement.value;
                         const precio = parseInt(precioElement.value);
                         const calificacion = parseInt(calificacionElement.value);
+                        const imagen = urlElement.value;
                         const id = productListItem.querySelector('.id').innerText;
                         fetch(`http://localhost:9200/products/${id}`, {
                             method: 'PATCH',
@@ -77,7 +80,8 @@ btn.addEventListener("click", (e) => {
                                 ID_Proveedor: proveedor,
                                 Descripcion: descripcion,
                                 PrecioVenta: precio,
-                                Calificacion: calificacion
+                                Calificacion: calificacion,
+                                Imagen: imagen
                             })
                         })
                         .then(res => {
@@ -117,8 +121,9 @@ const savebtn = document.querySelector(".btn-save");
         const precioElement = document.querySelector(".precio");
         const calificacionElement = document.querySelector(".calificacion");
         const proveedorElement = document.querySelector(".proveedor");
+        const urlElement = document.querySelector(".url")
 
-        if (nombreElement && marcaElement && descripcionElement && precioElement && categoriaElement && calificacionElement && proveedorElement) {
+        if (nombreElement && marcaElement && descripcionElement && precioElement && categoriaElement && calificacionElement && proveedorElement && urlElement) {
           const nombre = nombreElement.value;
           const categoria = parseInt(categoriaElement.value);
           const marca = marcaElement.value;
@@ -126,6 +131,7 @@ const savebtn = document.querySelector(".btn-save");
           const descripcion = descripcionElement.value;
           const precio = parseInt(precioElement.value);
           const calificacion = parseInt(calificacionElement.value);
+          const imagen = urlElement.value;
 
           fetch("http://localhost:9200/products", {
             method: "POST",
@@ -139,7 +145,8 @@ const savebtn = document.querySelector(".btn-save");
               id_proveedor: proveedor,
               descripcion: descripcion,
               precio: precio,
-              calificacion: calificacion
+              calificacion: calificacion,
+              imagen: imagen
             })
           })
             .then(res => {

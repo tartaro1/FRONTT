@@ -15,7 +15,7 @@ export class BackupsController {
             const [backup] = await BackupsModel.create({input});
             res.status(201).json(backup)
         } catch (error) {
-            
+            res.json(error)
         }
     }
 }
