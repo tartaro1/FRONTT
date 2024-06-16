@@ -15,4 +15,33 @@ export class DetailsController {
             res.status(500).json(error);
         }
     }
+    static getOrderProducts = async(req, res) => {
+        try {
+            const {id} = req.params;
+            const detailsOrder = await DetailsModel.getOrderProducts({id});
+            res.json(detailsOrder);
+        } catch (error) {
+            res.status(404).json(error);
+        }
+    }
+    static delete = async(req, res) => {
+        try {
+            const {id} = req.params;
+            const productsDetails = await DetailsModel.delete({id});
+            res.json(productsDetails);
+        } catch (error) {
+            res.status(404).json(error);
+        }
+    }
+    static update = async(req, res) => {
+        try {
+            const {id} = req.params;
+            const input = req.body;
+            const productsDetails = await DetailsModel.update({id, input})
+            res.json(productsDetails);
+        } catch (error) {
+            res.status(404).json(error);
+        }
+    }
+    
 }

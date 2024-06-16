@@ -66,7 +66,7 @@ export class OrderModel {
             params.push(id);
             await connection.query(`UPDATE pedidos SET ${updateFieldsString} WHERE ID_Pedido = ?`, params);
 
-            // Seleccionar el producto actualizado
+            
             const [rows] = await connection.query("SELECT * FROM pedidos WHERE ID_Pedido = ?", [id]);
 
             // Verificar si el producto existe
@@ -86,6 +86,14 @@ export class OrderModel {
             
         } catch (error) {
             throw new Error("Error deleting order: " + error);
+        }
+    }
+    static findByDealer = async({dealer}) => {
+        try {
+            const [dealerOrder] = await connection.query("CALL SP_ORDENREPARTIDOR(?)", [dealer])
+            return dealerOrder[0];
+        } catch (error) {
+            throw new Error(error)
         }
     }
 }

@@ -2,9 +2,15 @@ import { OrderModel } from "../models/orders.js";
 
 export class OrdersController {
     static getAll = async(req, res) => {
+        const {dealer} = req.query;
         try {
-            const orders = await OrderModel.getAll();
-            res.render("views.orders.ejs", {orders})
+            if (dealer) {
+                const orders = await OrderModel.findByDealer({dealer});
+                res.render("views.resulsOrdersByDealer.ejs", {orders});                
+            } else {
+                const orders = await OrderModel.getAll();
+                res.render("views.orders.ejs", {orders})
+            }
         } catch (error) {
             res.status(500).json({error: error});
         }
@@ -35,6 +41,15 @@ export class OrdersController {
             res.status(200).json(deletedOrder);
         } catch (error) {
             res.status(500).json({error: error.message});
+        }
+    }
+    static findByDealer = async(req, res) => {
+        try {
+            const {dealer} = req.params;
+            const orderDealer = await OrderModel.findByDealer({dealer})
+            res.json(orderDealer)
+        } catch (error) {
+            res.status(404).json(error)
         }
     } 
 }
