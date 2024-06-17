@@ -8,7 +8,7 @@ const deleteButtons = document.querySelectorAll(".delete-user-btn");
         const id = userListItem.querySelector('.id').innerText;
         const modalAcceptButton = document.querySelector(".accept");
         modalAcceptButton.addEventListener("click", () => {
-            fetch(`http://localhost:9200/users/${id}`, {
+            fetch(`http://localhost:9200/dashboard/users/${id}`, {
                 method: 'DELETE'
             })
             .then(res => {
@@ -25,7 +25,7 @@ browser.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     const email = browser.value.trim();
     if (email) {
-      window.location.href = `http://localhost:9200/users?email=${email}`;
+      window.location.href = `http://localhost:9200/dashboard/users?email=${email}`;
     }
   }
 });
@@ -48,7 +48,7 @@ savebtn.addEventListener("click", () => {
         const contrasena = contrasenaElement.value;
         const rol = parseInt(rolElement.value);
 
-        fetch("http://localhost:9200/users", {
+        fetch("http://localhost:9200/dashboard/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -94,7 +94,7 @@ editButtons.forEach(btn => {
         const correoElement = document.querySelector(".correoEdit");
         const contrasenaElement = document.querySelector(".contrasenaEdit");
 
-          fetch(`http://localhost:9200/users/${id}`)
+          fetch(`http://localhost:9200/dashboard/users/${id}`)
             .then(res => res.json())
             .then(userArray => {
               if (userArray && userArray.length > 0) {
@@ -117,7 +117,7 @@ editButtons.forEach(btn => {
                       const correo = correoElement.value;
                       const contrasena = contrasenaElement.value;
                       const id = userListItem.querySelector('.id').innerText;
-                      fetch(`http://localhost:9200/users/${id}`, {
+                      fetch(`http://localhost:9200/dashboard/users/${id}`, {
                         method: 'PATCH',
                         headers: {
                           "Content-Type": "application/json"

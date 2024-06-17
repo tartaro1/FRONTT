@@ -8,7 +8,7 @@ deleteButtons.forEach(button => {
         const id = productListItem.querySelector('.id').innerText;
         const modalAcceptButton = document.querySelector(".accept");
         modalAcceptButton.addEventListener("click", () => {
-        fetch(`http://localhost:9200/products/${id}`, {
+        fetch(`http://localhost:9200/dashboard/products/${id}`, {
             method: 'DELETE'
         })
         .then(res => {
@@ -25,7 +25,7 @@ browser.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     const category = browser.value.trim();
     if (category) {
-      window.location.href = `http://localhost:9200/products?category=${category}`;
+      window.location.href = `http://localhost:9200/dashboard/products?category=${category}`;
     }
   }
 });
@@ -42,7 +42,7 @@ btn.addEventListener("click", (e) => {
     const calificacionElement = document.querySelector(".calificacionEdit");
     const proveedorElement = document.querySelector(".proveedorEdit");
     const urlElement = document.querySelector(".urlEdit")
-    fetch(`http://localhost:9200/products/${id}`)
+    fetch(`http://localhost:9200/dashboard/products/${id}`)
         .then(res => res.json())
             .then(productArray => {
                 if (productArray && productArray.length > 0) {
@@ -68,7 +68,7 @@ btn.addEventListener("click", (e) => {
                         const calificacion = parseInt(calificacionElement.value);
                         const imagen = urlElement.value;
                         const id = productListItem.querySelector('.id').innerText;
-                        fetch(`http://localhost:9200/products/${id}`, {
+                        fetch(`http://localhost:9200/dashboard/products/${id}`, {
                             method: 'PATCH',
                             headers: {
                                 "Content-Type": "application/json"
@@ -133,7 +133,7 @@ const savebtn = document.querySelector(".btn-save");
           const calificacion = parseInt(calificacionElement.value);
           const imagen = urlElement.value;
 
-          fetch("http://localhost:9200/products", {
+          fetch("http://localhost:9200/dashboard/products", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"

@@ -9,7 +9,7 @@ createBackup.addEventListener("click", () => {
         Informacion: "backup mensual"
     };
 
-    fetch("http://localhost:9200/backup", {
+    fetch("http://localhost:9200/dashboard/backup", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
