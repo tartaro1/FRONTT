@@ -21,7 +21,7 @@
         </form>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"><img class="carrito" src="iconos/carrito.png" alt=""></a>
+            <img class="carrito" src="/iconos/carrito.png" alt="">
           </li>
         </ul>
         <a href="login.html"><button class="Iniciar btn-outline-success ms-5 me-5" type="button">Iniciar Sesión</button></a>
@@ -86,18 +86,20 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-12 col-md-4 ms-5 ms-md-0">
-                      <img src="<%= product.imagen %>" alt="" class="card-img-top" style="border-radius: 20px;">
+                      <img src="<%= product.imagen %>" alt="" class="src card-img-top" style="border-radius: 20px;">
                     </div>
                     <div class="col-12 col-md-4 mt-4">
-                      <p class="card-text fs-5 fb-5"><%= product.NombreProducto %></p>
-                      <p class="card-text fs-5"><%= product.PrecioVenta %></p>
+                      <p class="id" style="display: none;"><%= product.id %></p>
+                      <p class="card-text fs-5 fb-5 title"><%= product.NombreProducto %></p>
+                      <p class="card-text fs-5 fb-5 rating" style="display: none;"><%= product.Calificacion %></p>
+                      <p class="card-text fs-5 price"><%= product.PrecioVenta %></p>
                       <p class="card-text mb-3">★★★★★</p>
                     </div>
                     <div class="col-12 col-md-4 align-items-center justify-content-center mt-md-5 ms-5 ms-md-0">
                       <button type="button" class="menos btn btn-secondary ms-md-4">-</button>
-                        <span>1 unidad</span>
+                        <span class="cantidad">1 unidad</span>
                         <button type="button" class="mas btn btn-secondary">+</button>
-                        <a href="carrito.html" style="text-decoration: none;"><button type="button" class="agregar btn btn-primary d-block ms-md-4">🛒Agregar</button></a>
+                        <button type="button" class="agregar btn btn-primary d-block ms-md-4">🛒Agregar</button>
                     </div>
                     </div>
                   </div>
@@ -105,6 +107,32 @@
                 </div>
                 <% }); %>
             </div>
+    </div>
+    <div class="container-car col-11 col-md-11 ms-md-3 mt-5 mt-md-1">
+      <div class="container-fluid">
+        <p class="text-center pt-4 fs-5">Tus Productos</p>
+        <div class="row">
+            <div class="col-12 col-md-9">
+                <div class="producto card mb-3 ms-md-4">
+                    <div class="card-body">
+                        <div class="car row">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="producto card">
+                    <div class="card-body justify-content-center align-items-center text-center">
+                        <p class="text-center pt-5 text-center">Subtotal: $13000</p>
+                        <a href="formulario-envio.html" style="text-decoration: none;">
+                            <button type="button" class="comprar btn btn-primary d-block" style="margin: 70px auto;">Comprar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`
     </div>
     </div>
         

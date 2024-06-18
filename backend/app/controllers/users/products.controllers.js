@@ -6,10 +6,10 @@ export class ProductController {
             const {category} = req.query;
             if (category) {
                 const products = await ProductModel.getByCategory({category});
-                res.render("views.prueba.ejs", {products})
+                res.render("views.categories.ejs", {products})
             } else {
                 const products = await ProductModel.getAll();
-                res.render("views.prueba.ejs", {products});
+                res.render("views.index.ejs", {products});
             }
         } catch (error) {
             res.status(500).json({error: "Error getting all products" + error.message});

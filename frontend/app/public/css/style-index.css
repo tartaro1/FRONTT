@@ -84,7 +84,7 @@
 .btns {
     margin-top: -60px;
 }
-.agregar {
+.agregar, .eliminar, .comprar {
     background: #FE6C00;
     border: none;
     border-radius: 10px;
