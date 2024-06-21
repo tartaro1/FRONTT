@@ -5,21 +5,20 @@ const connection = await mysql.createConnection(configDB);
 
 export class DealersModel {
     static getAll = async() => {
-        const [dealers] = await connection.query("SELECT * FROM usuarios WHERE ID_Rol = 3");
-        return dealers;
+        const [dealers] = await connection.query("CALL SP_LISTARREPARTIDORES();");
+        return dealers[0];
     }
     static getByEmail = async({email}) => {
-        const [dealer] = await connection.query("SELECT * FROM usuarios WHERE ID_Rol = 3 AND Correo = ?", [email] );
-        return dealer;
+        const [dealer] = await connection.query("CALL SP_LISTAR_EMAIL_REPARTIDOR(?)", [email] );
+        return dealer[0];
     }
     static getById = async({id}) => {
         try {
-            const [dealer] = await connection.query(`SELECT * FROM usuarios WHERE ID_Usuario = ${id} AND ID_Rol = 3`);
+            const [dealer] = await connection.query(`CALL SP_LISTAR_REPARTIDOR(?)`, [id] );
             if (dealer.length === 0) {
                 return {message: "Dealer not found"}
             }
-            console.log(dealer);
-            return dealer;
+            return dealer[0];
         } catch (error) {
             throw new Error(error.message);
         }
@@ -36,8 +35,8 @@ export class DealersModel {
             Estado
         } = input;
         try {
-            const dealer = await connection.query("INSERT INTO `usuarios`(`Nombre`, `Celular`, `Cedula`, `Direccion`, `Correo`, `Contrasena`, `ID_Rol`, `EstadoUsuario`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [Nombre, Celular, Cedula, Direccion, Correo, Contrasena, ID_Rol, Estado]);
-            const newDealer = await connection.query("SELECT * FROM `usuarios` WHERE ID_Usuario = ?", [dealer[0].insertId]);
+            const dealer = await connection.query("CALL SP_CREAR_REPARTIDOR(?, ?, ?, ?, ?, ?, ?, ?)", [Nombre, Celular, Cedula, Direccion, Correo, Contrasena, ID_Rol, Estado]);
+            const newDealer = await connection.query("CALL SP_USUARIO_ID(?)", [dealer[0].insertId]);
             return newDealer[0];
         } catch (error) {
             throw new Error(error.message);
@@ -45,7 +44,7 @@ export class DealersModel {
     }
     static delete = async({id}) => {
         try {
-            const [deletedDealer] = await connection.query("DELETE FROM `usuarios` WHERE ID_Usuario = ?", [id]);
+            const [deletedDealer] = await connection.query("CALL SP_EliminarUsuario(?)", [id]);
             return deletedDealer;
         } catch (error) {
             throw new Error("Error deleting dealer: ", error.message);
@@ -107,7 +106,7 @@ export class DealersModel {
             params.push(id);
             await connection.query(`UPDATE usuarios SET ${updateFieldsString} WHERE ID_Usuario = ?`, params);
 
-            const [rows] = await connection.query("SELECT * FROM usuarios WHERE ID_Usuario = ?", [id]);
+            const [rows] = await connection.query("CALL SP_USUARIO_ID(?)", [id]);
 
             // Verificar si el producto existe
             if (rows.length === 0) {

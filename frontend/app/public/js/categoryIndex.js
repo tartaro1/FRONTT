@@ -8,7 +8,7 @@ menu.forEach(item => {
     item.addEventListener("click", (e) => {
         const clickedButton = e.target;
         let text = clickedButton.textContent.trim();
-        
+
         // Guardar el estado del botón seleccionado en localStorage
         localStorage.setItem('selectedCategory', text);
 
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     let plus = document.querySelectorAll('.mas');
     plus.forEach(btn => {
-        btn.addEventListener('click', (e) =>{
+        btn.addEventListener('click', (e) => {
             let card = e.target.closest(".card")
             e.stopPropagation();
             incrementarCantidad(card)
@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     let minus = document.querySelectorAll(".menos");
     minus.forEach(btn => {
-        btn.addEventListener('click', (e) =>{
-          e.stopPropagation();
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
             let card = e.target.closest(".card")
             decrementarCantidad(card)
         })
@@ -60,28 +60,28 @@ document.addEventListener("DOMContentLoaded", () => {
     let container = document.querySelector(".container-car")
     container.style.display = "none";
     carritoDisplay.addEventListener("click", (e) => {
-      if (e.target.classList.contains("mas")) {
-          incrementarCantidad(e.target.closest('.producto'));
-      }
-  });
-  // Evento para decrementar la cantidad de productos
+        if (e.target.classList.contains("mas")) {
+            incrementarCantidad(e.target.closest('.producto'));
+        }
+    });
+    // Evento para decrementar la cantidad de productos
     carritoDisplay.addEventListener("click", (e) => {
-      if (e.target.classList.contains("menos")) {
-        decrementarCantidad(e.target.closest('.producto'));
-      }
-  });
-  carritoDisplay.addEventListener("click", (e) => {
-    if (e.target.classList.contains("eliminar")) {
-        eliminarProducto(e.target.closest('.producto'));
+        if (e.target.classList.contains("menos")) {
+            decrementarCantidad(e.target.closest('.producto'));
+        }
+    });
+    carritoDisplay.addEventListener("click", (e) => {
+        if (e.target.classList.contains("eliminar")) {
+            eliminarProducto(e.target.closest('.producto'));
+        }
+    });
+    function eliminarProducto(card) {
+        const title = card.querySelector('.title').textContent.trim();
+        let productosEnCarrito = getCarritoFromLocalStorage();
+        productosEnCarrito = productosEnCarrito.filter(producto => producto.title !== title);
+        guardarCarritoEnLocalStorage(productosEnCarrito);
+        actualizarCarritoVisual();
     }
-});
-function eliminarProducto(card) {
-  const title = card.querySelector('.title').textContent.trim();
-  let productosEnCarrito = getCarritoFromLocalStorage();
-  productosEnCarrito = productosEnCarrito.filter(producto => producto.title !== title);
-  guardarCarritoEnLocalStorage(productosEnCarrito);
-  actualizarCarritoVisual();
-}
     // Función para obtener los productos guardados en localStorage
     function getCarritoFromLocalStorage() {
         let carrito = localStorage.getItem("carrito");
@@ -201,26 +201,26 @@ function getSiblings(elem) {
     return siblings;
 }
 function mostrarVentanaEmergente(content) {
-  const modalContainer = document.querySelector(".modal-container");
-  const ventanaEmergente = document.createElement("div");
-  ventanaEmergente.classList.add("modal-content");
-  
-  let img = content.querySelector(".card-img-top");
-  const imgUrl = img ? img.getAttribute("src") : '';
-  
-  let title = content.querySelector(".title");
-  const titleText = title ? title.textContent : '';
-  
-  let price = content.querySelector(".price");
-  let priceText = price ? price.textContent : '';
-  
-  let id = content.querySelector(".id") ? content.querySelector(".id").textContent : '';
-  
-  fetch(`http://localhost:9200/index/products/${id}`)
-      .then(response => response.json())
-      .then(data => {
-          if (data[0].Descripcion) {
-              ventanaEmergente.innerHTML = `
+    const modalContainer = document.querySelector(".modal-container");
+    const ventanaEmergente = document.createElement("div");
+    ventanaEmergente.classList.add("modal-content");
+
+    let img = content.querySelector(".card-img-top");
+    const imgUrl = img ? img.getAttribute("src") : '';
+
+    let title = content.querySelector(".title");
+    const titleText = title ? title.textContent : '';
+
+    let price = content.querySelector(".price");
+    let priceText = price ? price.textContent : '';
+
+    let id = content.querySelector(".id") ? content.querySelector(".id").textContent : '';
+
+    fetch(`http://localhost:9200/index/products/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data[0].Descripcion) {
+                ventanaEmergente.innerHTML = `
               <div class="container-fluid">
                   <button class="close-btn">X</button>
                   <div class="row ms-md-5 me-md-5">
@@ -337,27 +337,27 @@ function mostrarVentanaEmergente(content) {
                   </div>
               </div>
               `;
-              
-              const closeBtn = ventanaEmergente.querySelector(".close-btn");
-              if (closeBtn) {
-                  closeBtn.addEventListener("click", ocultarVentanaEmergente);
-              }
-              
-              // Add event listeners to increment and decrement buttons
-              const incrementBtn = ventanaEmergente.querySelector(".mas");
-              const decrementBtn = ventanaEmergente.querySelector(".menos");
-              if (incrementBtn) {
-                  incrementBtn.addEventListener("click", () => incrementarCantidad(ventanaEmergente));
-              }
-              if (decrementBtn) {
-                  decrementBtn.addEventListener("click", () => decrementarCantidad(ventanaEmergente));
-              }
-              
-              modalContainer.innerHTML = "";
-              modalContainer.appendChild(ventanaEmergente);
-              modalContainer.style.display = "flex";
-          }
-      })
+
+                const closeBtn = ventanaEmergente.querySelector(".close-btn");
+                if (closeBtn) {
+                    closeBtn.addEventListener("click", ocultarVentanaEmergente);
+                }
+
+                // Add event listeners to increment and decrement buttons
+                const incrementBtn = ventanaEmergente.querySelector(".mas");
+                const decrementBtn = ventanaEmergente.querySelector(".menos");
+                if (incrementBtn) {
+                    incrementBtn.addEventListener("click", () => incrementarCantidad(ventanaEmergente));
+                }
+                if (decrementBtn) {
+                    decrementBtn.addEventListener("click", () => decrementarCantidad(ventanaEmergente));
+                }
+
+                modalContainer.innerHTML = "";
+                modalContainer.appendChild(ventanaEmergente);
+                modalContainer.style.display = "flex";
+            }
+        })
 }
 
 function ocultarVentanaEmergente() {
@@ -366,27 +366,27 @@ function ocultarVentanaEmergente() {
 }
 // Funciones para incrementar y decrementar la cantidad
 function incrementarCantidad(card) {
-  const cantidadSpan = card.querySelector("span");
-  if (cantidadSpan) {
-      let cantidad = parseInt(cantidadSpan.textContent);
-      cantidad++;
-      cantidadSpan.textContent = cantidad + " unidades";
-  } else {
-      console.error('cantidadSpan not found');
-  }
+    const cantidadSpan = card.querySelector("span");
+    if (cantidadSpan) {
+        let cantidad = parseInt(cantidadSpan.textContent);
+        cantidad++;
+        cantidadSpan.textContent = cantidad + " unidades";
+    } else {
+        console.error('cantidadSpan not found');
+    }
 }
 
 function decrementarCantidad(card) {
-  const cantidadSpan = card.querySelector("span");
-  if (cantidadSpan) {
-      let cantidad = parseInt(cantidadSpan.textContent);
-      if (cantidad === 1) {
-          cantidadSpan.textContent = cantidad + " unidad";
-      } else if (cantidad >= 2) {
-          cantidad--;
-          cantidadSpan.textContent = cantidad + " unidades";
-      }
-  } else {
-      console.error('cantidadSpan not found');
-  }
+    const cantidadSpan = card.querySelector("span");
+    if (cantidadSpan) {
+        let cantidad = parseInt(cantidadSpan.textContent);
+        if (cantidad === 1) {
+            cantidadSpan.textContent = cantidad + " unidad";
+        } else if (cantidad >= 2) {
+            cantidad--;
+            cantidadSpan.textContent = cantidad + " unidades";
+        }
+    } else {
+        console.error('cantidadSpan not found');
+    }
 }

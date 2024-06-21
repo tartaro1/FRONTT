@@ -6,19 +6,19 @@ const connection = await mysql.createConnection(configDB);
 export class OrderModel {
     static getAll = async() => {
         try {
-            const [orders] = await connection.query("SELECT pedidos.ID_Pedido, pedidos.EstadoPedido, pedidos.Direccion, pedidos.PrecioVenta, pedidos.FechaPedido, cliente.Nombre AS Nombre_Cliente, repartidor.Nombre AS ID_Repartidor FROM pedidos JOIN usuarios AS cliente ON pedidos.Cliente = cliente.ID_Usuario JOIN usuarios AS repartidor ON pedidos.ID_Repartidor = repartidor.ID_Usuario WHERE repartidor.ID_Rol = 3;");
-            return orders;
+            const [orders] = await connection.query("CALL SP_LISTAR_PEDIDOS();");
+            return orders[0];
         } catch (error) {
             throw new Error(error.message);
         }
     }
     static getById = async({id}) => {
         try {
-            const [order] = await connection.query("SELECT * FROM pedidos WHERE ID_Pedido = ?", [id]);
+            const [order] = await connection.query("CALL SP_LISTAR_PEDIDO_ID(?)", [id]);
             if (order.length === 0) {
                 return {error: "Pedido not found"}
             }
-            return [order];
+            return order[0];
         } catch (error) {
             throw new Error(error.message);
         }
@@ -67,7 +67,7 @@ export class OrderModel {
             await connection.query(`UPDATE pedidos SET ${updateFieldsString} WHERE ID_Pedido = ?`, params);
 
             
-            const [rows] = await connection.query("SELECT * FROM pedidos WHERE ID_Pedido = ?", [id]);
+            const [rows] = await connection.query("CALL SP_LISTAR_PEDIDO_ID(?)", [id]);
 
             // Verificar si el producto existe
             if (rows.length === 0) {
@@ -81,8 +81,8 @@ export class OrderModel {
     }
     static delete = async({id}) => {
         try {
-            const [deletedOrder] = await connection.query("DELETE FROM pedidos WHERE ID_Pedido = ?", [id]);
-            return [deletedOrder];
+            const [deletedOrder] = await connection.query("CALL SP_ELIMINAR_PEDIDO(?)", [id]);
+            return deletedOrder;
             
         } catch (error) {
             throw new Error("Error deleting order: " + error);

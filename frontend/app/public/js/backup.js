@@ -16,16 +16,16 @@ createBackup.addEventListener("click", () => {
         },
         body: JSON.stringify(backupData)
     })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return res.json();
-    })
-    .then(data => {
-        console.log("Backup created successfully:", data);
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return res.json();
+        })
+        .then(data => {
+            console.log("Backup created successfully:", data);
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
 });

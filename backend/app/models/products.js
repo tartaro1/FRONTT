@@ -21,9 +21,9 @@ export class ProductModel {
         return products;
     }
     static getById = async({id}) => {
-        const [products] = await connection.query("SELECT * FROM `productos` WHERE id = ?;", [id]);
+        const [products] = await connection.query("CALL SP_LISTAR_PRODUCTO(?)", [id]);
         if (products.length === 0) return "Product not found";
-        return products;
+        return products[0];
     }
     static createProduct = async ({input}) => {
         const {
@@ -39,7 +39,7 @@ export class ProductModel {
         try {
             // const result = await connection.query("INSERT INTO `productos`(`NombreProducto`, `ID_Categoria`, `Marca`, `ID_Proveedor`, `Descripcion`, `PrecioVenta`, `Calificacion`, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)", [nombre, id_categoria, marca, id_proveedor, descripcion, precio, calificacion ]);
             const result = await connection.query("CALL SP_AddProducto(?, ?, ?, ?, ?, ?, ?, ?)", [nombre, id_categoria, marca, id_proveedor, descripcion, precio, calificacion, imagen ]);
-            const [product] = await connection.query("SELECT * FROM productos WHERE id = ?", result[0].insertId);
+            const [product] = await connection.query("CALL SP_LISTAR_PRODUCTO(?)", result[0].insertId);
             return product;
         } catch (error) {
             throw new Error("Error inserting product: " + error.message);
@@ -47,7 +47,7 @@ export class ProductModel {
     }
     static deleteProduct = async ({id}) => {
         try {
-            const [result] = await connection.query("DELETE FROM productos WHERE id = ?", [id]);
+            const [result] = await connection.query("CALL SP_EliminarProdu(?)", [id]);
             return result;
         } catch (error) {
             throw new Error("Error deleting product: " + error.message);
@@ -108,7 +108,7 @@ export class ProductModel {
             await connection.query(`UPDATE productos SET ${updateFieldsString} WHERE id = ?`, params);
 
             // Seleccionar el producto actualizado
-            const [rows] = await connection.query("SELECT * FROM productos WHERE id = ?", [id]);
+            const [rows] = await connection.query("CALL SP_LISTAR_PRODUCTO(?)", [id]);
 
             // Verificar si el producto existe
             if (rows.length === 0) {

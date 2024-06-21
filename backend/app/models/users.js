@@ -5,18 +5,18 @@ const connection = await mysql.createConnection(configDB);
 
 export class UserModel {
     static getAll = async() => {
-        const [users] = await connection.query("SELECT * FROM usuarios WHERE ID_Rol = 1");
-        return users;
+        const [users] = await connection.query("CALL SP_LISTAR_USUARIOS();");
+        return users[0];
     }
     static getByEmail = async({email}) => {
-        const [user] = await connection.query("SELECT * FROM usuarios WHERE ID_Rol = 1 AND Correo = ?", [email] );
-        return user;
+        const [user] = await connection.query("CALL SP_USUARIOS_EMAIL(?)", [email] );
+        return user[0];
     }
     static getById = async({id}) => {
         if (id) {
-            const [user] = await connection.query("SELECT * FROM usuarios WHERE ID_Usuario  = ?", [id]);
+            const [user] = await connection.query("CALL SP_USUARIO_ID(?)", [id]);
             if (user.length == 0) return {message: "User not found"};
-            return user;
+            return user[0];
         } 
     }
     static createUser = async ({input}) => {
@@ -31,8 +31,8 @@ export class UserModel {
             Estado
         } = input;
         try {
-            const [result] = await connection.query("CALL RegistrarUsuario(?, ?, ?, ?, ?, ?, ?, ?)", [Nombre, Celular, Cedula, Direccion, Correo, Contrasena, ID_Rol, Estado]);
-            const [user] = await connection.query("SELECT * FROM usuarios WHERE ID_Usuario = ?", [result.insertId]);
+            const result = await connection.query("CALL RegistrarUsuario(?, ?, ?, ?, ?, ?, ?, ?)", [Nombre, Celular, Cedula, Direccion, Correo, Contrasena, ID_Rol, Estado]);
+            const [user] = await connection.query("CALL SP_USUARIO_ID(?)", result[0].insertId);
             return user;
         } catch (error) {
             throw new Error("Error inserting user: " + error.message);
@@ -105,7 +105,7 @@ export class UserModel {
             await connection.query(`UPDATE usuarios SET ${updateFieldsString} WHERE ID_Usuario = ?`, params);
 
             // Seleccionar el producto actualizado
-            const [rows] = await connection.query("SELECT * FROM usuarios WHERE ID_Usuario = ?", [id]);
+            const [rows] = await connection.query("CALL SP_USUARIO_ID(?)", [id]);
 
             // Verificar si el producto existe
             if (rows.length === 0) {
@@ -120,7 +120,7 @@ export class UserModel {
     static login = async({Nombre, Contrasena}) => {
         try {
             const [request] = await connection.query("SELECT * FROM usuarios WHERE Nombre = ? AND Contrasena = ?", [Nombre, Contrasena]);
-            return [request];
+            return request;
         } catch (error) {
             throw new Error(error.message);
         }

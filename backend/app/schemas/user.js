@@ -9,7 +9,6 @@ const userSchema = z.object({
     Contrasena: z.string(),
     ID_Rol: z.number().int().default(1),
     Estado: z.string().default("Activo"),
-    imagen: z.string()
 });
 
 export function validateUser(input) {
