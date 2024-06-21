@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-06-2024 a las 04:51:44
+-- Tiempo de generación: 22-06-2024 a las 00:38:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -152,10 +152,9 @@ FROM
 JOIN
     categorias c ON p.ID_Categoria = c.ID_Categoria
 JOIN
-    proveedores pr ON p.ID_Proveedor = pr.ID_Proveedor
-    WHERE
+    proveedores pr ON p.ID_Proveedor = pr.ID_Proveedor WHERE
     c.Nombre LIKE CONCAT('%', _categoria, '%');
-END$$
+    END$$
 
 DROP PROCEDURE IF EXISTS `SP_BuscarDisponibilidad`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_BuscarDisponibilidad` ()   BEGIN
@@ -204,6 +203,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CREARCOPIA` (IN `NombreBD` VARCH
 INSERT INTO `copiasseguridad`(`NombreBD`, `VersionBD`, `Tipo`, `Ubicacion`, `Informacion`) VALUES (NombreBD, VersionBD, Tipo, Ubicacion, Informacion );
 END$$
 
+DROP PROCEDURE IF EXISTS `SP_CREAR_REPARTIDOR`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CREAR_REPARTIDOR` (IN `_nombre` VARCHAR(100), IN `_celular` VARCHAR(20), IN `_cedula` INT(20), IN `_direccion` VARCHAR(200), IN `_correo` VARCHAR(100), IN `_contrasena` VARCHAR(150), IN `_idrol` INT(11), IN `_estado` VARCHAR(50))   BEGIN
+INSERT INTO `usuarios`(`Nombre`, `Celular`, `Cedula`, `Direccion`, `Correo`, `Contrasena`, `ID_Rol`, `EstadoUsuario`) VALUES (_nombre, _celular, _cedula, _direccion, _correo, _contrasena, _idrol, _estado);
+END$$
+
 DROP PROCEDURE IF EXISTS `SP_DATOSPEDIDOS`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DATOSPEDIDOS` ()   SELECT 
     dp.ID_DetallePedido, 
@@ -243,18 +247,25 @@ GROUP BY p.ID_Pedido, p.FechaPedido;
 END$$
 
 DROP PROCEDURE IF EXISTS `SP_EliminarProdu`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_EliminarProdu` (IN `id` INT(11))   BEGIN
-DELETE FROM Productos WHERE ID_Producto = id;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_EliminarProdu` (IN `_id` INT(11))   BEGIN
+DELETE FROM productos WHERE id = _id;
 END$$
 
 DROP PROCEDURE IF EXISTS `SP_ELIMINARPRODUCTOORDEN`$$
-CREATE DEFINER=`` PROCEDURE `SP_ELIMINARPRODUCTOORDEN` (IN `_id` INT(11))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ELIMINARPRODUCTOORDEN` (IN `_id` INT(11))   BEGIN
 DELETE FROM `detallepedido` WHERE ID_DetallePedido = _id;
 END$$
 
 DROP PROCEDURE IF EXISTS `SP_EliminarUsuario`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_EliminarUsuario` (IN `_id` INT(11))   BEGIN
 	DELETE FROM usuarios WHERE ID_Usuario = _id;
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_ELIMINAR_PEDIDO`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ELIMINAR_PEDIDO` (IN `_id` INT(11))   BEGIN
+
+DELETE FROM pedidos WHERE ID_Pedido = _id;
+
 END$$
 
 DROP PROCEDURE IF EXISTS `SP_FECHACOPIA`$$
@@ -321,6 +332,51 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GestionarPublicidad` (IN `accion
   END IF;
 END$$
 
+DROP PROCEDURE IF EXISTS `SP_LISTARREPARTIDORES`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTARREPARTIDORES` ()   BEGIN
+SELECT * FROM usuarios WHERE ID_Rol = 3;
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_LISTAR_EMAIL_REPARTIDOR`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_EMAIL_REPARTIDOR` (IN `_email` VARCHAR(200))   BEGIN
+
+SELECT * FROM usuarios WHERE ID_Rol = 3 AND Correo LIKE CONCAT("%", _email, "%");
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_LISTAR_PEDIDOS`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_PEDIDOS` ()   BEGIN
+
+SELECT pedidos.ID_Pedido, pedidos.EstadoPedido, pedidos.Direccion, pedidos.PrecioVenta, pedidos.FechaPedido, cliente.Nombre AS Nombre_Cliente, repartidor.Nombre AS ID_Repartidor FROM pedidos JOIN usuarios AS cliente ON pedidos.Cliente = cliente.ID_Usuario JOIN usuarios AS repartidor ON pedidos.ID_Repartidor = repartidor.ID_Usuario WHERE repartidor.ID_Rol = 3;
+
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_LISTAR_PEDIDO_ID`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_PEDIDO_ID` (IN `_id` INT(11))   BEGIN
+
+SELECT * FROM pedidos WHERE ID_Pedido = _id;
+
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_LISTAR_PRODUCTO`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_PRODUCTO` (IN `_id` INT(11))   BEGIN
+
+SELECT * FROM `productos` WHERE id = _id;
+
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_LISTAR_REPARTIDOR`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_REPARTIDOR` (IN `_id` INT(11))   BEGIN
+
+SELECT * FROM usuarios WHERE ID_Usuario = _id AND ID_Rol = 3;
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_LISTAR_USUARIOS`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_LISTAR_USUARIOS` ()   BEGIN
+
+SELECT * FROM usuarios WHERE ID_Rol = 1;
+
+END$$
+
 DROP PROCEDURE IF EXISTS `SP_MOSTRARPRODUCTOS`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_MOSTRARPRODUCTOS` ()   BEGIN
 SELECT
@@ -336,7 +392,7 @@ JOIN
     END$$
 
 DROP PROCEDURE IF EXISTS `SP_ORDENPRODUCTOS`$$
-CREATE DEFINER=`` PROCEDURE `SP_ORDENPRODUCTOS` (IN `p_ID_Pedido` INT(11))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ORDENPRODUCTOS` (IN `p_ID_Pedido` INT(11))   BEGIN
     SELECT 
         dp.ID_DetallePedido,
         dp.ID_Pedido,
@@ -356,7 +412,7 @@ CREATE DEFINER=`` PROCEDURE `SP_ORDENPRODUCTOS` (IN `p_ID_Pedido` INT(11))   BEG
 END$$
 
 DROP PROCEDURE IF EXISTS `SP_ORDENREPARTIDOR`$$
-CREATE DEFINER=`` PROCEDURE `SP_ORDENREPARTIDOR` (IN `nombre` VARCHAR(200))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ORDENREPARTIDOR` (IN `nombre` VARCHAR(200))   BEGIN
 SELECT pedidos.ID_Pedido, pedidos.EstadoPedido, pedidos.Direccion, pedidos.PrecioVenta, pedidos.FechaPedido, cliente.Nombre AS Nombre_Cliente, repartidor.Nombre AS ID_Repartidor FROM pedidos JOIN usuarios AS cliente ON pedidos.Cliente = cliente.ID_Usuario JOIN usuarios AS repartidor ON pedidos.ID_Repartidor = repartidor.ID_Usuario WHERE repartidor.ID_Rol = 3 AND repartidor.Nombre LIKE CONCAT('%', nombre, '%');
 END$$
 
@@ -470,6 +526,18 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_RestringirAcceso` (IN `p_Usuario
     END IF;
 END$$
 
+DROP PROCEDURE IF EXISTS `SP_USUARIOS_EMAIL`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_USUARIOS_EMAIL` (IN `_email` VARCHAR(200))   BEGIN
+
+SELECT * FROM usuarios WHERE ID_Rol = 1 AND Correo LIKE CONCAT("%", _email, "%");
+
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_USUARIO_ID`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_USUARIO_ID` (IN `_id` INT(11))   BEGIN
+SELECT * FROM `usuarios` WHERE ID_Usuario = _id; 
+END$$
+
 DROP PROCEDURE IF EXISTS `SP_VerPedidosAsignadosRepartidor`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_VerPedidosAsignadosRepartidor` ()   BEGIN
   DECLARE id_repartidor INT;
@@ -538,11 +606,10 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`ID_Categoria`, `Nombre`, `Descripcion`, `EstadoCategoria`) VALUES
-(1, 'Electrónicos', 'Productos electrónicos', 'Activo'),
-(2, 'Ropa', 'Ropa de moda', 'Activo'),
-(3, 'Hogar', 'Artículos para el hogar', 'Activo'),
-(4, 'Alimentos', 'Productos alimenticios', 'Activo'),
-(5, 'Deportes', 'Artículos deportivos', 'Activo');
+(1, 'Carnes', 'Productos electrónicos', 'Activo'),
+(2, 'Grano', 'Ropa de moda', 'Activo'),
+(3, 'Lácteos', 'Artículos para el hogar', 'Activo'),
+(4, 'Frutas', 'Productos alimenticios', 'Activo');
 
 -- --------------------------------------------------------
 
@@ -611,8 +678,7 @@ CREATE TABLE `detallepedido` (
 --
 
 INSERT INTO `detallepedido` (`ID_DetallePedido`, `ID_Pedido`, `ID_Producto`, `Cantidad`, `PrecioVenta`, `Descuento`) VALUES
-(12, 2, 15, 20, 30.00, 0),
-(18, 3, 17, 10, 4.00, 0);
+(19, 2, 17, 1, 30.00, 0);
 
 -- --------------------------------------------------------
 
@@ -710,12 +776,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `NombreProducto`, `ID_Categoria`, `Marca`, `ID_Proveedor`, `Descripcion`, `PrecioVenta`, `Calificacion`, `Disponibilidad`, `imagen`) VALUES
-(15, 'esneider', 2, 'Metro', 3, 'Jeadns anasdadchos', 305.000, 3, 1, 'https://th.bing.com/th?id=OIF.m4Ae%2f2eY%2bb7Bv6KFEwpciA&rs=1&pid=ImgDetMain'),
-(17, 'sopa', 1, 's', 1, 'asdad', 100.000, 1, 1, 'https://th.bing.com/th/id/OIP.loZFbPjBeTfB-YakWiTJGQHaEK?rs=1&pid=ImgDetMain'),
-(18, 'dasdadaa', 3, '1', 2, 'aaaaa', 1.000, 1, 1, 'https://th.bing.com/th/id/R.1e805519693cbbc18db83571e99f317a?rik=APZHMyMaG5vZ6Q&pid=ImgRaw&r=0'),
-(19, 'asdaaaaad', 1, '1', 1, 'adaaaa', 1.000, 1, 1, 'https://th.bing.com/th/id/R.2fe46343d57a9ded9bb11ff9cecf61b9?rik=KUMvubl15aeNwQ&riu=http%3a%2f%2fglobalnation.inquirer.net%2ffiles%2f2013%2f06%2fgolan-heights-putin.jpg&ehk=0Qgi2ehjGmhtbpBFb4GeueqAs4d9yYPplu80IbLi%2bVQ%3d&risl=&pid=ImgRaw&r=0'),
-(28, 'fdfdf', 1, '1', 1, 'ddd', 1.000, 1, 1, 'https://th.bing.com/th/id/R.05365f44030f4e9c21796a2e77f25c66?rik=7mJTx1jz7MtSTw&riu=http%3a%2f%2fwww.elcolombiano.com%2fblogs%2frevelacionesdelbajomundo%2fwp-content%2fuploads%2f2010%2f01%2fesne.jpg&ehk=OUlnvRAok6CET7Ixv4D1Tw0TRzgzWw21EHWS%2bkX1w%2f8%3d&risl=&pid=ImgRaw&r=0'),
-(31, 'nhbvnvbnvbv', 1, '1', 1, 'fghnfgjfj', 1.000, 1, 1, 'https://i.ytimg.com/vi/ReuTNYa9s0E/maxresdefault.jpg');
+(15, 'klimber', 2, 'Metro', 3, 'Jeadns anasdadchos', 305.000, 3, 1, 'https://th.bing.com/th?id=OIF.m4Ae%2f2eY%2bb7Bv6KFEwpciA&rs=1&pid=ImgDetMain'),
+(17, 'sopa', 1, 's', 1, 'asdad', 100.000, 1, 1, 'https://th.bing.com/th/id/OIP.loZFbPjBeTfB-YakWiTJGQHaEK?rs=1&pid=ImgDetMain');
 
 -- --------------------------------------------------------
 
@@ -767,9 +829,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`ID_Usuario`, `Nombre`, `Celular`, `Cedula`, `Direccion`, `Correo`, `Contrasena`, `ID_Rol`, `EstadoUsuario`) VALUES
-(41, 'asdd', '5555', 102022, 'yh', 'hhh', 'jjj', 3, ''),
+(41, 'asddeeq', '5555', 102022, 'yh', 'hhh', 'jjj', 3, ''),
 (42, 'esneidrq', '2111111', 33333331, 'dsfsfsf', 'adadadddad@gmail.com', 'asdadad', 1, 'Activo'),
-(49, 'adadada', '222222', 111333, 'dddaaa', '113', '1112233', 3, 'Activo');
+(49, 'adadada', '222222', 111333, 'dddaaa', '113', '1112233', 3, 'Activo'),
+(53, 'E', '1', 2, 'E', 'E', 'E', 1, '');
 
 --
 -- Índices para tablas volcadas
@@ -889,7 +952,7 @@ ALTER TABLE `detallefactura`
 -- AUTO_INCREMENT de la tabla `detallepedido`
 --
 ALTER TABLE `detallepedido`
-  MODIFY `ID_DetallePedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID_DetallePedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas`
@@ -913,7 +976,7 @@ ALTER TABLE `pedidos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
@@ -925,7 +988,7 @@ ALTER TABLE `proveedores`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- Restricciones para tablas volcadas
