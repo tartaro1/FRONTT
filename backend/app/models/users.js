@@ -1,5 +1,6 @@
 import mysql from "mysql2/promise"
 import { configDB } from "../config/db.config.js";
+import bcrypt from "bcrypt";
 
 const connection = await mysql.createConnection(configDB);
 

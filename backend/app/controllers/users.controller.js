@@ -6,23 +6,28 @@ export class UsersController {
             const {email} = req.query;
             if (email) {
                 const user = await UserModel.getByEmail({email});
-                res.render("views.resultUser.ejs", {user})
+                res.status(200).json(user);
+                // res.render("views.resultUser.ejs", {user})
             } else {
                 const users = await UserModel.getAll();
-                res.render("views.users.ejs", {users});
+                res.status(404).json(users);
+                // res.render("views.users.ejs", {users});
             }
         } catch (error) {
             res.status(500).json({error: "Error getting all users" + error.message});
         }
     }
     static getById = async(req, res) => {
-        const {id} = req.params;
-        const user = await UserModel.getById({id});
-        res.json(user);
+        try {
+            const {id} = req.params;
+            const user = await UserModel.getById({id});
+            res.status(200).json(user);
+        } catch (error) {
+            res.status(404).json({error: "User not found" + error.message});
+        }
     }
     static createUser = async(req, res) => { 
         const result = validateUser(req.body);
-        console.log(result); 
         if (result.error) {
             return res.status(400).json({ error: result.error.errors });
         }

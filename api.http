@@ -98,9 +98,9 @@ Content-Type: application/json
 }
 
 ###ORDERS
-GET http://localhost:9200/orders
+GET http://localhost:9200/dashboard/orders
 ###ORDERS BY ID
-GET http://localhost:3000/orders/1
+GET http://localhost:3000/dashboard/orders/1
 ###UPDATE ORDER
 PATCH http://localhost:3000/orders/1 
 Content-Type: application/json 

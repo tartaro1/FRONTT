@@ -22,7 +22,7 @@ export class BackupsModel {
             } = input;
             console.log(input);
             const [backup] = await connection.query("CALL SP_CREARCOPIA(?, ?, ?, ?, ?)", [NombreBd, VersionBd, Tipo, Ubicacion, Informacion]);
-            return backup[0]
+            return backup
         } catch (error) {
             throw new Error(error)
         }

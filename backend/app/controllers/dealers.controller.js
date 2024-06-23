@@ -6,10 +6,12 @@ export class DealersController {
             const {email} = req.query;
             if (email) {
                 const dealers = await DealersModel.getByEmail({email});
-                res.render("views.resultDealer.ejs", {dealers})
+                res.status(200).json(dealers);
+                // res.render("views.resultDealer.ejs", {dealers})
             } else {
                 const dealers = await DealersModel.getAll();
-                res.render("views.dealers.ejs", {dealers});
+                res.status(404).json(dealers);
+                // res.render("views.dealers.ejs", {dealers});
             }
         } catch (error) {
             res.json({error: error.message})

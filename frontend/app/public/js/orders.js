@@ -3,7 +3,7 @@ browser.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         const dealer = browser.value.trim();
         if (dealer) {
-            window.location.href = `http://localhost:9200/dashboard/orders?dealer=${dealer}`;
+            window.location.href = `http://localhost:3000/dashboard/orders?dealer=${dealer}`;
         }
     }
 });
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userItems = document.querySelectorAll('.user-list-item');
     userItems.forEach(order => {
         const id = order.querySelector('.id').innerText;
-        fetch(`http://localhost:9200/dashboard/detailsOrders/${id}`)
+        fetch(`http://localhost:9200/detailsOrders/${id}`)
             .then(response => response.json())
             .then(data => {
                 let subtotal = 0;
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             userText.textContent = `Usuario: ${client.textContent}`;
             dealerText.value = dealer.textContent;
 
-            fetch(`http://localhost:9200/dashboard/detailsOrders/${id}`)
+            fetch(`http://localhost:9200/detailsOrders/${id}`)
                 .then(response => response.json())
                 .then(data => {
                     data.forEach(producto => {
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         cantidadEdit.forEach((input, index) => {
                             const productID = data[index].ID_DetallePedido;
                             const cantidad = input.value;
-                            fetch(`http://localhost:9200/dashboard/detailsOrders/${productID}`, {
+                            fetch(`http://localhost:9200/detailsOrders/${productID}`, {
                                 headers: { 'Content-Type': 'application/json' },
                                 method: "PATCH",
                                 body: JSON.stringify({
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         statusSelect = document.querySelectorAll("#inputGroupSelect01")[index];
                         statusSelect.addEventListener("change", () => {
                             const newStatus = statusSelect.value;
-                            fetch(`http://localhost:9200/dashboard/orders/${id}`, {
+                            fetch(`http://localhost:9200/orders/${id}`, {
                                 headers: { 'Content-Type': 'application/json' },
                                 method: "PATCH",
                                 body: JSON.stringify({
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function removeProduct(e, producto) {
     const alertEliminar = e.target.closest(".alert");
-    fetch(`http://localhost:9200/dashboard/detailsOrders/${producto.ID_DetallePedido}`, {
+    fetch(`http://localhost:9200/detailsOrders/${producto.ID_DetallePedido}`, {
         method: 'DELETE',
     })
         .then(res => {

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = userListItem.querySelector('.id').innerText;
       const modalAcceptButton = document.querySelector(".accept");
       modalAcceptButton.addEventListener("click", () => {
-        fetch(`http://localhost:9200/dashboard/dealers/${id}`, {
+        fetch(`http://localhost:9200/dealers/${id}`, {
           method: 'DELETE'
         })
           .then(res => {
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") {
       const email = browser.value.trim();
       if (email) {
-        window.location.href = `http://localhost:9200/dashboard/dealers?email=${email}`;
+        window.location.href = `http://localhost:3000/dashboard/dealers?email=${email}`;
       }
     }
   });
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const contrasena = contrasenaElement.value;
       const rol = parseInt(rolElement.value);
 
-      fetch("http://localhost:9200/dashboard/dealers", {
+      fetch("http://localhost:9200/dealers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const correoElement = document.querySelector(".correoEdit");
       const contrasenaElement = document.querySelector(".contrasenaEdit");
 
-      fetch(`http://localhost:9200/dashboard/dealers/${id}`)
+      fetch(`http://localhost:9200/dealers/${id}`)
         .then(res => res.json())
         .then(userArray => {
           if (userArray && userArray.length > 0) {
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   const correo = correoElement.value;
                   const contrasena = contrasenaElement.value;
 
-                  fetch(`http://localhost:9200/dashboard/dealers/${id}`, {
+                  fetch(`http://localhost:9200/dealers/${id}`, {
                     method: 'PATCH',
                     headers: {
                       "Content-Type": "application/json"

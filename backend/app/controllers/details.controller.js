@@ -5,10 +5,12 @@ export class DetailsController {
             const { provider } = req.query;
             if (provider) {
                 const detailsOrdersFiltred = await DetailsModel.getByProvider({ provider })
-                res.render("views.filtred.ejs", { detailsOrdersFiltred });
+                res.status(200).json(detailsOrdersFiltred);
+                // res.render("views.filtred.ejs", { detailsOrdersFiltred });
             } else {
                 const detailsOrders = await DetailsModel.getAll();
-                res.render("views.detailsOrder.ejs", { detailsOrders });
+                res.status(404).json(detailsOrders);
+                // res.render("views.detailsOrder.ejs", { detailsOrders });
             }
 
         } catch (error) {

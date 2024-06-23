@@ -1,4 +1,4 @@
-import routesProducts from "./routes.usuarios.js";
+import routesProducts from "./routes.product.js";
 import routesUsers from "./routes.users.js";
 import routesOrders from "./routes.orders.js";
 import routesDelivers from "./routes.dealers.js";

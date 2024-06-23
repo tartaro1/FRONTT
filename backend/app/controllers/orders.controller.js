@@ -6,10 +6,12 @@ export class OrdersController {
         try {
             if (dealer) {
                 const orders = await OrderModel.findByDealer({dealer});
-                res.render("views.resulsOrdersByDealer.ejs", {orders});                
+                res.status(200).json(orders);
+                // res.render("views.resulsOrdersByDealer.ejs", {orders});                
             } else {
                 const orders = await OrderModel.getAll();
-                res.render("views.orders.ejs", {orders})
+                res.status(404).json(orders);
+                // res.render("views.orders.ejs", {orders})
             }
         } catch (error) {
             res.status(500).json({error: error});

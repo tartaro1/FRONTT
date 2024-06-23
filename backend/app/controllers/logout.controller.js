@@ -3,7 +3,7 @@
 export class LogOutController {
     static logout = async(req, res) => {
         try {
-            res.render("views.index.ejs");
+            res.json({message: "Ha cerrado sesión"});
         } catch (error) {
             res.json(error);
         }
