@@ -8,5 +8,5 @@ routesUsers.get("/:id", UsersController.getById);
 routesUsers.post("/", UsersController.createUser);
 routesUsers.delete("/:id", UsersController.deleteUser);
 routesUsers.patch("/:id", UsersController.updateUser);
-
+routesUsers.post("/login", UsersController.loginUser);
 export default routesUsers;

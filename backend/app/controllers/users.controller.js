@@ -62,9 +62,9 @@ export class UsersController {
         }
     }
     static loginUser = async (req, res) => {
-        const {Nombre, Contrasena} = req.body
+        const {Correo, Contrasena} = req.body
         try {
-            const response = await UserModel.login({Nombre, Contrasena});
+            const response = await UserModel.login({Correo, Contrasena});
             res.status(200).json(response);
         } catch (error) {
             res.status(404).json(error.message);

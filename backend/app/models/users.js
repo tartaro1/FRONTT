@@ -31,8 +31,11 @@ export class UserModel {
             ID_Rol,
             Estado
         } = input;
+        const passwordUnencrypted = Contrasena;
         try {
-            const result = await connection.query("CALL RegistrarUsuario(?, ?, ?, ?, ?, ?, ?, ?)", [Nombre, Celular, Cedula, Direccion, Correo, Contrasena, ID_Rol, Estado]);
+            const hash = await bcrypt.hash(passwordUnencrypted, 2)
+            const passwordEncrypted = hash;
+            const result = await connection.query("CALL RegistrarUsuario(?, ?, ?, ?, ?, ?, ?, ?)", [Nombre, Celular, Cedula, Direccion, Correo, passwordEncrypted, ID_Rol, Estado]);
             const [user] = await connection.query("CALL SP_USUARIO_ID(?)", result[0].insertId);
             return user;
         } catch (error) {
@@ -58,7 +61,7 @@ export class UserModel {
             ID_Rol,
             Estado
         } = input;
-
+        
         const updateFields = [];
         const params = [];
 
@@ -118,10 +121,18 @@ export class UserModel {
             throw new Error("Error al actualizar el producto: " + error.message);
         }
     }
-    static login = async({Nombre, Contrasena}) => {
+    static login = async({Correo, Contrasena}) => {
         try {
-            const [request] = await connection.query("SELECT * FROM usuarios WHERE Nombre = ? AND Contrasena = ?", [Nombre, Contrasena]);
-            return request;
+            const [request] = await connection.query("CALL SP_USUARIOS_EMAIL(?)", [Correo]);
+            if (request[0].length == 0) {
+                throw new Error("User not found");
+            }
+            const match = await bcrypt.compare(Contrasena, request[0][0].Contrasena)
+            console.log(request[0][0].Contrasena);
+            if (!match) {
+                throw new Error("Password incorrect");
+            }
+            return match;
         } catch (error) {
             throw new Error(error.message);
         }
