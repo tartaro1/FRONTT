@@ -63,7 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
           Direccion: direccion,
           Correo: correo,
           Contrasena: contrasena,
-          ID_Rol: rol
+          ID_Rol: rol,
+          Estado: "Activo"
         })
       })
         .then(res => {
@@ -97,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const direccionElement = document.querySelector(".direccionEdit");
       const correoElement = document.querySelector(".correoEdit");
       const contrasenaElement = document.querySelector(".contrasenaEdit");
-
+      const rolElement = document.querySelector("#rolEdit");
       fetch(`http://localhost:9200/users/${id}`)
         .then(res => res.json())
         .then(userArray => {
@@ -110,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
               direccionElement.value = user.Direccion;
               correoElement.value = user.Correo;
               contrasenaElement.value = user.Contrasena;
-
+              rolElement.value = user.ID_Rol
               const saveEditButton = document.querySelector(".btn-save-edit");
               saveEditButton.addEventListener("click", () => {
                 if (nombreElement && celularElement && cedulaElement && direccionElement && correoElement && contrasenaElement) {
@@ -120,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   const direccion = direccionElement.value;
                   const correo = correoElement.value;
                   const contrasena = contrasenaElement.value;
-
+                  const rol = parseInt(rolElement.value);
                   fetch(`http://localhost:9200/users/${id}`, {
                     method: 'PATCH',
                     headers: {
@@ -132,7 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
                       Cedula: cedula,
                       Direccion: direccion,
                       Correo: correo,
-                      Contrasena: contrasena
+                      Contrasena: contrasena,
+                      ID_Rol: rol,
                     })
                   })
                     .then(res => {

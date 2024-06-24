@@ -44,6 +44,47 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `IniciarSesionUsuario` (IN `correo` 
     END IF;
 END$$
 
+DROP PROCEDURE IF EXISTS `SP_MODIFICAR_DETALLEPEDIDO`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_MODIFICAR_DETALLEPEDIDO` (IN `p_ID_DetallePedido` INT(11), IN `p_Cantidad` INT(10))   BEGIN
+    UPDATE `detallepedido`
+    SET 
+        `Cantidad` = p_Cantidad
+    WHERE 
+        `ID_DetallePedido` = p_ID_DetallePedido;
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_MODIFICAR_PRODUCTO`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_MODIFICAR_PRODUCTO` (IN `p_id` INT(11), IN `p_NombreProducto` VARCHAR(255), IN `p_ID_Categoria` INT(11), IN `p_Marca` VARCHAR(150), IN `p_ID_Proveedor` INT(11), IN `p_Descripcion` VARCHAR(200), IN `p_PrecioVenta` DECIMAL(10,3), IN `p_Calificacion` INT(11), IN `p_Disponibilidad` TINYINT(4), IN `p_imagen` TEXT)   BEGIN
+    UPDATE `productos`
+    SET 
+        `id` = p_id,
+        `NombreProducto` = p_NombreProducto,
+        `ID_Categoria` = p_ID_Categoria,
+        `Marca` = p_Marca,
+        `ID_Proveedor` = p_ID_Proveedor,
+        `Descripcion` = p_Descripcion,
+        `PrecioVenta` = p_PrecioVenta,
+        `Calificacion` = p_Calificacion,
+        `Disponibilidad` = p_Disponibilidad,
+        `imagen` = p_imagen
+    WHERE `id` = p_id;
+END$$
+
+DROP PROCEDURE IF EXISTS `SP_MODIFICAR_USUARIO`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_MODIFICAR_USUARIO` (IN `p_ID_Usuario` INT(11), IN `p_Nombre` VARCHAR(100), IN `p_Celular` VARCHAR(20), IN `p_Cedula` INT(20), IN `p_Direccion` VARCHAR(200), IN `p_Correo` VARCHAR(100), IN `p_Contrasena` VARCHAR(250), IN `p_ID_Rol` INT(11), IN `p_EstadoUsuario` VARCHAR(50))   BEGIN
+    UPDATE `usuarios`
+    SET 
+        `Nombre` = p_Nombre,
+        `Celular` = p_Celular,
+        `Cedula` = p_Cedula,
+        `Direccion` = p_Direccion,
+        `Correo` = p_Correo,
+        `Contrasena` = p_Contrasena,
+        `ID_Rol` = p_ID_Rol,
+        `EstadoUsuario` = p_EstadoUsuario
+    WHERE `ID_Usuario` = p_ID_Usuario;
+END$$
+
 DROP PROCEDURE IF EXISTS `ObtenerDireccionEntrega`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerDireccionEntrega` (IN `idRepartidor` INT, IN `idPedido` INT)   BEGIN
     DECLARE existeRepartidor INT;

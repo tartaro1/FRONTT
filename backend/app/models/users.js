@@ -33,7 +33,7 @@ export class UserModel {
         } = input;
         const passwordUnencrypted = Contrasena;
         try {
-            const hash = await bcrypt.hash(passwordUnencrypted, 2)
+            const hash = await bcrypt.hash(passwordUnencrypted, 2);
             const passwordEncrypted = hash;
             const result = await connection.query("CALL RegistrarUsuario(?, ?, ?, ?, ?, ?, ?, ?)", [Nombre, Celular, Cedula, Direccion, Correo, passwordEncrypted, ID_Rol, Estado]);
             const [user] = await connection.query("CALL SP_USUARIO_ID(?)", result[0].insertId);
@@ -61,64 +61,14 @@ export class UserModel {
             ID_Rol,
             Estado
         } = input;
-        
-        const updateFields = [];
-        const params = [];
-
-        if (Nombre !== undefined) {
-            updateFields.push("Nombre = ?");
-            params.push(Nombre);
-        }
-        if (Celular !== undefined) {
-            updateFields.push("Celular = ?");
-            params.push(Celular);
-        }
-        if (Cedula !== undefined) {
-            updateFields.push("Cedula = ?");
-            params.push(Cedula);
-        }
-        if (Direccion !== undefined) {
-            updateFields.push("Direccion = ?");
-            params.push(Direccion);
-        }
-        if (Correo !== undefined) {
-            updateFields.push("Correo = ?");
-            params.push(Correo);
-        }
-        if (Contrasena !== undefined) {
-            updateFields.push("Contrasena = ?");
-            params.push(Contrasena);
-        }
-        if (ID_Rol !== undefined) {
-            updateFields.push("ID_Rol = ?");
-            params.push(ID_Rol);
-        }
-        if (Estado !== undefined) {
-            updateFields.push("EstadoUsuario = ?");
-            params.push(Estado);
-        }
-        if (updateFields.length === 0) {
-            throw new Error("No se proporcionaron campos para actualizar");
-        }
-
-        const updateFieldsString = updateFields.join(", ");
-
+        const passwordUnencrypted = Contrasena;
+        const hash = await bcrypt.hash(passwordUnencrypted, 2);
+        const passwordEncrypted = hash;
         try {
-
-            params.push(id);
-            await connection.query(`UPDATE usuarios SET ${updateFieldsString} WHERE ID_Usuario = ?`, params);
-
-            // Seleccionar el producto actualizado
-            const [rows] = await connection.query("CALL SP_USUARIO_ID(?)", [id]);
-
-            // Verificar si el producto existe
-            if (rows.length === 0) {
-                throw new Error("Producto no encontrado");
-            }
-
-            return rows[0];
+            const request = await connection.query("CALL SP_MODIFICAR_USUARIO(?,?,?,?,?,?,?,?,?)", [id, Nombre, Celular, Cedula, Direccion, Correo, passwordEncrypted, ID_Rol, Estado]);
+            return request;
         } catch (error) {
-            throw new Error("Error al actualizar el producto: " + error.message);
+            throw new Error(error);
         }
     }
     static login = async({Correo, Contrasena}) => {

@@ -61,63 +61,15 @@ export class ProductModel {
             ID_Proveedor,
             Descripcion,
             PrecioVenta,
-            Calificacion
+            Calificacion,
+            Disponibilidad,
+            imagen
         } = input;
-
-        const updateFields = [];
-        const params = [];
-
-        if (NombreProducto !== undefined) {
-            updateFields.push("NombreProducto = ?");
-            params.push(NombreProducto);
-        }
-        if (ID_Categoria !== undefined) {
-            updateFields.push("ID_Categoria = ?");
-            params.push(ID_Categoria);
-        }
-        if (Marca !== undefined) {
-            updateFields.push("Marca = ?");
-            params.push(Marca);
-        }
-        if (ID_Proveedor !== undefined) {
-            updateFields.push("ID_Proveedor = ?");
-            params.push(ID_Proveedor);
-        }
-        if (Descripcion !== undefined) {
-            updateFields.push("Descripcion = ?");
-            params.push(Descripcion);
-        }
-        if (PrecioVenta !== undefined) {
-            updateFields.push("PrecioVenta = ?");
-            params.push(PrecioVenta);
-        }
-        if (Calificacion !== undefined) {
-            updateFields.push("Calificacion = ?");
-            params.push(Calificacion);
-        }
-
-        if (updateFields.length === 0) {
-            throw new Error("No se proporcionaron campos para actualizar");
-        }
-
-        const updateFieldsString = updateFields.join(", ");
-
         try {
-
-            params.push(id);
-            await connection.query(`UPDATE productos SET ${updateFieldsString} WHERE id = ?`, params);
-
-            // Seleccionar el producto actualizado
-            const [rows] = await connection.query("CALL SP_LISTAR_PRODUCTO(?)", [id]);
-
-            // Verificar si el producto existe
-            if (rows.length === 0) {
-                throw new Error("Producto no encontrado");
-            }
-
-            return rows[0];
+            const result = await connection.query("CALL SP_MODIFICAR_PRODUCTO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [id, NombreProducto, ID_Categoria, Marca, ID_Proveedor, Descripcion, PrecioVenta, Calificacion, Disponibilidad, imagen]);
+            return result;
         } catch (error) {
-            throw new Error("Error al actualizar el producto: " + error.message);
+            throw new Error("Error inserting user: " + error.message);
         }
     }
     

@@ -40,35 +40,10 @@ export class DetailsModel {
     }
     static update = async({id, input}) => {
         const {
-            ID_Producto, 
-            Cantidad, 
-            PrecioVenta, 
+            Cantidad 
         } = input;
-
-        const updateFields = [];
-        const params = [];
-
-        if (ID_Producto !== undefined) {
-            updateFields.push("ID_Producto = ?");
-            params.push(ID_Producto);
-        }
-        if (Cantidad !== undefined) {
-            updateFields.push("Cantidad = ?");
-            params.push(Cantidad);
-        }
-        if (PrecioVenta !== undefined) {
-            updateFields.push("PrecioVenta = ?");
-            params.push(PrecioVenta);
-        }
-        if (updateFields.length === 0) {
-            throw new Error("No se proporcionaron campos para actualizar");
-        }
-
-        const updateFieldsString = updateFields.join(", ");
-
         try {
-            params.push(id);
-            const detailsProducts = await connection.query(`UPDATE detallepedido SET ${updateFieldsString} WHERE ID_DetallePedido = ?`, params);
+            const detailsProducts = await connection.query("CALL SP_MODIFICAR_DETALLEPEDIDO(?,?)", [id, Cantidad]);
             return detailsProducts;
         } catch (error) {
             throw new Error("Error al actualizar el pedido: " + error.message);

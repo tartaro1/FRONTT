@@ -59,7 +59,7 @@ export class DealersController {
             const updatedDealer = await DealersModel.update({id, input});
             res.status(200).json(updatedDealer);
         } catch (error) {
-            res.status(500).json({error: error.message});
+            res.status(500).json({error: error});
         }
     }
 }

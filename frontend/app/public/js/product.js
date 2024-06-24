@@ -42,6 +42,7 @@ editButtons.forEach(btn => {
     const calificacionElement = document.querySelector(".calificacionEdit");
     const proveedorElement = document.querySelector(".proveedorEdit");
     const urlElement = document.querySelector(".urlEdit")
+    const disponibilidadElement = document.querySelector(".disponibilidadEdit")
     fetch(`http://localhost:9200/products/${id}`)
       .then(res => res.json())
       .then(productArray => {
@@ -56,6 +57,7 @@ editButtons.forEach(btn => {
             precioElement.value = product.PrecioVenta;
             calificacionElement.value = product.Calificacion;
             urlElement.value = product.imagen;
+            disponibilidadElement.value = product.Disponibilidad
             const saveEditButton = document.querySelector(".btn-save-edit");
             saveEditButton.addEventListener("click", () => {
               if (nombreElement && marcaElement && descripcionElement && precioElement && categoriaElement && calificacionElement && proveedorElement) {
@@ -67,6 +69,7 @@ editButtons.forEach(btn => {
                 const precio = parseInt(precioElement.value);
                 const calificacion = parseInt(calificacionElement.value);
                 const imagen = urlElement.value;
+                const disponibilidad = parseInt(disponibilidadElement.value);
                 const id = productListItem.querySelector('.id').innerText;
                 fetch(`http://localhost:9200/products/${id}`, {
                   method: 'PATCH',
@@ -81,7 +84,8 @@ editButtons.forEach(btn => {
                     Descripcion: descripcion,
                     PrecioVenta: precio,
                     Calificacion: calificacion,
-                    Imagen: imagen
+                    Disponibilidad: disponibilidad,
+                    imagen: imagen
                   })
                 })
                   .then(res => {
@@ -122,7 +126,7 @@ savebtn.addEventListener("click", () => {
   const calificacionElement = document.querySelector(".calificacion");
   const proveedorElement = document.querySelector(".proveedor");
   const urlElement = document.querySelector(".url")
-
+  
   if (nombreElement && marcaElement && descripcionElement && precioElement && categoriaElement && calificacionElement && proveedorElement && urlElement) {
     const nombre = nombreElement.value;
     const categoria = parseInt(categoriaElement.value);
