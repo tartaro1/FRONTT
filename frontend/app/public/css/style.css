@@ -178,6 +178,11 @@ a{
 	width: 130px;
 	border-radius: 10px;
 }
+.contrasena{
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
 @media (max-width: 968px) {
 	.sidebar {

@@ -88,81 +88,92 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const editButtons = document.querySelectorAll(".edit-user-btn");
-  editButtons.forEach(btn => {
+editButtons.forEach(btn => {
     btn.addEventListener("click", (e) => {
-      const userListItem = e.target.closest('.user-list-item');
-      const id = userListItem.querySelector('.id').innerText;
-      const nombreElement = document.querySelector(".nombreEdit");
-      const celularElement = document.querySelector(".celularEdit");
-      const cedulaElement = document.querySelector(".cedulaEdit");
-      const direccionElement = document.querySelector(".direccionEdit");
-      const correoElement = document.querySelector(".correoEdit");
-      const contrasenaElement = document.querySelector(".contrasenaEdit");
-      const rolElement = document.querySelector("#rolEdit");
-      fetch(`http://localhost:9200/users/${id}`)
-        .then(res => res.json())
-        .then(userArray => {
-          if (userArray && userArray.length > 0) {
-            const user = userArray[0];
-            if (nombreElement && celularElement && cedulaElement && direccionElement && correoElement && contrasenaElement) {
-              nombreElement.value = user.Nombre;
-              celularElement.value = user.Celular;
-              cedulaElement.value = user.Cedula;
-              direccionElement.value = user.Direccion;
-              correoElement.value = user.Correo;
-              contrasenaElement.value = user.Contrasena;
-              rolElement.value = user.ID_Rol
-              const saveEditButton = document.querySelector(".btn-save-edit");
-              saveEditButton.addEventListener("click", () => {
-                if (nombreElement && celularElement && cedulaElement && direccionElement && correoElement && contrasenaElement) {
-                  const nombre = nombreElement.value;
-                  const celular = celularElement.value;
-                  const cedula = parseInt(cedulaElement.value);
-                  const direccion = direccionElement.value;
-                  const correo = correoElement.value;
-                  const contrasena = contrasenaElement.value;
-                  const rol = parseInt(rolElement.value);
-                  fetch(`http://localhost:9200/users/${id}`, {
-                    method: 'PATCH',
-                    headers: {
-                      "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                      Nombre: nombre,
-                      Celular: celular,
-                      Cedula: cedula,
-                      Direccion: direccion,
-                      Correo: correo,
-                      Contrasena: contrasena,
-                      ID_Rol: rol,
-                    })
-                  })
-                    .then(res => {
-                      if (res.ok) {
-                        return res.json();
-                      } else {
-                        throw new Error('Error updating user');
-                      }
-                    })
-                    .then(data => {
-                      console.log("User updated successfully:", data);
-                      const modal = bootstrap.Modal.getInstance(document.querySelector('#exampleEditUserModal'));
-                      modal.hide();
-                      location.reload();
-                    })
-                    .catch(error => {
-                      console.error('Error:', error);
-                    });
+        const userListItem = e.target.closest('.user-list-item');
+        const id = userListItem.querySelector('.id').innerText;
+        const nombreElement = document.querySelector(".nombreEdit");
+        const celularElement = document.querySelector(".celularEdit");
+        const cedulaElement = document.querySelector(".cedulaEdit");
+        const direccionElement = document.querySelector(".direccionEdit");
+        const correoElement = document.querySelector(".correoEdit");
+        const contrasenaElement = document.querySelector(".contrasenaEdit");
+        const rolElement = document.querySelector("#rolEdit");
+
+        fetch(`http://localhost:9200/users/${id}`)
+            .then(res => res.json())
+            .then(userArray => {
+                if (userArray && userArray.length > 0) {
+                    const user = userArray[0];
+                    if (nombreElement && celularElement && cedulaElement && direccionElement && correoElement) {
+                        nombreElement.value = user.Nombre;
+                        celularElement.value = user.Celular;
+                        cedulaElement.value = user.Cedula;
+                        direccionElement.value = user.Direccion;
+                        correoElement.value = user.Correo;
+                        rolElement.value = user.ID_Rol;
+
+                        const saveEditButton = document.querySelector(".btn-save-edit");
+                        saveEditButton.addEventListener("click", () => {
+                            const nombre = nombreElement.value;
+                            const celular = celularElement.value;
+                            const cedula = parseInt(cedulaElement.value);
+                            const direccion = direccionElement.value;
+                            const correo = correoElement.value;
+                            const rol = parseInt(rolElement.value);
+                            let contrasena = contrasenaElement.value;
+
+                            // Verificar si la contraseña ha sido modificada
+                            if (contrasena === user.Contrasena) {
+                                // Si la contraseña no se ha cambiado, eliminar el campo Contrasena del cuerpo de la solicitud
+                                contrasena = ''; // Opcionalmente puedes dejarlo como user.Contrasena si prefieres no enviar un campo vacío
+                            }
+
+                            fetch(`http://localhost:9200/users/${id}`, {
+                                method: 'PATCH',
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    Nombre: nombre,
+                                    Celular: celular,
+                                    Cedula: cedula,
+                                    Direccion: direccion,
+                                    Correo: correo,
+                                    Contrasena: contrasena, // Enviar la nueva contraseña o una cadena vacía si no se cambia
+                                    ID_Rol: rol,
+                                })
+                            })
+                            .then(res => {
+                                if (res.ok) {
+                                    return res.json();
+                                } else {
+                                    throw new Error('Error updating user');
+                                }
+                            })
+                            .then(data => {
+                                console.log("User updated successfully:", data);
+                                const modal = bootstrap.Modal.getInstance(document.querySelector('#exampleEditUserModal'));
+                                modal.hide();
+                                location.reload();
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                        }, { once: true });
+                    }
+                } else {
+                    console.error("No user data found for the provided ID");
                 }
-              }, { once: true });
-            }
-          } else {
-            console.error("No user data found for the provided ID");
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     });
-  });
 });
+})
+
+
+
+
+

@@ -50,7 +50,7 @@ export class UserModel {
             throw new Error(error);
         }
     }
-    static updateUser = async({id, input}) => {
+    static updateUser = async ({ id, input }) => {
         const {
             Nombre,
             Celular,
@@ -61,11 +61,22 @@ export class UserModel {
             ID_Rol,
             Estado
         } = input;
-        const passwordUnencrypted = Contrasena;
-        const hash = await bcrypt.hash(passwordUnencrypted, 2);
-        const passwordEncrypted = hash;
+    
         try {
-            const request = await connection.query("CALL SP_MODIFICAR_USUARIO(?,?,?,?,?,?,?,?,?)", [id, Nombre, Celular, Cedula, Direccion, Correo, passwordEncrypted, ID_Rol, Estado]);
+            // Obtener la contraseña actual cifrada de la base de datos
+            const [currentPasswordRow] = await connection.query('SELECT Contrasena FROM usuarios WHERE ID_Usuario = ?', [id]);
+            const currentPasswordEncrypted = currentPasswordRow[0].Contrasena;
+    
+            // Verificar si la contraseña ha cambiado
+            let passwordEncrypted = currentPasswordEncrypted;
+            if (Contrasena !== '') {
+                // Generar hash para la nueva contraseña
+                const hash = await bcrypt.hash(Contrasena, 2);
+                passwordEncrypted = hash;
+            }
+    
+            // Llamar al procedimiento almacenado con los datos actualizados
+            const request = await connection.query('CALL SP_MODIFICAR_USUARIO(?,?,?,?,?,?,?,?,?)', [id, Nombre, Celular, Cedula, Direccion, Correo, passwordEncrypted, ID_Rol, Estado]);
             return request;
         } catch (error) {
             throw new Error(error);
