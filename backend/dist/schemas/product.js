@@ -1,28 +1,21 @@
-"use strict";
-
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.validatePartialMovie = validatePartialMovie;
-exports.validateProduct = validateProduct;
-var _zod = _interopRequireDefault(require("zod"));
-var productSchema = _zod["default"].object({
-  nombre: _zod["default"].string({
+import z from 'zod';
+const productSchema = z.object({
+  nombre: z.string({
     invalid_type_error: 'Product title must be a string',
     required_error: 'Product title is required.'
   }),
-  id_categoria: _zod["default"].number()["int"]().min(1).max(5),
-  marca: _zod["default"].string(),
-  id_proveedor: _zod["default"].number()["int"]().positive(),
-  descripcion: _zod["default"].string(),
-  precio: _zod["default"].number(),
-  calificacion: _zod["default"].number().min(1).max(5),
-  disponibilidad: _zod["default"].number()["default"](1)
+  id_categoria: z.number().int().min(1).max(5),
+  marca: z.string(),
+  id_proveedor: z.number().int().positive(),
+  descripcion: z.string(),
+  precio: z.number(),
+  calificacion: z.number().min(1).max(5),
+  imagen: z.string(),
+  disponibilidad: z.number().default(1)
 });
-function validateProduct(input) {
+export function validateProduct(input) {
   return productSchema.safeParse(input);
 }
-function validatePartialMovie(input) {
+export function validatePartialMovie(input) {
   return productSchema.partial().safeParse(input);
 }

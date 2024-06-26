@@ -1,18 +1,21 @@
-"use strict";
+import routesProducts from "./routes.product.js";
+import routesUsers from "./routes.users.js";
+import routesOrders from "./routes.orders.js";
+import routesDelivers from "./routes.dealers.js";
+import { Router } from "express";
+import routesDetails from "./routes.details.js";
+import routesBackup from "./routes.backup.js";
+import routesLogOut from "./routes.logOut.js";
+const indexRouter = Router();
+indexRouter.use("/products", routesProducts);
+indexRouter.use("/users", routesUsers);
+indexRouter.use("/dealers", routesDelivers);
+indexRouter.use("/orders", routesOrders);
+indexRouter.use("/detailsOrders", routesDetails);
+indexRouter.use("/backup", routesBackup);
+// indexRouter.use("/index", routesLogOut);
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-Object.defineProperty(exports, "__esModule", {
-  value: true
+indexRouter.use("/", (req, res) => {
+  res.render('views.index.ejs');
 });
-exports["default"] = void 0;
-var _routesProduct = _interopRequireDefault(require("./routes.product.js"));
-var _routesUsers = _interopRequireDefault(require("./routes.users.js"));
-var _routesOrders = _interopRequireDefault(require("./routes.orders.js"));
-var _routesDealers = _interopRequireDefault(require("./routes.dealers.js"));
-var _express = require("express");
-var router = (0, _express.Router)();
-router.use("/products", _routesProduct["default"]);
-router.use("/users", _routesUsers["default"]);
-router.use("/dealers", _routesDealers["default"]);
-router.use("/orders", _routesOrders["default"]);
-var _default = exports["default"] = router;
+export default indexRouter;
