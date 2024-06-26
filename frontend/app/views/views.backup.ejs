@@ -92,7 +92,10 @@
                             <li class="list-group-item">
                                 <h5 class="card-title">Ultima Copia de Seguridad</h5>
                                 <h6><i class="bi bi-cloud-arrow-up-fill fs-2"></i>
-                                    <%=backup.fecha %>
+                                    <% let fecha = new Date(backup.fecha);
+                                    let opcionesFecha = { day: '2-digit', month: '2-digit', year: 'numeric'}
+                                    let fechaFormateada = fecha.toLocaleDateString('es-CO', opcionesFecha) %>
+                                    <%= fechaFormateada %>
                                 </h6>
                                 <button class="btn btn-warning create">Crear Copia</button>
                             </li>

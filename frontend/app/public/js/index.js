@@ -7,7 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const modalTitle = document.querySelector("#staticBackdropLabel");
       modalTitle.innerText = `¿Deseas eliminar a "${userName}"?`;
       const id = userListItem.querySelector('.id').innerText;
-      const modalAcceptButton = document.querySelector(".accept");
+      const modalAcceptButton = document.querySelector(".accept")
+      const modalCancelButton = document.querySelector(".cancel")
+      modalCancelButton.addEventListener("click", () => {
+        location.reload()
+      })
       modalAcceptButton.addEventListener("click", () => {
         fetch(`http://localhost:9200/users/${id}`, {
           method: 'DELETE'
@@ -142,6 +146,7 @@ editButtons.forEach(btn => {
                                     Correo: correo,
                                     Contrasena: contrasena, // Enviar la nueva contraseña o una cadena vacía si no se cambia
                                     ID_Rol: rol,
+                                    Estado: "Activo"
                                 })
                             })
                             .then(res => {

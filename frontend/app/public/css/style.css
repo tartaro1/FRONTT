@@ -5,9 +5,6 @@
     color: #F86913;
     font-size: 30px;
 }
-.navbar > .container-fluid {
-	height: 100%;
-}
 .sidebar {
 	min-width: 250px;
 	max-width: 250px;
@@ -178,7 +175,7 @@ a{
 	width: 130px;
 	border-radius: 10px;
 }
-.contrasena{
+tr > .contrasena{
 	max-width: 150px;
 	overflow: hidden;
 	text-overflow: ellipsis;
