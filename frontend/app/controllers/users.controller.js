@@ -10,6 +10,7 @@ export class UsersController {
                     datos = data
                     res.render("views.resultUser.ejs", {users: datos})
                 })
+                .catch(error => console.log(error))
             } else {
                 let datos = {}
                 fetch('http://localhost:9200/users')
