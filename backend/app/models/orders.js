@@ -1,18 +1,21 @@
 import mysql from "mysql2/promise";
-import { configDB } from "../config/db.config.js";
+import pool from "../config/db.config.js";
 
-const connection = await mysql.createConnection(configDB);
 
 export class OrderModel {
     static getAll = async() => {
+        const connection = await pool.getConnection();
         try {
             const [orders] = await connection.query("CALL SP_LISTAR_PEDIDOS();");
             return orders[0];
         } catch (error) {
-            throw new Error(error.message);
+            throw new Error(error)
+        } finally {
+            connection.release();
         }
     }
     static getById = async({id}) => {
+        const connection = await pool.getConnection();
         try {
             const [order] = await connection.query("CALL SP_LISTAR_PEDIDO_ID(?)", [id]);
             if (order.length === 0) {
@@ -20,7 +23,9 @@ export class OrderModel {
             }
             return order[0];
         } catch (error) {
-            throw new Error(error.message);
+            throw new Error(error)
+        } finally {
+            connection.release();
         }
     }
     static update = async({id, input}) => {
@@ -61,39 +66,46 @@ export class OrderModel {
 
         const updateFieldsString = updateFields.join(", ");
 
+        const connection = await pool.getConnection();
         try {
-
             params.push(id);
             await connection.query(`UPDATE pedidos SET ${updateFieldsString} WHERE ID_Pedido = ?`, params);
-
+    
             
             const [rows] = await connection.query("CALL SP_LISTAR_PEDIDO_ID(?)", [id]);
-
+    
             // Verificar si el producto existe
             if (rows.length === 0) {
                 throw new Error("Pedido no encontrado");
             }
-
+    
             return rows[0];
         } catch (error) {
-            throw new Error("Error al actualizar el pedido: " + error.message);
+            throw new Error(error)
+        } finally {
+            connection.release();
         }
     }
     static delete = async({id}) => {
+        const connection = await pool.getConnection();
         try {
             const [deletedOrder] = await connection.query("CALL SP_ELIMINAR_PEDIDO(?)", [id]);
             return deletedOrder;
-            
         } catch (error) {
-            throw new Error("Error deleting order: " + error);
+            throw new Error(error)
+        } finally {
+            connection.release();
         }
     }
     static findByDealer = async({dealer}) => {
+        const connection = await pool.getConnection();
         try {
             const [dealerOrder] = await connection.query("CALL SP_ORDENREPARTIDOR(?)", [dealer])
             return dealerOrder[0];
         } catch (error) {
             throw new Error(error)
+        } finally {
+            connection.release();
         }
     }
 }

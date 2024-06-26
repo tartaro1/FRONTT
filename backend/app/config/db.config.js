@@ -1,9 +1,14 @@
 import { config } from "dotenv"
+import mysql from "mysql2/promise"
 config();
-export const configDB = {
+const pool =  mysql.createPool({
     host:process.env.MYSQLHOST,
     port:process.env.MYSQLPORT,
-    user:process.env.MYSQLUSER || 'root',
-    password:process.env.MYSQLPASSWORD || '',
-    database:process.env.MYSQLDATABASE ||'tartaro'
-}
+    user:process.env.MYSQLUSER || 'ur2g5uxifdmetppw',
+    password:process.env.MYSQLPASSWORD || 'UAlddoPRkfLlc6IxUIXA',
+    database:process.env.MYSQLDATABASE ||'b0u1bfs2gghv9cwqhexp',
+    waitForConnections: true,
+    connectionLimit: 5,  // Adjust this based on your server limits and needs
+    queueLimit: 0
+})
+export default pool;

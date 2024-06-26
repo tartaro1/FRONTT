@@ -1,24 +1,46 @@
 import mysql from "mysql2/promise"
-import { configDB } from "../config/db.config.js";
+import pool from "../config/db.config.js";
 import bcrypt from "bcrypt";
-
-const connection = await mysql.createConnection(configDB);
 
 export class UserModel {
     static getAll = async() => {
-        const [users] = await connection.query("CALL SP_LISTAR_USUARIOS();");
-        return users[0];
+        const connection = await pool.getConnection();
+        try {
+            const [users] = await connection.query("CALL SP_LISTAR_USUARIOS();");
+            return users[0];
+        } catch (error) {
+            throw new Error(error);
+        } finally {
+            connection.release();
+        }
+        
     }
     static getByEmail = async({email}) => {
-        const [user] = await connection.query("CALL SP_USUARIOS_EMAIL(?)", [email] );
-        return user[0];
+        const connection = await pool.getConnection();
+        try {
+            const [user] = await connection.query("CALL SP_USUARIOS_EMAIL(?)", [email] );
+            return user[0];
+        } catch (error) {
+            throw new Error(error)
+        } finally {
+            connection.release();
+        }
+        
     }
     static getById = async({id}) => {
-        if (id) {
-            const [user] = await connection.query("CALL SP_USUARIO_ID(?)", [id]);
-            if (user.length == 0) return {message: "User not found"};
-            return user[0];
-        } 
+        const connection = await pool.getConnection();
+        try {
+            if (id) {
+                const [user] = await connection.query("CALL SP_USUARIO_ID(?)", [id]);
+                if (user.length == 0) return {message: "User not found"};
+                return user[0];
+            } 
+        } catch (error) {
+            throw new Error(error)
+        } finally {
+            connection.release();
+        }
+        
     }
     static createUser = async ({input}) => {
         const {
@@ -32,6 +54,7 @@ export class UserModel {
             Estado
         } = input;
         const passwordUnencrypted = Contrasena;
+        const connection = await pool.getConnection();
         try {
             const hash = await bcrypt.hash(passwordUnencrypted, 2);
             const passwordEncrypted = hash;
@@ -39,15 +62,20 @@ export class UserModel {
             const [user] = await connection.query("CALL SP_USUARIO_ID(?)", result[0].insertId);
             return user;
         } catch (error) {
-            throw new Error("Error inserting user: " + error.message);
+            throw new Error(error)
+        } finally {
+            connection.release();
         }
     }
     static deleteUser = async({id}) => {
+        const connection = await pool.getConnection();
         try {
             const [result] = await connection.query("CALL SP_EliminarUsuario(?)", [id]);
             return result;
         } catch (error) {
-            throw new Error(error);
+            throw new Error(error)
+        } finally {
+            connection.release();
         }
     }
     static updateUser = async ({ id, input }) => {
@@ -61,9 +89,8 @@ export class UserModel {
             ID_Rol,
             Estado
         } = input;
-    
+        const connection = await pool.getConnection();
         try {
-            // Obtener la contraseña actual cifrada de la base de datos
             const [currentPasswordRow] = await connection.query('SELECT Contrasena FROM usuarios WHERE ID_Usuario = ?', [id]);
             const currentPasswordEncrypted = currentPasswordRow[0].Contrasena;
     
@@ -79,10 +106,13 @@ export class UserModel {
             const request = await connection.query('CALL SP_MODIFICAR_USUARIO(?,?,?,?,?,?,?,?,?)', [id, Nombre, Celular, Cedula, Direccion, Correo, passwordEncrypted, ID_Rol, Estado]);
             return request;
         } catch (error) {
-            throw new Error(error);
+            throw new Error(error)
+        } finally {
+            connection.release();
         }
     }
     static login = async({Correo, Contrasena}) => {
+        const connection = await pool.getConnection();
         try {
             const [request] = await connection.query("CALL SP_USUARIOS_EMAIL(?)", [Correo]);
             if (request[0].length == 0) {
@@ -95,7 +125,9 @@ export class UserModel {
             }
             return match;
         } catch (error) {
-            throw new Error(error.message);
+            throw new Error(error)
+        } finally {
+            connection.release();
         }
     }
 }
