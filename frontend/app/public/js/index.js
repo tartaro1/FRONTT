@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  let token = localStorage.getItem("token");
   const deleteButtons = document.querySelectorAll(".delete-user-btn");
   deleteButtons.forEach(button => {
     button.addEventListener("click", (e) => {
@@ -14,7 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       modalAcceptButton.addEventListener("click", () => {
         fetch(`http://localhost:9200/users/${id}`, {
-          method: 'DELETE'
+          method: 'DELETE',
+          headers: {
+            "x-access-token": token
+          }
         })
           .then(res => {
             if (res.ok) {

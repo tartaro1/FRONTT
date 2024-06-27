@@ -18,6 +18,12 @@ app.set("views", path.join(__dirname, "views"));
 app.use(cors());
 app.set("port", process.env.PORT || 3000);
 
+app.use("/index", (req, res) => {
+    res.render("views.index.ejs")
+})
 app.use("/dashboard", dashboardRouter);
+app.use("/", (req, res) => {
+    res.render("views.login.ejs")
+})
 
 export default app;
