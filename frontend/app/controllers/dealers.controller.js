@@ -4,7 +4,7 @@ export class DealersController {
             const {email} = req.query;
             if (email) {
                 let datos = {};
-                fetch(`http://localhost:9200/dealers?email=${email}`)
+                fetch(`https://ms-backend-tartaro.onrender.com/dealers?email=${email}`)
                 .then(response => response.json())
                 .then(data => {
                     datos = data;
@@ -12,7 +12,7 @@ export class DealersController {
                 })
             }else {
                 let datos = {};
-                fetch("http://localhost:9200/dealers")
+                fetch("https://ms-backend-tartaro.onrender.com/dealers")
                 .then(response => response.json())
                 .then(data => {
                     datos = data;

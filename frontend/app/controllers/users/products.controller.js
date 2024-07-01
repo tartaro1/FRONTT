@@ -4,7 +4,7 @@ export class ProductController {
             const {category} = req.query;
             if (category) {
                 let datos = {}
-                fetch(`http://localhost:9200/products?category=${category}`)
+                fetch(`https://ms-backend-tartaro.onrender.com/products?category=${category}`)
                 .then(response => response.json())
                 .then(data => {
                     datos = data;
@@ -12,7 +12,7 @@ export class ProductController {
                 })
             } else {
                 let datos = {};
-                fetch("http://localhost:9200/products")
+                fetch("https://ms-backend-tartaro.onrender.com/products")
                 .then(response => response.json())
                 .then(data => {
                     datos = data;

@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         location.reload()
       })
       modalAcceptButton.addEventListener("click", () => {
-        fetch(`http://localhost:9200/users/${id}`, {
+        fetch(`https://ms-backend-tartaro.onrender.com/users/${id}`, {
           method: 'DELETE',
           headers: {
             "x-access-token": token
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") {
       const email = browser.value.trim();
       if (email) {
-        window.location.href = `http://localhost:3000/dashboard/users?email=${email}`;
+        window.location.href = `https://ms-backend-tartaro.onrender.com/users?email=${email}`;
       }
     }
   });
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const contrasena = contrasenaElement.value;
       const rol = parseInt(rolElement.value);
 
-      fetch("http://localhost:9200/users", {
+      fetch("https://ms-backend-tartaro.onrender.com/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const contrasenaElement = document.querySelector(".contrasenaEdit");
       const rolElement = document.querySelector("#rolEdit");
 
-      fetch(`http://localhost:9200/users/${id}`)
+      fetch(`https://ms-backend-tartaro.onrender.com/users/${id}`)
         .then(res => res.json())
         .then(userArray => {
           if (userArray && userArray.length > 0) {
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   contrasena = ''; // Opcionalmente puedes dejarlo como user.Contrasena si prefieres no enviar un campo vacío
                 }
 
-                fetch(`http://localhost:9200/users/${id}`, {
+                fetch(`https://ms-backend-tartaro.onrender.com/users/${id}`, {
                   method: 'PATCH',
                   headers: {
                     "Content-Type": "application/json"
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const tbody = document.querySelector(".info")
       tbody.innerHTML = ""
       const userId = container.querySelector(".id").innerText;
-      fetch(`http://localhost:9200/orders?user=${userId}`)
+      fetch(`https://ms-backend-tartaro.onrender.com/orders?user=${userId}`)
         .then(response => response.json())
         .then(data => {
           data.forEach((order) => {

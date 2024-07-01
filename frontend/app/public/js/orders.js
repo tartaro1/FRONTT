@@ -3,7 +3,7 @@ browser.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         const dealer = browser.value.trim();
         if (dealer) {
-            window.location.href = `http://localhost:3000/dashboard/orders?dealer=${dealer}`;
+            window.location.href = `https://frontt-ig4n.onrender.com//dashboard/orders?dealer=${dealer}`;
         }
     }
 });
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userItems = document.querySelectorAll('.user-list-item');
     userItems.forEach(order => {
         const id = order.querySelector('.id').innerText;
-        fetch(`http://localhost:9200/detailsOrders/${id}`)
+        fetch(`https://ms-backend-tartaro.onrender.com/detailsOrders/${id}`)
             .then(response => response.json())
             .then(data => {
                 let subtotal = 0;
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             repartidorSelect.innerHTML = repartidor
             container.innerHTML = "";
             userText.textContent = `Usuario: ${client.textContent}`;
-            fetch("http://localhost:9200/dealers")
+            fetch("https://ms-backend-tartaro.onrender.com/dealers")
             .then(res => res.json())
             .then(data => {
                 data.forEach((text, count) => {
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     dealerText.appendChild(option);
                 })
             })
-            fetch(`http://localhost:9200/detailsOrders/${id}`)
+            fetch(`https://ms-backend-tartaro.onrender.com/detailsOrders/${id}`)
                 .then(response => response.json())
                 .then(data => {
                     data.forEach(producto => {
@@ -93,12 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     const save = document.querySelector('.save');
                     save.replaceWith(save.cloneNode(true));
                     document.querySelector('.save').addEventListener('click', () => {
-                        fetch(`http://localhost:9200/detailsOrders/${id}`)
+                        fetch(`https://ms-backend-tartaro.onrender.com/detailsOrders/${id}`)
                         const cantidadEdit = document.querySelectorAll('.cantidadEdit');
                         cantidadEdit.forEach((input, index) => {
                             const productID = data[index].ID_DetallePedido;
                             const cantidad = input.value;
-                            fetch(`http://localhost:9200/detailsOrders/${productID}`, {
+                            fetch(`https://ms-backend-tartaro.onrender.com/detailsOrders/${productID}`, {
                                 headers: { 'Content-Type': 'application/json' },
                                 method: "PATCH",
                                 body: JSON.stringify({
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         statusSelect = document.querySelectorAll("#inputGroupSelect01")[index];
                         statusSelect.addEventListener("change", () => {
                             const newStatus = statusSelect.value;
-                            fetch(`http://localhost:9200/orders/state/${id}`, {
+                            fetch(`https://ms-backend-tartaro.onrender.com/orders/state/${id}`, {
                                 headers: { 'Content-Type': 'application/json' },
                                 method: "PATCH",
                                 body: JSON.stringify({
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         dealerSelect.addEventListener("change", () => {
                             const newDealer = dealerSelect.value
                             console.log(newDealer);
-                            fetch(`http://localhost:9200/orders/${id}`, {
+                            fetch(`https://ms-backend-tartaro.onrender.com/orders/${id}`, {
                                 method: "PATCH",
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function removeProduct(e, producto) {
     const alertEliminar = e.target.closest(".alert");
-    fetch(`http://localhost:9200/detailsOrders/${producto.ID_DetallePedido}`, {
+    fetch(`https://ms-backend-tartaro.onrender.com/detailsOrders/${producto.ID_DetallePedido}`, {
         method: 'DELETE',
     })
         .then(res => {
@@ -211,7 +211,7 @@ deleteButtons.forEach(button => {
         const id = orderListItem.querySelector('.id').innerText;
         const modalAcceptButton = document.querySelector(".accept");
         modalAcceptButton.addEventListener("click", () => {
-            fetch(`http://localhost:9200/orders/${id}`, {
+            fetch(`https://ms-backend-tartaro.onrender.com/orders/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => {

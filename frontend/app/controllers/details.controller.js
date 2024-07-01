@@ -4,7 +4,7 @@ export class DetailsController {
             const {provider} = req.query;
             if (provider) {
                 let datos = {};
-                fetch(`http://localhost:9200/detailsOrders?provider=${provider}`)
+                fetch(`https://ms-backend-tartaro.onrender.com/detailsOrders?provider=${provider}`)
                 .then(response => response.json())
                 .then(data => {
                     datos = data;
@@ -12,7 +12,7 @@ export class DetailsController {
                 })
             }else{
                 let datos = {};
-                fetch("http://localhost:9200/detailsOrders")
+                fetch("https://ms-backend-tartaro.onrender.com/detailsOrders")
                 .then(response => response.json())
                 .then(data => {
                     datos = data;

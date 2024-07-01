@@ -9,7 +9,7 @@ createBackup.addEventListener("click", () => {
         Informacion: "backup mensual"
     };
 
-    fetch("http://localhost:9200/backup", {
+    fetch("https://ms-backend-tartaro.onrender.com/backup", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

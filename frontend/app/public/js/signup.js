@@ -8,7 +8,7 @@ signup.addEventListener("click", (e) => {
     const direccion = document.querySelector("#direccion").value;
     const correo = document.querySelector("#correo").value;
     const contrasena = document.querySelector("#contrasena").value;
-    fetch("http://localhost:9200/users", {
+    fetch("https://ms-backend-tartaro.onrender.com/users", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({

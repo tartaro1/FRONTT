@@ -2,7 +2,7 @@ export class BackupsController {
     static getLatest = async(req, res) => {
         try {
             let datos = {};
-            fetch("http://localhost:9200/backup")
+            fetch("https://ms-backend-tartaro.onrender.com/backup")
             .then(response => response.json())
             .then(data => {
                 datos = data;

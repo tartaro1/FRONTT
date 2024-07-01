@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = userListItem.querySelector('.id').innerText;
       const modalAcceptButton = document.querySelector(".accept");
       modalAcceptButton.addEventListener("click", () => {
-        fetch(`http://localhost:9200/dealers/${id}`, {
+        fetch(`https://ms-backend-tartaro.onrender.com/dealers/${id}`, {
           method: 'DELETE'
         })
           .then(res => {
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") {
       const email = browser.value.trim();
       if (email) {
-        window.location.href = `http://localhost:3000/dashboard/dealers?email=${email}`;
+        window.location.href = `https://ms-backend-tartaro.onrender.com/dealers?email=${email}`;
       }
     }
   });
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const contrasena = contrasenaElement.value;
       const rol = parseInt(rolElement.value);
 
-      fetch("http://localhost:9200/dealers", {
+      fetch("https://ms-backend-tartaro.onrender.com/dealers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   const correo = correoElement.value;
                   const contrasena = contrasenaElement.value;
                   const rol = parseInt(rolElement.value);
-                  fetch(`http://localhost:9200/dealers/${id}`, {
+                  fetch(`https://ms-backend-tartaro.onrender.com/dealers/${id}`, {
                     method: 'PATCH',
                     headers: {
                       "Content-Type": "application/json"
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const tbody = document.querySelector(".info")
       tbody.innerHTML = ""
       const userId = container.querySelector(".id").innerText;
-      fetch(`http://localhost:9200/orders?dealerID=${userId}`)
+      fetch(`https://ms-backend-tartaro.onrender.com/orders?dealerID=${userId}`)
         .then(response => response.json())
         .then(data => {
           data.forEach((order) => {

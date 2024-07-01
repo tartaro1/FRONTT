@@ -13,7 +13,7 @@ menu.forEach(item => {
         localStorage.setItem('selectedCategory', text);
 
         // Cambiar la URL
-        window.location.href = `http://localhost:9200/index/products?category=${text}`;
+        window.location.href = `https://ms-backend-tartaro.onrender.com/products?category=${text}`;
     });
 });
 
