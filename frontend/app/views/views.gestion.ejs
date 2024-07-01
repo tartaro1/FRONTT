@@ -107,7 +107,8 @@
         const downloadLink = document.createElement('a');
         downloadLink.href = `https://ms-backend-tartaro.onrender.com${pdfPath}`;
         downloadLink.innerText = 'Descargar PDF';
-        downloadLink.setAttribute('download', `https://ms-backend-tartaro.onrender.com${pdfPath}`);
+        downloadLink.setAttribute('download', '');
+        downloadLink.download = `https://ms-backend-tartaro.onrender.com${pdfPath}`
         listItem.appendChild(downloadLink);
         uploadedFilesList.appendChild(listItem);
     } else {
