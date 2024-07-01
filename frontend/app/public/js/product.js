@@ -41,14 +41,15 @@ editButtons.forEach(btn => {
     const precioElement = document.querySelector(".precioEdit");
     const calificacionElement = document.querySelector(".calificacionEdit");
     const proveedorElement = document.querySelector(".proveedorEdit");
-    const urlElement = document.querySelector(".urlEdit")
-    const disponibilidadElement = document.querySelector(".disponibilidadEdit")
+    const urlElement = document.querySelector(".urlEdit");
+    const disponibilidadElement = document.querySelector(".disponibilidadEdit");
+    const stockElement = document.querySelector(".stockEdit");
     fetch(`http://localhost:9200/products/${id}`)
       .then(res => res.json())
       .then(productArray => {
         if (productArray && productArray.length > 0) {
           const product = productArray[0];
-          if (nombreElement && marcaElement && descripcionElement && precioElement && categoriaElement && calificacionElement && proveedorElement) {
+          if (nombreElement && marcaElement && descripcionElement && precioElement && categoriaElement && calificacionElement && proveedorElement ) {
             nombreElement.value = product.NombreProducto;
             categoriaElement.value = product.ID_Categoria;
             marcaElement.value = product.Marca;
@@ -58,6 +59,7 @@ editButtons.forEach(btn => {
             calificacionElement.value = product.Calificacion;
             urlElement.value = product.imagen;
             disponibilidadElement.value = product.Disponibilidad
+            stockElement.value = product.Stock
             const saveEditButton = document.querySelector(".btn-save-edit");
             saveEditButton.addEventListener("click", () => {
               if (nombreElement && marcaElement && descripcionElement && precioElement && categoriaElement && calificacionElement && proveedorElement) {
@@ -70,6 +72,7 @@ editButtons.forEach(btn => {
                 const calificacion = parseInt(calificacionElement.value);
                 const imagen = urlElement.value;
                 const disponibilidad = parseInt(disponibilidadElement.value);
+                const stock = parseInt(stockElement.value);
                 const id = productListItem.querySelector('.id').innerText;
                 fetch(`http://localhost:9200/products/${id}`, {
                   method: 'PATCH',
@@ -85,7 +88,8 @@ editButtons.forEach(btn => {
                     PrecioVenta: precio,
                     Calificacion: calificacion,
                     Disponibilidad: disponibilidad,
-                    imagen: imagen
+                    imagen: imagen,
+                    stock: stock
                   })
                 })
                   .then(res => {
@@ -126,8 +130,9 @@ savebtn.addEventListener("click", () => {
   const calificacionElement = document.querySelector(".calificacion");
   const proveedorElement = document.querySelector(".proveedor");
   const urlElement = document.querySelector(".url")
+  const stockElement = document.querySelector(".stock");
   
-  if (nombreElement && marcaElement && descripcionElement && precioElement && categoriaElement && calificacionElement && proveedorElement && urlElement) {
+  if (nombreElement && marcaElement && descripcionElement && precioElement && categoriaElement && calificacionElement && proveedorElement && urlElement && stockElement) {
     const nombre = nombreElement.value;
     const categoria = parseInt(categoriaElement.value);
     const marca = marcaElement.value;
@@ -136,6 +141,7 @@ savebtn.addEventListener("click", () => {
     const precio = parseInt(precioElement.value);
     const calificacion = parseInt(calificacionElement.value);
     const imagen = urlElement.value;
+    const stock = parseInt(stockElement.value);
 
     fetch("http://localhost:9200/products", {
       method: "POST",
@@ -150,7 +156,8 @@ savebtn.addEventListener("click", () => {
         descripcion: descripcion,
         precio: precio,
         calificacion: calificacion,
-        imagen: imagen
+        imagen: imagen,
+        stock: stock
       })
     })
       .then(res => {

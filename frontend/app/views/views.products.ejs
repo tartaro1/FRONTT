@@ -149,6 +149,11 @@
                           <input type="number" class="form-control categoria alert-dark rounded" id="recipient-name"
                             placeholder="0">
                         </div>
+                        <div class="mb-2">
+                          <label for="recipient-name" class="col-form-label">Stock</label>
+                          <input type="number" class="form-control stock alert-dark rounded" id="recipient-name"
+                            placeholder="0">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -176,7 +181,8 @@
                 <th scope="col">PrecioVenta</th>
                 <th scope="col">Calificacion</th>
                 <th scope="col">Disponibilidad</th>
-                <th>Acciones</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -210,7 +216,9 @@
                   <td class="disponibilidad">
                     <%= product.Disponibilidad%>
                   </td>
-
+                  <td class="stock">
+                    <%= product.Stock %>
+                  </td>
                   <td>
                     <div class="rounded icon-button">
                       <button class="btn btn-warning edit-user-btn" type="button" data-bs-toggle="modal"
@@ -289,6 +297,11 @@
                         <div class="mb-2">
                           <label for="recipient-name" class="col-form-label">categoria</label>
                           <input type="number" class="form-control categoriaEdit alert-dark rounded" id="recipient-name"
+                            placeholder="0">
+                        </div>
+                        <div class="mb-2">
+                          <label for="recipient-name" class="col-form-label">Stock</label>
+                          <input type="number" class="form-control stockEdit alert-dark rounded" id="recipient-name"
                             placeholder="0">
                         </div>
                       </div>

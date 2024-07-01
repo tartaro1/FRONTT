@@ -14,7 +14,9 @@ dashboardRouter.use("/detailsOrders", routesDetails)
 dashboardRouter.use("/orders", routesOrders)
 dashboardRouter.use("/dealers", routesDelivers)
 dashboardRouter.use("/backup", routesBackup)
-
+dashboardRouter.use("/gestion", (req, res) => {
+    res.render("views.gestion.ejs")
+})
 dashboardRouter.use("/", (req, res) => {
     res.render('views.dashboard.ejs');
 });

@@ -1,7 +1,8 @@
 const send = document.querySelector(".send");
-send.addEventListener("click", () => {
-    const correo = document.getElementById("correo").value;
-    const contrasena = document.getElementById("contrasena").value;
+send.addEventListener("click", (e) => {
+    e.preventDefault();
+    const correo = document.getElementById("email").value;
+    const contrasena = document.getElementById("password").value;
     fetch("http://localhost:9200/users/login", {
         method: "POST",
         headers: {
@@ -14,12 +15,19 @@ send.addEventListener("click", () => {
     })
     .then(res => res.json())
     .then(data => {
-        localStorage.setItem("token", data.token);
+        sessionStorage.setItem("token", data.token);
         if (data.role === 2) {
-            window.location.href = "/dashboard";
+            alertify.success("Login exitoso");
+            setTimeout(() => {
+                window.location.href = "/dashboard";
+            }, 1000);
         } else if (data.role === 1) {
-            window.location.href = "/index";
+            alertify.success("Login exitoso");
+            setTimeout(() => {
+                window.location.href = "/inicio";
+            }, 1000);
         } else {
+            alertify.error("correo o contraseña incorrecta")
             console.error('Invalid role');
         }
     })

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar productos | Tartaro</title>
+    <link rel="stylesheet" href="./css/views/search.css">
+    <script src="https://kit.fontawesome.com/58e42bf76d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-main">
+            <a href="index.html">
+                <img src="./img/logo2.png" alt="">
+            </a>
+            <ul>
+                <li><a href=""><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <li><a href="" class="vender">Vender</a></li>
+                <li><a href="#" id="menu-toggle" class="menu-toggle"><i class="fas fa-bars"></i></a></li>
+            </ul>
+        </div>
+        <div class="nav-center" id="nav-center">
+            <ul class="list-items">
+                <li id="categories-toggle">
+                    <a href="#">Categorias</a>
+                    <ul class="dropdown" id="categories-dropdown">
+                        <li><a href="#">Tecnologia</a></li>
+                        <li><a href="#">Mercado</a></li>
+                        <li><a href="#">Comida rápida</a></li>
+                        <li><a href="#">Limpieza</a></li>
+                        <li><a href="#">Tendencia</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Ofertas</a></li>
+                <li><a href="#">Supermercado</a></li>
+                <li><a href="search.html">Buscar</a></li>
+            </ul>
+            <ul class="list-links">
+                <li><a href="signup.html">Crea tu cuenta</a></li>
+                <li><a href="login.html">Ingresar</a></li>
+                <li><a href="#">Ayuda</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="flex flex-grow">
+        <!-- Barra Lateral con Filtros -->
+        <aside class="w-64 h-auto p-4 sticky top-0 self-start">
+            <h2 class="text-xl font-bold mb-4">Categorías</h2>
+            <!-- Categoría 1 -->
+            <div class="category mb-2">
+                <div class="flex justify-between items-center cursor-pointer dropdown-toggle">
+                    <label for="tendencia" class="text-gray-700">Tendencia</label>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-content hidden pl-4">
+                    <label class="flex justify-between mb-2">
+                        <span>Subcategoría 1</span>
+                        <input type="checkbox" class="filter-checkbox" data-category="subcategoria1">
+                    </label>
+                    <label class="flex justify-between mb-2">
+                        <span>Subcategoría 2</span>
+                        <input type="checkbox" class="filter-checkbox" data-category="subcategoria2">
+                    </label>
+                </div>
+            </div>
+            <!-- Categoría 2 -->
+            <div class="category mb-2">
+                <div class="flex justify-between items-center cursor-pointer dropdown-toggle">
+                    <label for="comida" class="text-gray-700">Comida</label>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-content hidden pl-4">
+                    <label class="flex justify-between mb-2">
+                        <span>Subcategoría 3</span>
+                        <input type="checkbox" class="filter-checkbox" data-category="subcategoria3">
+                    </label>
+                    <label class="flex justify-between mb-2">
+                        <span>Subcategoría 4</span>
+                        <input type="checkbox" class="filter-checkbox" data-category="subcategoria4">
+                    </label>
+                </div>
+            </div>
+            <!-- Categoría 3 -->
+            <div class="category mb-2">
+                <div class="flex justify-between items-center cursor-pointer dropdown-toggle">
+                    <label for="comida-rapida" class="text-gray-700">Comida rápida</label>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-content hidden pl-4">
+                    <label class="flex justify-between mb-2">
+                        <span>Subcategoría 5</span>
+                        <input type="checkbox" class="filter-checkbox" data-category="subcategoria5">
+                    </label>
+                    <label class="flex justify-between mb-2">
+                        <span>Subcategoría 6</span>
+                        <input type="checkbox" class="filter-checkbox" data-category="subcategoria6">
+                    </label>
+                </div>
+            </div>
+            <!-- Categoría 4 -->
+            <div class="category mb-2">
+                <div class="flex justify-between items-center cursor-pointer dropdown-toggle">
+                    <label for="limpieza" class="text-gray-700">Limpieza</label>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-content hidden pl-4">
+                    <label class="flex justify-between mb-2">
+                        <span>Subcategoría 7</span>
+                        <input type="checkbox" class="filter-checkbox" data-category="subcategoria7">
+                    </label>
+                    <label class="flex justify-between mb-2">
+                        <span>Subcategoría 8</span>
+                        <input type="checkbox" class="filter-checkbox" data-category="subcategoria8">
+                    </label>
+                </div>
+            </div>
+            <!-- Categoría 5 -->
+            <div class="category mb-2">
+                <div class="flex justify-between items-center cursor-pointer dropdown-toggle">
+                    <label for="accesorios" class="text-gray-700">Accesorios</label>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-content hidden pl-4">
+                    <label class="flex justify-between mb-2">
+                        <span>Subcategoría 9</span>
+                        <input type="checkbox" class="filter-checkbox" data-category="subcategoria9">
+                    </label>
+                    <label class="flex justify-between mb-2">
+                        <span>Subcategoría 10</span>
+                        <input type="checkbox" class="filter-checkbox" data-category="subcategoria10">
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <div class="flex-grow p-6">
+            <div class="flex items-center justify-center mt-8 mb-4">
+                <input id="searchInput" type="text" placeholder="Buscar productos..." class="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+            </div>
+
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Productos -->
+                <div class="product-card bg-white p-4 rounded-lg shadow-lg" data-category="subcategoria1">
+                    <img src="img/img11.png" alt="Producto"
+                        class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-lg font-bold mb-2">Producto de Subcategoría 1</h3>
+                    <p class="text-gray-700 mb-2">Descripción del producto de subcategoría 1.</p>
+                    <p class="text-orange-600 font-bold mb-4">$20,000</p>
+                    <div class="flex space-x-2">
+                        <a href="#" class="bg-orange-600 text-white py-2 px-4 rounded-lg">Ver</a>
+                        <a href="#" class="bg-green-600 text-white py-2 px-4 rounded-lg">Comprar</a>
+                    </div>
+                </div>
+                <div class="product-card bg-white p-4 rounded-lg shadow-lg" data-category="subcategoria3">
+                    <img src="img/img14.png" alt="Producto"
+                        class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-lg font-bold mb-2">Producto de Subcategoría 3</h3>
+                    <p class="text-gray-700 mb-2">Descripción del producto de subcategoría 3.</p>
+                    <p class="text-orange-600 font-bold mb-4">$15,000</p>
+                    <div class="flex space-x-2">
+                        <a href="#" class="bg-orange-600 text-white py-2 px-4 rounded-lg">Ver</a>
+                        <a href="#" class="bg-green-600 text-white py-2 px-4 rounded-lg">Comprar</a>
+                    </div>
+                </div>
+                <div class="product-card bg-white p-4 rounded-lg shadow-lg" data-category="subcategoria5">
+                    <img src="img/img8.png" alt="Producto"
+                        class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-lg font-bold mb-2">Producto de Subcategoría 5</h3>
+                    <p class="text-gray-700 mb-2">Descripción del producto de subcategoría 5.</p>
+                    <p class="text-orange-600 font-bold mb-4">$12,000</p>
+                    <div class="flex space-x-2">
+                        <a href="#" class="bg-orange-600 text-white py-2 px-4 rounded-lg">Ver</a>
+                        <a href="#" class="bg-green-600 text-white py-2 px-4 rounded-lg">Comprar</a>
+                    </div>
+                </div>
+                <div class="product-card bg-white p-4 rounded-lg shadow-lg" data-category="subcategoria7">
+                    <img src="img/img17.png" alt="Producto"
+                        class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-lg font-bold mb-2">Producto de Subcategoría 7</h3>
+                    <p class="text-gray-700 mb-2">Descripción del producto de subcategoría 7.</p>
+                    <p class="text-orange-600 font-bold mb-4">$10,000</p>
+                    <div class="flex space-x-2">
+                        <a href="#" class="bg-orange-600 text-white py-2 px-4 rounded-lg">Ver</a>
+                        <a href="#" class="bg-green-600 text-white py-2 px-4 rounded-lg">Comprar</a>
+                    </div>
+                </div>
+                <div class="product-card bg-white p-4 rounded-lg shadow-lg" data-category="subcategoria9">
+                    <img src="img/img16.png" alt="Producto"
+                        class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-lg font-bold mb-2">Producto de Subcategoría 9</h3>
+                    <p class="text-gray-700 mb-2">Descripción del producto de subcategoría 9.</p>
+                    <p class="text-orange-600 font-bold mb-4">$25,000</p>
+                    <div class="flex space-x-2">
+                        <a href="#" class="bg-orange-600 text-white py-2 px-4 rounded-lg">Ver</a>
+                        <a href="#" class="bg-green-600 text-white py-2 px-4 rounded-lg">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-secondary text-white py-10 mt-10 ">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 ">
+                <nav>
+                    <h3 class="text-white text-lg font-bold mb-4 ">Información</h3>
+                    <ul>
+                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 "
+                                href="">Condiciones de uso
+                            </a></li>
+                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="">Aviso de
+                                privicidad </a></li>
+                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="">Ayuda </a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav>
+                    <h3 class="text-white text-lg font-bold mb-4 ">Legal</h3>
+                    <ul>
+                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="">Terminos y
+                                condiciones </a></li>
+                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="">Todos los
+                                derechos reservados </a></li>
+                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="">Tartaro
+                                INC</a></li>
+                    </ul>
+                </nav>
+                <nav>
+                    <h3 class="text-white text-lg font-bold mb-4 ">Redes sociales</h3>
+                    <ul class="flex space-x-4">
+                        <li class="mb-2 "><a href=""><i class="fab fa-facebook fa-lg"></i></a></li>
+                        <li class="mb-2 "><a href=""><i class="fab fa-twitter fa-lg"></i></a></li>
+                        <li class="mb-2 "><a href=""><i class="fab fa-instagram fa-lg"></i></a></li>
+                    </ul>
+                </nav>
+                <nav>
+                    <h3 class="text-white text-lg font-bold mb-4 ">Contacto</h3>
+                    <ul>
+                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 "
+                                href="mailto:danirojasbermudez20@gmail.com">danirojasbermudez20@gmail.com</a></li>
+                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 "
+                                href="tel:+573052338332"> +57
+                                305-233-8332</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+            <div class="mt-8 text-center border-t border-gray-700 pt-4">
+                <p>&copy; 2024 Tartaro Inc. Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/menu.js"></script>
+    <script src="js/filter.js"></script>
+</body>
+
+</html>

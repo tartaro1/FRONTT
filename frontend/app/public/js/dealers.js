@@ -164,4 +164,42 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
   });
+  const infoBtn = document.querySelectorAll(".info-user-btn");
+  infoBtn.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const container = e.target.closest(".user-list-item");
+      const tbody = document.querySelector(".info")
+      tbody.innerHTML = ""
+      const userId = container.querySelector(".id").innerText;
+      fetch(`http://localhost:9200/orders?dealerID=${userId}`)
+        .then(response => response.json())
+        .then(data => {
+          data.forEach((order) => {
+            tbody.innerHTML +=
+              `
+          <tr class="user-list-item">
+            <td class="idPedido">
+            ${order.ID_Pedido}
+            </td>
+            <td class="estadoPedido">
+            ${order.EstadoPedido}
+            </td>
+            <td class="direccionPedido">
+            ${order.Direccion}
+            </td>
+            <td class="ventaPedido">
+            ${order.PrecioVenta}
+            </td>
+            <td class="repartidorPedido">
+            ${order.ID_Repartidor}
+            </td>
+            <td class="fechaPedido">
+            ${order.FechaPedido}
+            </td>
+          </tr>
+          `
+          })
+        })
+    })
+  })
 });

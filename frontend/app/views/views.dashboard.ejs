@@ -12,6 +12,29 @@
 </head>
 
 <body>
+    <script>
+        const token = sessionStorage.getItem('token');
+        if (token == "" || token == null) {
+            window.location.href = "/"
+        }
+        fetch("http://localhost:9200/users/oauth", {
+            method: "POST",
+            headers: {
+                "content-Type": "application/json",
+                "x-access-token": token
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    console.error(data.error);
+                }
+            })
+        const logOut = () => {
+            sessionStorage.clear();
+            window.location.href= "/"
+        }
+    </script>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-2">
@@ -64,13 +87,13 @@
                                     </li>
                                     <br>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" href="#"><i class="bi bi-book-half"></i> Gestionar
+                                        <a class="nav-link text-dark" href="/dashboard/gestion"><i class="bi bi-book-half"></i> Gestionar
                                             contenido</a>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="offcanvas-footer mt-auto p-2">
-                                <h5 p-2><a class="nav-link text-dark m-3 " href="/index"><i
+                            <div class="offcanvas-footer mt-auto p-2" onclick="logOut()">
+                                <h5 p-2><a class="nav-link text-dark m-3 "><i
                                             class="bi bi-box-arrow-left"></i> Finalizar Sesion</a></h5>
                             </div>
                         </div>

@@ -9,6 +9,8 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/27a2ff0d1a.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -220,6 +222,36 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content" style="width: fit-content;">
+                            <div class="modal-header" style="align-self: center;padding-bottom:20px">
+                                <h5 class="modal-title fs-5" id="staticBackdropLabel">Historial de Pedidos
+                                </h5>
+                                <button type="button" class=" btn btn-outline-dark bi-x btn-close-modal"
+                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div style="text-align: center;padding-bottom: 20px;">
+                                <table class="table table bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">EstadoPedido</th>
+                                            <th scope="col">Direccion</th>
+                                            <th scope="col">PrecioVenta</th>
+                                            <th scope="col">ID_Repartidor</th>
+                                            <th scope="col">FechaPedido</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="info">
+                                            
+                                    </tbody>
+                                    </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="container">
                     <table class="table table bordered table-striped">
                         <thead>
@@ -275,6 +307,14 @@
                                             <button type="button" class="btn btn-danger delete-user-btn"
                                                 data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                                 <i class="sidebar-icon bi bi-x"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="rounded icon-button ms-1 remove">
+                                            <button type="button" class="btn btn-info info-user-btn"
+                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                                                <i class="fa-regular fa-file" style="background-image: url(/img/file-regular.svg);"></i>
                                             </button>
                                         </div>
                                     </td>

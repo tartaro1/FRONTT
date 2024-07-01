@@ -30,59 +30,70 @@ document.addEventListener('DOMContentLoaded', () => {
             const order = e.target.closest(".user-list-item");
             const id = order.querySelector(".id").innerText;
             const container = document.querySelector(".detalles");
+            const repartidor = document.querySelector(".repartidor").textContent
             let userText = document.querySelector(".usuario");
             let client = order.querySelector(".cliente");
             let dealerText = document.querySelector(".dealer");
-            let dealer = order.querySelector(".repartidor");
+            const repartidorSelect = document.querySelector(".rep");
+            repartidorSelect.innerHTML = repartidor
             container.innerHTML = "";
             userText.textContent = `Usuario: ${client.textContent}`;
-            dealerText.value = dealer.textContent;
-
+            fetch("http://localhost:9200/dealers")
+            .then(res => res.json())
+            .then(data => {
+                data.forEach((text, count) => {
+                    let option = document.createElement("option");
+                    option.classList = "option"
+                    option.value = data[count].ID_Usuario
+                    option.innerHTML = data[count].Nombre
+                    dealerText.appendChild(option);
+                })
+            })
             fetch(`http://localhost:9200/detailsOrders/${id}`)
                 .then(response => response.json())
                 .then(data => {
                     data.forEach(producto => {
                         let alert = `
-                  <div class="alert alert-light alert-dismissible fade show" role="alert">
-                      <div class="card" style="width: 100%; height: auto;">
-                          <img style="width: 50vh; height: 30vh; margin: auto;" class="img" src="${producto.imagen}" class="card-img-top" alt="...">
-                          <div class="card-body">
-                              <button type="button" class="btn-close btn-produ" data-bs-dismiss="alert" aria-label="Close"></button>
-                              <form class="row g-3">
-                                  <div class="col-md-3">
-                                      <label for="inputCity" class="form-label">Nombre</label>
-                                      <input type="text" disabled class="form-control nombreEdit" value="${producto.NombreProducto}">
-                                  </div>
-                                  <div class="col-md-3">
-                                      <label for="inputState" class="form-label">Cantidad</label>
-                                      <input type="number" class="form-control cantidadEdit" value="${producto.Cantidad}">
-                                  </div>
-                                  <div class="col-md-3">
-                                      <label for="inputZip" class="form-label">Precio</label>
-                                      <input type="number" disabled class="form-control precioEdit" value="${producto.PrecioVenta}">
-                                  </div>
-                                  <div class="col-md-3">
-                                      <label for="inputZip" class="form-label">Imagen</label>
-                                      <input type="text" disabled class="form-control precioEdit" value="${producto.imagen}">
-                                  </div>
-                              </form>
-                          </div>
-                      </div>
-                  </div>`;
+                            <div class="alert alert-light alert-dismissible fade show" role="alert">
+                                <div class="card" style="width: 100%; height: auto;">
+                                    <img style="width: 50vh; height: 30vh; margin: auto;" class="img" src="${producto.imagen}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <button type="button" class="btn-close btn-produ" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        <form class="row g-3">
+                                            <div class="col-md-3">
+                                                <label for="inputCity" class="form-label">Nombre</label>
+                                                <input type="text" disabled class="form-control nombreEdit" value="${producto.NombreProducto}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="inputState" class="form-label">Cantidad</label>
+                                                <input type="number" class="form-control cantidadEdit" value="${producto.Cantidad}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="inputZip" class="form-label">Precio</label>
+                                                <input type="number" disabled class="form-control precioEdit" value="${producto.PrecioVenta}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="inputZip" class="form-label">Imagen</label>
+                                                <input type="text" disabled class="form-control precioEdit" value="${producto.imagen}">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>`;
                         container.innerHTML += alert;
                         subtotal += (parseInt(producto.PrecioVenta * producto.Cantidad));
                     });
 
                     let totalesHtml = `
-              <p>Subtotal: $${subtotal}</p>
-              <p>IVA: $${parseInt((subtotal * 0.19))}</p>
-              <p>Total: $${parseInt((subtotal * 0.19)) + subtotal}</p>`;
+                    <p>Subtotal: $${subtotal}</p>
+                    <p>IVA: $${parseInt((subtotal * 0.19))}</p>
+                    <p>Total: $${parseInt((subtotal * 0.19)) + subtotal}</p>`;
                     let resultados = document.querySelector(".totales");
                     resultados.innerHTML = totalesHtml;
-
                     const save = document.querySelector('.save');
                     save.replaceWith(save.cloneNode(true));
                     document.querySelector('.save').addEventListener('click', () => {
+                        fetch(`http://localhost:9200/detailsOrders/${id}`)
                         const cantidadEdit = document.querySelectorAll('.cantidadEdit');
                         cantidadEdit.forEach((input, index) => {
                             const productID = data[index].ID_DetallePedido;
@@ -105,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     console.log(data);
                                     const modal = bootstrap.Modal.getInstance(document.querySelector('#exampleEditUserModal'));
                                     modal.hide();
-                                    location.reload();
+                                    // location.reload();
                                     resultados.innerHTML = "";
                                 })
                                 .catch(err => console.log(err));
@@ -124,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         statusSelect = document.querySelectorAll("#inputGroupSelect01")[index];
                         statusSelect.addEventListener("change", () => {
                             const newStatus = statusSelect.value;
-                            fetch(`http://localhost:9200/orders/${id}`, {
+                            fetch(`http://localhost:9200/orders/state/${id}`, {
                                 headers: { 'Content-Type': 'application/json' },
                                 method: "PATCH",
                                 body: JSON.stringify({
@@ -144,6 +155,34 @@ document.addEventListener('DOMContentLoaded', () => {
                                 .catch(err => console.log(err));
                         });
                     });
+                    const selectDealer = document.querySelectorAll("#inputGroupSelect02")
+                    selectDealer.forEach((dealerSelect, index) => {
+                        dealerSelect = document.querySelectorAll(`#inputGroupSelect02`)[index]
+                        dealerSelect.addEventListener("change", () => {
+                            const newDealer = dealerSelect.value
+                            console.log(newDealer);
+                            fetch(`http://localhost:9200/orders/${id}`, {
+                                method: "PATCH",
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    ID_Repartidor: newDealer
+                                })
+                            })
+                            .then(res => {
+                                if (res.ok) {
+                                    return res.json();
+                                } else {
+                                    throw new Error("Error updating order dealer");
+                                }
+                            })
+                            .then(data => {
+                                console.log(data);
+                            })
+                            .catch(err => console.log(err));
+                        })
+                    })
                 });
         });
     });
@@ -184,5 +223,3 @@ deleteButtons.forEach(button => {
         });
     });
 });
-
-
