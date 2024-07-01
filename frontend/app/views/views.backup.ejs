@@ -12,6 +12,12 @@
 </head>
 
 <body>
+    <script>
+        const logOut = () => {
+            sessionStorage.clear();
+            window.location.href= "/"
+        }
+    </script>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-2">
@@ -64,13 +70,13 @@
                                     </li>
                                     <br>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" href="#"><i class="bi bi-book-half"></i> Gestionar
+                                        <a class="nav-link text-dark" href="/dashboard/gestion"><i class="bi bi-book-half"></i> Gestionar
                                             contenido</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="offcanvas-footer mt-auto p-2">
-                                <h5 p-2><a class="nav-link text-dark m-3 " href="/index"><i
+                                <h5 p-2><a class="nav-link text-dark m-3 " onclick="logOut()"><i
                                             class="bi bi-box-arrow-left"></i> Finalizar Sesion</a></h5>
                             </div>
                         </div>
