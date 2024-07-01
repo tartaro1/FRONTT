@@ -1,10 +1,10 @@
 export class ProductController {
-    static getAll = (req, res) => {
+    static getAll = async(req, res) => {
         try {
             const {category} = req.query;
             if (category) {
                 let datos = {}
-                fetch(`https://ms-backend-tartaro.onrender.com/products?category=${category}`)
+                await fetch(`https://ms-backend-tartaro.onrender.com/products?category=${category}`)
                 .then(response => response.json())
                 .then(data => {
                     datos = data;
@@ -12,7 +12,7 @@ export class ProductController {
                 })
             } else {
                 let datos = {};
-                fetch("https://ms-backend-tartaro.onrender.com/products")
+                await fetch("https://ms-backend-tartaro.onrender.com/products")
                 .then(response => response.json())
                 .then(data => {
                     datos = data;
