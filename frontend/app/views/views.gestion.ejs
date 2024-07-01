@@ -85,6 +85,7 @@
                         <h2>Archivos Subidos</h2>
                         <ul id="uploadedFiles"></ul>
                     </div>
+
                 </div>
             </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -106,7 +107,7 @@
         const downloadLink = document.createElement('a');
         downloadLink.href = `https://ms-backend-tartaro.onrender.com${pdfPath}`;
         downloadLink.innerText = 'Descargar PDF';
-        downloadLink.setAttribute('download', '');
+        downloadLink.setAttribute('download', `https://ms-backend-tartaro.onrender.com${pdfPath}`);
         listItem.appendChild(downloadLink);
         uploadedFilesList.appendChild(listItem);
     } else {
