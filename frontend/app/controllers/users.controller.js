@@ -4,7 +4,7 @@ export class UsersController {
             const {email} = req.query;
             if (email) {
                 let datos = {}
-                await fetch(`http://localhost:9200/users?email=${email}`)
+                await fetch(`https://ms-backend-tartaro.onrender.com/users?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     datos = data
@@ -13,7 +13,7 @@ export class UsersController {
                 .catch(error => console.log(error))
             } else {
                 let datos = {}
-                fetch('http://localhost:9200/users')
+                fetch('https://ms-backend-tartaro.onrender.com/users')
                 .then(res => res.json())
                 .then(data => {
                     datos = data;

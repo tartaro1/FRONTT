@@ -3,7 +3,7 @@ send.addEventListener("click", (e) => {
     e.preventDefault();
     const correo = document.getElementById("email").value;
     const contrasena = document.getElementById("password").value;
-    fetch("http://localhost:9200/users/login", {
+    fetch("https://ms-backend-tartaro.onrender.com/users/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
