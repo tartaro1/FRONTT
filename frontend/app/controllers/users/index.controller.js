@@ -10,4 +10,11 @@ export const index = (req, res) => {
 export const inicio = (req, res) => {
     res.render("views.inicio.ejs");
 }
+export const search = (req, res) => {
+    res.render("views.search.ejs");
+}
+
+export const categorias = (req, res) => {
+    res.render("views.categories.ejs");
+}
 
