@@ -15,43 +15,7 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="nav-main">
-            <a href="/">
-                <img src="./img/logo2.png" alt="">
-            </a>
-            <form action="">
-                <input type="text" placeholder="Buscar contenido...">
-            </form>
-            <ul>
-                <li><a href=""><i class="fa-solid fa-cart-shopping"></i></a></li>
-                <li><a href="" class="vender">Vender</a></li>
-                <li><a href="#" id="menu-toggle" class="menu-toggle"><i class="fas fa-bars"></i></a></li>
-            </ul>
-        </div>
-        <div class="nav-center" id="nav-center">
-            <ul class="list-items">
-                <li id="categories-toggle">
-                    <a href="#">Categorias</a>
-                    <ul class="dropdown" id="categories-dropdown">
-                        <li><a href="#">Tecnologia</a></li>
-                        <li><a href="#">Mercado</a></li>
-                        <li><a href="#">Comida rápida</a></li>
-                        <li><a href="#">Limpieza</a></li>
-                        <li><a href="#">Tendencia</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Ofertas</a></li>
-                <li><a href="#">Supermercado</a></li>
-                <li><a href="search.html">Buscar</a></li>
-            </ul>
-            <ul class="list-links">
-                <li><a href="/register">Crea tu cuenta</a></li>
-                <li><a href="/login">Ingresar</a></li>
-                <li><a href="#">Ayuda</a></li>
-            </ul>
-        </div>
-    </nav>
+    <%- include('./partials/header') %>
     <main class="flex items-center justify-center min-h-screen">
         <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl flex">
             <div class="hidden md:block md:w-1/2 bg-cover bg-center rounded-l-lg" style="background-image: url('./img/form/bgform1.jpg');"></div>
@@ -77,53 +41,7 @@
             </div>
         </div>
     </main>
-    <footer class="bg-secondary text-white py-10 mt-10 ">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 ">
-                <nav>
-                    <h3 class="text-white text-lg font-bold mb-4 ">Información</h3>
-                    <ul>
-                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 "
-                                href="">Condiciones de uso </a></li>
-                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="">Aviso de
-                                privicidad </a></li>
-                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="">Ayuda </a>
-                        </li>
-                    </ul>
-                </nav>
-                <nav>
-                    <h3 class="text-white text-lg font-bold mb-4 ">Legal</h3>
-                    <ul>
-                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="">Terminos y
-                                condiciones </a></li>
-                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="">Todos los
-                                derechos reservados </a></li>
-                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="">Tartaro
-                                INC</a></li>
-                    </ul>
-                </nav>
-                <nav>
-                    <h3 class="text-white text-lg font-bold mb-4 ">Redes sociales</h3>
-                    <ul class="flex space-x-4">
-                        <li class="mb-2 "><a href=""><i class="fab fa-facebook fa-lg"></i></a></li>
-                        <li class="mb-2 "><a href=""><i class="fab fa-twitter fa-lg"></i></a></li>
-                        <li class="mb-2 "><a href=""><i class="fab fa-instagram fa-lg"></i></a></li>
-                    </ul>
-                </nav>
-                <nav>
-                    <h3 class="text-white text-lg font-bold mb-4 ">Contacto</h3>
-                    <ul>
-                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="mailto:danirojasbermudez20@gmail.com">danirojasbermudez20@gmail.com</a></li>
-                        <li class="mb-2 "><a class="hover:text-white transition-colors duration-200 " href="tel:+573052338332"> +57 305-233-8332</a></li>
-                    </ul>
-                </nav>
-
-            </div>
-            <div class="mt-8 text-center border-t border-gray-700 pt-4">
-                <p>&copy; 2024 Tartaro Inc. Todos los derechos reservados</p>
-            </div>
-        </div>
-    </footer>
+    <%- include('./partials/footer') %>
     <script src="/js/menu.js"></script>
     <script src="/js/login.js"></script>
 </body>

@@ -18,3 +18,7 @@ export const categorias = (req, res) => {
     res.render("views.categories.ejs");
 }
 
+export const formulario = (req, res) => {
+    res.render("views.form.ejs");
+}
+
