@@ -21,4 +21,7 @@ export const categorias = (req, res) => {
 export const formulario = (req, res) => {
     res.render("views.form.ejs");
 }
+export const producto = (req, res) => {
+    res.render("views.product.ejs");
+}
 

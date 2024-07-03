@@ -22,5 +22,8 @@ app.set("port", process.env.PORT || 3000);
 app.use("/dashboard", dashboardRouter);
 
 app.use("/", usersIndex)
+app.use("/",(req,res)=>{
+    res.render("views.error404.ejs")
+})
 
 export default app;
