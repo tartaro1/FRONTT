@@ -7,6 +7,100 @@ browser.addEventListener("keydown", (e) => {
         }
     }
 });
+const usersSele = document.querySelector("#usuariosSele");
+fetch("https://ms-backend-tartaro.onrender.com/users")
+.then(res => res.json())
+.then(data => {
+    data.forEach((user, index) => {
+        const option = document.createElement("option");
+        option.value = data[index].ID_Usuario;
+        option.innerHTML = data[index].Nombre
+        usersSele.appendChild(option);
+    })
+})
+const produSele = document.querySelector("#productosSele");
+fetch("https://ms-backend-tartaro.onrender.com/products")
+.then(res => res.json())
+.then(data => {
+    data.forEach((user, index) => {
+        const option = document.createElement("option");
+        option.value = data[index].id;
+        option.innerHTML = data[index].NombreProducto
+        produSele.appendChild(option);
+    })
+})
+const dealerSele = document.querySelector("#repartidorSele");
+fetch("https://ms-backend-tartaro.onrender.com/dealers")
+.then(res => res.json())
+.then(data => {
+    data.forEach((user, index) => {
+        const option = document.createElement("option");
+        option.value = data[index].ID_Usuario;
+        option.innerHTML = data[index].Nombre
+        dealerSele.appendChild(option);
+    })
+})
+const btnSave = document.querySelector(".btn-save");
+
+btnSave.addEventListener("click", () => {
+    const usersSele = parseInt(document.querySelector("#usuariosSele").value);
+    const productosSele = document.querySelector("#productosSele");
+    const dealerSele = parseInt(document.querySelector("#repartidorSele").value);
+    const estaodSele = document.querySelector(".estadoSele").value;
+    const direccion = document.querySelector("#direccionSele").value;
+    const productosSeleccionados = Array.from(productosSele.selectedOptions).map(option => option.value);
+
+    console.log(usersSele);
+    console.log(dealerSele);
+    console.log(estaodSele);
+    console.log(direccion);
+
+    fetch("https://ms-backend-tartaro.onrender.com/orders", {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        body: JSON.stringify({
+            EstadoPedido: estaodSele,
+            Direccion: direccion,
+            cliente: usersSele,
+            PrecioVenta: 0,
+            ID_Repartidor: dealerSele
+        })
+    })
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("Error en la creación del pedido");
+        }
+        return res.json();
+    })
+    .then(response => {
+        console.log(response);
+        const idPedido = response.data.PedidoID;
+
+        // Crear los detalles del pedido
+        const detallePromises = productosSeleccionados.map(productoID => {
+            return fetch("https://ms-backend-tartaro.onrender.com/detailsOrders", {
+                headers: { "Content-Type": "application/json" },
+                method: "POST",
+                body: JSON.stringify({
+                    ID_Pedido: idPedido,
+                    ID_Producto: productoID,
+                    cantidad: 1, // Ajusta la lógica para obtener la cantidad
+                    PrecioVenta: 100, // Ajusta la lógica para obtener el precio
+                    Descuento: 0 // Ajusta la lógica para obtener el descuento
+                })
+            });
+        });
+
+        return Promise.all(detallePromises);
+    })
+    .then(() => {
+        alert("Pedido guardado con éxito.");
+        location.reload();
+    })
+    .catch(err => console.log(err));
+});
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const userItems = document.querySelectorAll('.user-list-item');
     userItems.forEach(order => {

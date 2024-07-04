@@ -38,10 +38,65 @@
                                 <input type="search" id="browse" placeholder="Buscar pedido por repartidor"
                                     class="form-control rounded-pill alert-dark" aria-label="Buscar usuario"><i
                                     class="bi bi-search"></i>
+                                </div>
                             </div>
+                            <!-- Botón de agregar usuario -->
+                        <button class="btn btn-warning add-user-btn" style="color:#fff;" type="button" data-bs-toggle="modal" data-bs-target="#exampleAddUserModal"><i class="bi bi-plus"></i></button>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleAddUserModal" tabindex="-1"
+                    aria-labelledby="exampleEditUserModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title fs-5" id="exampleEditUserModalLabel">Agregar Pedido</h3>
+                                <button type="button" class="btn btn-outline-dark bi-x btn-close-modal"
+                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="estadoPedido" class="col-form-label">Estado del Pedido</label>
+                                        <select class="form-control alert-dark rounded estadoSele">
+                                            <option value="En Espera">En Espera</option>
+                                            <option value="Cancelado">Cancelado</option>
+                                            <option value="Entregado">Entregado</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="direccion" class="col-form-label">Dirección</label>
+                                        <input type="text" class="form-control alert-dark rounded" id="direccionSele">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cliente" class="col-form-label">Cliente</label>
+                                        <select class="form-control alert-dark rounded" id="usuariosSele">
+                                            <!-- Aquí se añadirán los productos disponibles -->
+                                            
+                                            <!-- Añadir más productos según sea necesario -->
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="idRepartidor" class="col-form-label">Repartidor</label>
+                                        <select class="form-control alert-dark rounded" id="repartidorSele">
+                                            <!-- Aquí se añadirán los productos disponibles -->
+                                            <!-- Añadir más productos según sea necesario -->
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="productos" class="col-form-label">Productos</label>
+                                        <select multiple class="form-control alert-dark rounded" id="productosSele">
+                                            <!-- Aquí se añadirán los productos disponibles -->
+
+                                            <!-- Añadir más productos según sea necesario -->
+                                        </select>
+                                    </div>
+                                </form>
+                                <div style="text-align: center;">
+                                    <button type="button" class="btn btn-warning btn-save">Guardar</button>
+                                </div>
+                            </div>
+                            
                         </div>
-                        <!-- Botón de agregar usuario -->
-                        <!-- <button class="btn btn-warning add-user-btn" style="color:#fff;" type="button" data-bs-toggle="modal" data-bs-target="#exampleAddUserModal"><i class="bi bi-plus"></i></button> -->
                     </div>
                 </div>
                 <!-- Modal Editar Usuario -->
@@ -143,7 +198,7 @@
                                     </td>
                                     <td class="precio"></td>
                                     <td class="repartidor">
-                                        <%= order.ID_Repartidor %>
+                                        <%= order.Nombre %>
                                     </td>
                                     <td class="fecha">
                                         <%= order.FechaPedido %>

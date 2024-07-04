@@ -12,7 +12,7 @@
         if (token == "" || token == null) {
             window.location.href = "/"
         }
-        fetch("http://localhost:9200/users/oauth", {
+        fetch("https://ms-backend-tartaro.onrender.com/users/oauth", {
             method: "POST",
             headers: {
                 "content-Type": "application/json",
