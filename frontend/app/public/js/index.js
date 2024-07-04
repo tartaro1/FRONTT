@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") {
       const email = browser.value.trim();
       if (email) {
-        window.location.href = `http://localhost:3000/dashboard/users?email=${email}`;
+        window.location.href = `https://ms-backend-tartaro.onrender.com/dashboard/users?email=${email}`;
       }
     }
   });

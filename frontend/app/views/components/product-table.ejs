@@ -17,54 +17,54 @@
     </thead>
     <tbody>
         <% products.forEach(product=> { %>
-            <tr class="user-list-item" data-id=`<%=product.id %>`>
-            <td class="id">
-                <%= product.id %>
-            </td>
-            <td class="imagen"><img src="<%= product.imagen %>" alt=""></td>
-            <td class="nombre">
-                <%= product.NombreProducto %>
-            </td>
-            <td class="categoria">
-                <%= product.ID_Categoria %>
-            </td>
-            <td class="marca">
-                <%= product.Marca %>
-            </td>
-            <td class="proveedor">
-                <%= product.ID_Proveedor %>
-            </td>
-            <td class="descripcion">
-                <%= product.Descripcion%>
-            </td>
-            <td class="precio">
-                <%= product.PrecioVenta %>
-            </td>
-            <td class="calificacion">
-                <%= product.Calificacion%>
-            </td>
-            <td class="disponibilidad">
-                <%= product.Disponibilidad%>
-            </td>
-            <td class="stock">
-                <%= product.Stock %>
-            </td>
-            <td>
-                <div class="rounded icon-button">
-                <button class="btn btn-warning edit-user-btn" type="button" data-bs-toggle="modal"
-                    data-bs-target="#exampleEditUserModal">
-                    <i class="sidebar-icon bi bi-pencil-fill"></i>
-                </button>
-                </div>
-            </td>
-            <td>
-                <div class="rounded icon-button ms-1 remove">
-                <button type="button" class="btn btn-danger delete-user-btn" data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop">
-                    <i class="sidebar-icon bi bi-x"></i>
-                </button>
-                </div>
-            </td>
+            <tr class="user-list-item" data-id="`<%= product.id %>`">
+                <td class="id">
+                    <%= product.id %>
+                </td>
+                <td class="imagen"><img src="<%= product.imagen %>" alt=""></td>
+                <td class="nombre">
+                    <%= product.NombreProducto %>
+                </td>
+                <td class="categoria">
+                    <%= product.ID_Categoria %>
+                </td>
+                <td class="marca">
+                    <%= product.Marca %>
+                </td>
+                <td class="proveedor">
+                    <%= product.ID_Proveedor %>
+                </td>
+                <td class="descripcion">
+                    <%= product.Descripcion%>
+                </td>
+                <td class="precio">
+                    <%= product.PrecioVenta %>
+                </td>
+                <td class="calificacion">
+                    <%= product.Calificacion%>
+                </td>
+                <td class="disponibilidad">
+                    <%= product.Disponibilidad%>
+                </td>
+                <td class="stock">
+                    <%= product.Stock %>
+                </td>
+                <td>
+                    <div class="rounded icon-button">
+                        <button class="btn btn-warning edit-user-btn" type="button" data-bs-toggle="modal"
+                            data-bs-target="#exampleEditUserModal">
+                            <i class="sidebar-icon bi bi-pencil-fill"></i>
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    <div class="rounded icon-button ms-1 remove">
+                        <button type="button" class="btn btn-danger delete-user-btn" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
+                            <i class="sidebar-icon bi bi-x"></i>
+                        </button>
+                    </div>
+                </td>
             </tr>
         <% }); %>
     </tbody>
