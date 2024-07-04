@@ -108,74 +108,7 @@
 
         <!-- Lista de usuarios -->
         <div class="container">
-          <table class="table table bordered table-striped">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Imagen</th>
-                <th scope="col">Producto</th>
-                <th scope="col">ID_Categoria </th>
-                <th scope="col">Marca</th>
-                <th scope="col">ID_Proveedor</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">PrecioVenta</th>
-                <th scope="col">Calificacion</th>
-                <th scope="col">Disponibilidad</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% products.forEach(product=> { %>
-                <tr class="user-list-item" data-id=`<%=product.id %>`>
-                  <td class="id">
-                    <%= product.id %>
-                  </td>
-                  <td class="imagen"><img src="<%= product.imagen %>" alt=""></td>
-                  <td class="nombre">
-                    <%= product.NombreProducto %>
-                  </td>
-                  <td class="categoria">
-                    <%= product.ID_Categoria %>
-                  </td>
-                  <td class="marca">
-                    <%= product.Marca %>
-                  </td>
-                  <td class="proveedor">
-                    <%= product.ID_Proveedor %>
-                  </td>
-                  <td class="descripcion">
-                    <%= product.Descripcion%>
-                  </td>
-                  <td class="precio">
-                    <%= product.PrecioVenta %>
-                  </td>
-                  <td class="calificacion">
-                    <%= product.Calificacion%>
-                  </td>
-                  <td class="disponibilidad">
-                    <%= product.Disponibilidad%>
-                  </td>
-
-                  <td>
-                    <div class="rounded icon-button">
-                      <button class="btn btn-warning edit-user-btn" type="button" data-bs-toggle="modal"
-                        data-bs-target="#exampleEditUserModal">
-                        <i class="sidebar-icon bi bi-pencil-fill"></i>
-                      </button>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="rounded icon-button ms-1 remove">
-                      <button type="button" class="btn btn-danger delete-user-btn" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop">
-                        <i class="sidebar-icon bi bi-x"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                <% }); %>
-            </tbody>
-          </table>
+          <%- include('./components/product-table') %>
         </div>
         <!-- Modal Editar Usuario -->
         <div class="modal fade" id="exampleEditUserModal" tabindex="-1" aria-labelledby="exampleEditUserModalLabel"
