@@ -15,7 +15,10 @@ dashboardRouter.use("/orders", routesOrders)
 dashboardRouter.use("/dealers", routesDelivers)
 dashboardRouter.use("/backup", routesBackup)
 dashboardRouter.use("/gestion", (req, res) => {
-    res.render("views.gestion.ejs")
+    res.render("pages/admin/gestion",{
+        layout:"layouts/main-admin",
+        title: 'Dashboard gestion'
+    });
 })
 dashboardRouter.use("/", (req, res) => {
     res.render("pages/admin/index",{

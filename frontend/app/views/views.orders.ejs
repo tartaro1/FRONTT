@@ -169,64 +169,7 @@
                     </div>
                 </div>
                 <div class="container">
-                    <table class="table table bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID_Pedido</th>
-                                <th scope="col">Estado Pedido</th>
-                                <th scope="col">Direccion</th>
-                                <th scope="col">Cliente</th>
-                                <th scope="col">Precio Venta</th>
-                                <th scope="col">ID_Repartidor</th>
-                                <th scope="col">Fecha Pedido</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% orders.forEach(order=> { %>
-                                <tr class="user-list-item" data-id=`<%=order.ID_Usuario %>`>
-                                    <td class="id">
-                                        <%= order.ID_Pedido %>
-                                    </td>
-                                    <td class="estado">
-                                        <%= order.EstadoPedido %>
-                                    </td>
-                                    <td class="direccion">
-                                        <%= order.Direccion %>
-                                    </td>
-                                    <td class="cliente">
-                                        <%= order.Nombre_Cliente %>
-                                    </td>
-                                    <td class="precio"></td>
-                                    <td class="repartidor">
-                                        <%= order.Nombre %>
-                                    </td>
-                                    <td class="fecha">
-                                        <%= order.FechaPedido %>
-                                    </td>
-                                    <td>
-                                        <div class="rounded icon-button">
-                                            <button class="btn btn-warning edit-user-btn" type="button"
-                                                data-bs-toggle="modal" data-bs-target="#exampleEditUserModal">
-                                                <i class="sidebar-icon bi bi-pencil-fill"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="rounded icon-button ms-1 remove">
-                                            <button type="button" class="btn btn-danger delete-user-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                              <i class="sidebar-icon bi bi-x"></i>
-                                            </button>
-                                          </div>
-                                    </td>
-                                    <td>
-                                        <div class="rounded icon-button ms-1 remove">
-                                            <button class="generar btn btn-info "><i class="bi bi-file-earmark-arrow-down"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <% }); %>
-                        </tbody>
-                    </table>
+                    <%- include('./components/orders-table') %>
                 </div>
             </div>
         </div>

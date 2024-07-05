@@ -16,7 +16,12 @@ export class DealersController {
                 .then(response => response.json())
                 .then(data => {
                     datos = data;
-                    res.render("views.dealers.ejs", {dealers: datos})
+                    // res.render("views.dealers.ejs", {dealers: datos})
+                    res.render("pages/admin/dealers",{
+                        layout:"layouts/main-admin",
+                        title: 'Dashboard dealers',
+                        dealers: datos
+                    });
                 })
             }
         } catch (error) {

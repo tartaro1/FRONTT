@@ -16,7 +16,12 @@ export class ProductController {
                 .then(response => response.json())
                 .then(data => {
                     datos = data;
-                    res.render("views.products.ejs", {products: datos})
+                    // res.render("views.products.ejs", {products: datos})
+                    res.render("pages/admin/products",{
+                        layout:"layouts/main-admin",
+                        title: 'Dashboard Products',
+                        product: datos
+                    });
                 })
             }
         } catch (error) {

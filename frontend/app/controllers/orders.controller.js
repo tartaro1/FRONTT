@@ -16,7 +16,12 @@ export class OrdersController {
                 .then(response => response.json())
                 .then(data => {
                     datos = data;
-                    res.render("views.orders.ejs", {orders: datos})
+                    // res.render("views.orders.ejs", {orders: datos})
+                    res.render("pages/admin/orders",{
+                        layout:"layouts/main-admin",
+                        title: 'Dashboard orders',
+                        orders: datos
+                    });
                 })
             }
         } catch (error) {
