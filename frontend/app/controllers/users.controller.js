@@ -17,7 +17,12 @@ export class UsersController {
                 .then(res => res.json())
                 .then(data => {
                     datos = data;
-                    res.render("views.users.ejs", {users: datos});
+                    // res.render("views.users.ejs", {users: datos});
+                    res.render("pages/admin/users",{
+                        layout:"layouts/main-admin",
+                        title: 'Dashboard users',
+                        users: datos
+                    });
                 })
             }
         } catch (error) {

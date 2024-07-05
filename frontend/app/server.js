@@ -4,6 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import cors from "cors";
+import expressLayouts from "express-ejs-layouts";
 import dashboardRouter from "./routes/dashboardIndex.js";
 import usersIndex from "./routes/users/usersIndex.js";
 
@@ -15,6 +16,7 @@ app.use(urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.set("view engine", "ejs");
+app.use(expressLayouts);
 app.set("views", path.join(__dirname, "views"));
 app.use(cors());
 app.set("port", process.env.PORT || 3000);

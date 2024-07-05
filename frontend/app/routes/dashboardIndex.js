@@ -18,7 +18,10 @@ dashboardRouter.use("/gestion", (req, res) => {
     res.render("views.gestion.ejs")
 })
 dashboardRouter.use("/", (req, res) => {
-    res.render('views.dashboard.ejs');
+    res.render("pages/admin/index",{
+        layout:"layouts/main-admin",
+        title: 'Home Dashboard Tartaro'
+    });
 });
 
 export default dashboardRouter;
