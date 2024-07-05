@@ -8,7 +8,11 @@ export class UsersController {
                 .then(res => res.json())
                 .then(data => {
                     datos = data
-                    res.render("views.resultUser.ejs", {users: datos})
+                    res.render("pages/admin/resultUser",{
+                        layout:"layouts/main-admin",
+                        title: 'Dashboard Result users',
+                        users: datos
+                    });
                 })
                 .catch(error => console.log(error))
             } else {
