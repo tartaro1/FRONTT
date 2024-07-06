@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const container = e.target.closest(".user-list-item");
             const id = parseInt(container.querySelector(".id").textContent);
 
-            fetch(`http://localhost:9200/bills/${id}`)
+            fetch(`https://ms-backend-tartaro.onrender.com/bills/${id}`)
                 .then(res => res.json())
                 .then(data => {
                     // Datos de la factura y productos obtenidos
