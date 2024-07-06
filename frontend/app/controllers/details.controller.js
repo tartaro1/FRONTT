@@ -8,7 +8,12 @@ export class DetailsController {
                 .then(response => response.json())
                 .then(data => {
                     datos = data;
-                    res.render("views.detailsOrder.ejs", {detailsOrders: datos})
+                    // res.render("views.detailsOrder.ejs", {detailsOrders: datos})
+                    res.render("pages/admin/detailsOrders",{
+                        layout:"layouts/main-admin",
+                        title: 'Dashboard Details Orders',
+                        detailsOrders: datos
+                    });
                 })
             }else{
                 let datos = {};

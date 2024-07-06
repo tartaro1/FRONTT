@@ -35,7 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") {
       const email = browser.value.trim();
       if (email) {
-        window.location.href = `https://frontt-ig4n.onrender.com/dashboard/users?email=${email}`;
+        fetch(`https://ms-backend-tartaro.onrender.com/users?email=${email}`)
+          .then(response => response.json())
+          .then(data => {
+            updateTable(data);
+          })
+          .catch(error => console.error('Error:', error));
       }
     }
   });
