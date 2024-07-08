@@ -1,0 +1,56 @@
+<%- contentFor('body') %>
+<div id="carouselExampleIndicators" class="carousel slide">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fadminlte.io%2Fuploads%2Fimages%2Fblog%2F05%2F030-Startmin-Bootstrap-Admin-Theme-secondtruth.github.io_.png&f=1&nofb=1&ipt=809a4da53e59e49c26c4e16d0f74fef9366b15623cf065bb8f35d6821b7328ff&ipo=images" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fadminlte.io%2Fuploads%2Fimages%2Fblog%2F05%2F060-Hogo-%25E2%2580%2593-Creative-Admin-Multipurpose-Responsive-Bootstrap4-Dashboard-HT_-www.spruko.com_.png&f=1&nofb=1&ipt=860338a4545199d9465a2d29b0f24872f5f441243fce19abd49a95915578a1a1&ipo=images" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fadminlte.io%2Fuploads%2Fimages%2Fblog%2F05%2F030-Startmin-Bootstrap-Admin-Theme-secondtruth.github.io_.png&f=1&nofb=1&ipt=809a4da53e59e49c26c4e16d0f74fef9366b15623cf065bb8f35d6821b7328ff&ipo=images" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
+
+<div role="tabpanel">
+    <!-- List group -->
+    <div class="list-group" id="myList" role="tablist">
+      <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#home" role="tab">Home</a>
+      <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#profile" role="tab">Profile</a>
+      <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#messages" role="tab">Messages</a>
+      <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#settings" role="tab">Settings</a>
+    </div>
+  
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="home" role="tabpanel">...</div>
+      <div class="tab-pane" id="profile" role="tabpanel">...</div>
+      <div class="tab-pane" id="messages" role="tabpanel">...</div>
+      <div class="tab-pane" id="settings" role="tabpanel">...</div>
+    </div>
+</div>
+
+<script src="/js/index.js"></script>

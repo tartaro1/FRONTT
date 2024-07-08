@@ -1,5 +1,5 @@
 export const login = (req, res) => {
-    res.render("pages/login",{
+    res.render("pages/login.ejs",{
         layout:"layouts/main-user",
         title: 'login tartaro'
     });
@@ -11,13 +11,13 @@ export const signup = (req, res) => {
     });
 }
 export const index = (req, res) => {
-    res.render("pages/index",{
+    res.render("pages/index", {
         layout:"layouts/main",
         title: 'Index tartaro'
     });
 }
 export const inicio = (req, res) => {
-    res.render("pages/user/index",{
+    res.render("pages/user/Index",{
         layout:"layouts/main-user",
         title: 'Inicio tartaro /bienvenido'
     });

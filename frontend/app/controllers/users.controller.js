@@ -8,11 +8,7 @@ export class UsersController {
                 .then(res => res.json())
                 .then(data => {
                     datos = data
-                    res.render("pages/admin/resultUser",{
-                        layout:"layouts/main-admin",
-                        title: 'Dashboard Result users',
-                        users: datos
-                    });
+                    res.render("views.resultUser.ejs", {users: datos})
                 })
                 .catch(error => console.log(error))
             } else {
@@ -21,13 +17,12 @@ export class UsersController {
                 .then(res => res.json())
                 .then(data => {
                     datos = data;
-                    // res.render("views.users.ejs", {users: datos});
-                    res.render("pages/admin/users",{
-                        layout:"layouts/main-admin",
-                        title: 'Dashboard users',
+                    res.render("pages/admin/users", {
+                        layout:'layouts/main-admin',
+                        title:'Dash users',
                         users: datos
                     });
-                })
+                });
             }
         } catch (error) {
             console.error("Error fetching users:", error.message);

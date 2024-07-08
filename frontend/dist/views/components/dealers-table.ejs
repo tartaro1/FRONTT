@@ -1,0 +1,69 @@
+<table class="table table bordered table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Celular</th>
+            <th scope="col">Cedula</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Contrasena </th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% dealers.forEach(dealer=> { %>
+            <tr class="user-list-item" data-id="`<%=dealer.ID_Usuario %>`">
+                <td class="id">
+                    <%= dealer.ID_Usuario %>
+                </td>
+                <td class="nombre">
+                    <%= dealer.Nombre %>
+                </td>
+                <td class="celular">
+                    <%= dealer.Celular %>
+                </td>
+                <td class="cedula">
+                    <%= dealer.Cedula %>
+                </td>
+                <td class="direccion">
+                    <%= dealer.Direccion %>
+                </td>
+                <td class="correo">
+                    <%= dealer.Correo%>
+                </td>
+                <td class="contrasena">
+                    <%= dealer.Contrasena %>
+                </td>
+                <td class="estado">
+                    <%= dealer.EstadoUsuario%>
+                </td>
+                <td>
+                    <div class="rounded icon-button">
+                        <button class="btn btn-warning edit-user-btn" type="button"
+                            data-bs-toggle="modal" data-bs-target="#exampleEditUserModal">
+                            <i class="sidebar-icon bi bi-pencil-fill"></i>
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    <div class="rounded icon-button ms-1 remove">
+                        <button type="button" class="btn btn-danger delete-user-btn"
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <i class="sidebar-icon bi bi-x"></i>
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    <div class="rounded icon-button ms-1 remove">
+                        <button type="button" class="btn btn-info info-user-btn"
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                            <i class="fa-regular fa-file" style="background-image: url(/img/file-regular.svg);"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <% }); %>
+    </tbody>
+</table>

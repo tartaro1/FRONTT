@@ -2,6 +2,7 @@ export class BackupsController {
     static getLatest = async(req, res) => {
         try {
             let datos = {};
+            
             fetch("https://ms-backend-tartaro.onrender.com/backup")
             .then(response => response.json())
             .then(data => {

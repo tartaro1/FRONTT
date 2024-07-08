@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head', { title: title }) %>
+</head>
+<body>
+    <main class="container-fluid">
+        <article class="row">
+            <aside class="col-sm-2" >
+                <%- include('../partials/header-dash') %>
+            </aside>
+            <section class="col-sm-10">
+                <%- body %>
+            </section>
+        </article>
+    </main>
+    <%- include('../partials/scripts') %>
+</body>
+</html>
