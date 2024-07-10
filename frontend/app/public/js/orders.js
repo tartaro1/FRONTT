@@ -90,7 +90,6 @@ btnSave.addEventListener("click", () => {
                 })
             });
         });
-
         return Promise.all(detallePromises);
     })
     .then(() => {
